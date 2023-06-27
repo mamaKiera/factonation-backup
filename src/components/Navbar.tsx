@@ -1,12 +1,13 @@
 import { FC } from "react";
-import { Button } from "./ui/Button";
+import { Button, buttonVariants } from "./ui/Button";
 import Image from "next/image";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 const Navbar: FC = () => {
   return (
-    <div className="fixed top-0 inset-x-0 h-fit z-[10] py-4">
-      <div className="container max-w-11/12 h-full mx-auto flex items-center justify-between gap-2">
+    <div className="fixed top-0 inset-x-0 h-fit z-[10] py-4 bg-text opacity-95 bg-blend-luminosity">
+      <div className="container h-full mx-auto flex items-center justify-between gap-2">
         <div className="flex justify-start gap-20">
           <Link href="/">
             <h1 className="hidden font-bold text-zinc-700 text-2xl md:block">
@@ -22,7 +23,9 @@ const Navbar: FC = () => {
           </div>
         </div>
         <div className="flex items-center">
-          <Button variant={"ghost"}>Login</Button>
+          <Link className={cn(buttonVariants)} href="/sign-in">
+            Login
+          </Link>
           <Button className="bg-primary-button">Free Trial</Button>
         </div>
       </div>
