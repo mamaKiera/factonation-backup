@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { signIn } from "next-auth/react";
 import * as React from "react";
 import { FC } from "react";
-import { Button } from "@/components/ui/Button";
+import { Button, buttonVariants } from "@/components/ui/Button";
 import { useToast } from "./ui/use-toast";
 
 import { Icons } from "./Icon";
@@ -32,7 +32,14 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
   };
 
   return (
-    <div className={cn("flex justify-center", className)} {...props}>
+    <div
+      className={cn(
+        buttonVariants(),
+        "flex justify-center bg-primary-button",
+        className
+      )}
+      {...props}
+    >
       <Button
         type="button"
         size="sm"
