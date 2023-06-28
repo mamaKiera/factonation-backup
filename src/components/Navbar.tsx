@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 const Navbar: FC = () => {
   return (
-    <div className="fixed top-0 inset-x-0 h-fit z-[10] py-4 bg-background opacity-95 bg-blend-luminosity">
+    <div className="sticky top-0 inset-x-0 h-fit z-[10] py-4 bg-background opacity-95 bg-blend-luminosity">
       <div className="container h-full mx-auto flex items-center justify-between gap-2">
         <div className="flex justify-start gap-20">
           <Link href="/">
@@ -21,14 +21,17 @@ const Navbar: FC = () => {
             <Link href="/store">Documentation</Link>
           </div>
         </div>
-        <div className="flex items-center">
-          <Link className={cn(buttonVariants())} href="/sign-in">
+        <div className="flex items-center gap-3">
+          <Link
+            className={cn(buttonVariants({ variant: "ghost" }))}
+            href="/sign-in"
+          >
             Login
           </Link>
           <Link
             className={cn(
-              buttonVariants({ variant: "default" }),
-              "bg-primary-button"
+              buttonVariants({ variant: "ghost" }),
+              "bg-secondary-button"
             )}
             href="/"
           >

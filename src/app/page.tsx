@@ -9,7 +9,7 @@ import HeroImageContainer from "@/components/HeroImageContainer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen max-w-7xl mx-auto">
       <main className="flex justify-between min-h-screen items-center mt-10 px-6">
         <div className="w-fit flex flex-col justify-center items-center">
           <h1 className="text-5xl font-bold">Scada Master</h1>

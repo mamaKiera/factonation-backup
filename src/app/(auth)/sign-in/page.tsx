@@ -1,28 +1,58 @@
-import SignIn from "@/components/SignIn";
-import { buttonVariants } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
-import { ChevronLeft } from "lucide-react";
+"use client";
+import { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { FC } from "react";
+import { Command } from "lucide-react";
 
-const page: FC = () => {
+import { cn } from "@/lib/utils";
+import { Button, buttonVariants } from "@/components/ui/Button";
+import { UserAuthForm } from "@/components/UserAuthForm";
+import bootcampImage from "../../../../public/scada-bootcamp-1200px.webp";
+import { Icons } from "@/components/Icon";
+import React from "react";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export default function AuthenticationPage({
+  className,
+  ...props
+}: UserAuthFormProps) {
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
+  async function onSubmit(event: React.SyntheticEvent) {
+    event.preventDefault();
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  }
+
   return (
-    <div className="absolute bg-slate-200 inset-0">
-      <div className="h-full max-w-2xl mx-auto flex flex-col items-center justify-center gap-20">
-        <Link
-          href="/"
-          className={cn(
-            buttonVariants({ variant: "ghost" }),
-            "self-start -mt-20"
-          )}
-        >
-          <ChevronLeft className="mr-2 h-4 w-4" />
-          Home
-        </Link>
-        <SignIn />
+    <div className="z-[999] bg-background flex h-screen">
+      <div className="grid place-content-center bg-secondary-button w-1/2">
+        <div className="max-w-xl">
+          <div className="flex flex-col justify-center items-center mt-50 rounded-lg overflow-hidden">
+            <Image
+              src={bootcampImage}
+              width={1200}
+              height={800}
+              alt="bootcamp image"
+            />
+          </div>
+          <h1 className="text-lg my-6 text-center">
+            เริ่มตั้งแต่สอนเขียน C# ตั้งแต่ศูนย์
+            ไม่จำเป็นต้องมีพื้นฐานการเขียนโปรแกรม เรียนแบบ On-demand สัปดาห์ละ 2
+            วิดีโอ ในกลุ่ม Private ถามตอบได้ตลอดเวลา
+          </h1>
+        </div>
+      </div>
+
+      <div className="w-1/2 bg-background my-auto">
+        <UserAuthForm className="max-w-lg mx-auto" />
       </div>
     </div>
   );
-};
-
-export default page;
+}

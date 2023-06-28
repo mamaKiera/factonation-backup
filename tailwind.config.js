@@ -15,10 +15,10 @@ module.exports = {
     },
     colors: {
       text: "#ebf9fa",
-      background: "#051314",
+      background: "#0b0e0c",
       "primary-button": "#0ac5a8",
-      "secondary-button": "#0b2728",
-      accent: "#8edde1",
+      "secondary-button": "#1b2122",
+      accent: "#768f93",
     },
     extend: {
       backgroundImage: {
