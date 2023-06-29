@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en" className={cn(inter.className)}>
       <body
         className={cn(
-          "min-h-screen pt-12 bg-slate-50 antialiased max-w-7xl mx-auto"
+          "min-h-screen bg-slate-50 antialiased mx-auto bg-background"
         )}
       >
         <Navbar />
