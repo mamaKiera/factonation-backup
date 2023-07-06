@@ -14,10 +14,11 @@ module.exports = {
       },
     },
     colors: {
-      text: "#ebf9fa",
-      background: "#0b0e0c",
+      text: "#111111",
       "primary-button": "#0ac5a8",
-      "secondary-button": "#1b2122",
+      background: "#ffffff",
+      darkBackground: "#2C3730",
+      "secondary-button": "#efebeb",
       accent: "#768f93",
     },
     extend: {
