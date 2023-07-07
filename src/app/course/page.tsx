@@ -25,6 +25,13 @@ const page: FC<pageProps> = ({}) => {
           >
             Dashboard
           </Link>
+          <Link
+            href="/course/learn"
+            className={cn(buttonVariants({ size: "lg", variant: "ghost" }))}
+          >
+            Learn
+          </Link>
+          <div style={{ padding: "56.25% 0 0 0;", position: "relative" }}></div>
         </div>
       </div>
     </div>
