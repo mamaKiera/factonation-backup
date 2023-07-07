@@ -17,11 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={cn(inter.className)}>
-      <body
-        className={cn(
-          "min-h-screen bg-slate-50 antialiased mx-auto bg-background"
-        )}
-      >
+      <body className={cn("min-h-screen mx-auto")}>
         <Navbar />
         {children}
       </body>
