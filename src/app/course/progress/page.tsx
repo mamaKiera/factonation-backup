@@ -23,6 +23,14 @@ import {
   YoutubeIcon,
 } from "lucide-react";
 
+import {
+  ThisCourseIncludes,
+  ThisCourseIndlues,
+  courseDetails,
+  lessonLists,
+  whatYourWillLearn,
+} from "data";
+
 interface pageProps {}
 
 const page: FC<pageProps> = ({}) => {
@@ -31,7 +39,7 @@ const page: FC<pageProps> = ({}) => {
       {/* header */}
       <div className="bg-[#0B0E0C] h-[379px] py-24 opacity-90">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-8 text-secondary-button">
             <h1 className="text-5xl font-semibold">C# & .NET Fundamentals</h1>
             <p className="text-lg font-medium">
               Way to go! Here are all the courses you’ve finished.
@@ -81,21 +89,25 @@ const page: FC<pageProps> = ({}) => {
           <div className="flex flex-col">
             <div className="flex flex-col py-4">
               <h1 className="font-bold text-2xl py-2">Details</h1>
-              <p className="text-xl">updated Jun 23, 2023</p>
-              <p className="text-xl">10 lessons</p>
+              {courseDetails.map((detail, i) => {
+                return (
+                  <p className="text-xl" key={i}>
+                    {detail}
+                  </p>
+                );
+              })}
             </div>
             <div className="flex flex-col py-4">
               <h1 className="font-bold text-2xl py-2">
                 What you&apos;ll learn
               </h1>
-              <li className="text-xl">
-                ระยะเวลารวมประมาณ 4 เดือน โดยรูปแบบการเรียนจะเป็น VDO On-Demand
-                สัปดาห์ละ 2 วิดีโอ
-              </li>
-              <li className="text-xl">
-                กลุ่ม Private ผ่าน Discord
-                สำหรับการพูดคุยและถามตอบระหว่างอาจารย์และนักเรียนที่เรียนในคอร์สเดียวกัน
-              </li>
+              {whatYourWillLearn.map((e, i) => {
+                return (
+                  <li className="text-xl" key={i}>
+                    {e}
+                  </li>
+                );
+              })}
             </div>
             <div className="flex flex-col py-4">
               <h1 className="font-bold text-2xl py-2">Prerequisites</h1>
@@ -123,35 +135,22 @@ const page: FC<pageProps> = ({}) => {
             <div className="flex flex-col py-2 ml-8">
               <h1 className="font-bold text-2xl py-9">Lesson List</h1>
               <div className="rounded-xl flex flex-col gap-3 text-xl my-2 p-8 border-[1px] border-primary-button">
-                <p>Introduction</p>
-                <p>Environment Setup</p>
-                <p>C# & .NET</p>
-                <p>Architecture of .NET Applications</p>
-                <p>Variables & Constants</p>
-                <p>Types</p>
-                <p>Type Conversion</p>
-                <p>Final Project (Solutino)</p>
+                {lessonLists.map((lesson, i) => {
+                  return <p key={i}>{lesson}</p>;
+                })}
               </div>
             </div>
             <div className="flex flex-col py-2 ml-8 min-w-[349px]">
               <h1 className="font-bold text-2xl py-9">Thie course includes</h1>
               <div className="rounded-xl flex flex-col gap-3 text-xl my-2 p-8 border-[1px] border-primary-button">
-                <div className="flex items-center gap-8">
-                  <YoutubeIcon />
-                  <p className="text-xl">Videos (999 hr total)</p>
-                </div>
-                <div className="flex items-center gap-8">
-                  <CheckCheckIcon />
-                  <p className="text-xl">multiple choice questions</p>
-                </div>
-                <div className="flex items-center gap-8">
-                  <ClipboardListIcon />
-                  <p className="text-xl">tasks</p>
-                </div>
-                <div className="flex items-center gap-8">
-                  <Code2Icon />
-                  <p className="text-xl">code challenges</p>
-                </div>
+                {ThisCourseIncludes.map((e, i) => {
+                  return (
+                    <div className="flex items-center gap-8" key={i}>
+                      <e.icon />
+                      <p className="text-xl">{e.desc}</p>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
