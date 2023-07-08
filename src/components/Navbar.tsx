@@ -19,8 +19,8 @@ const Navbar: FC = () => {
               Factonation
             </h1>
           </Link>
-          <div className="hidden md:flex md:items-center md:justify-start md:gap-8">
-            <Link href="/course">courses</Link>
+          <div className="md:flex md:items-center md:justify-start md:gap-8">
+            <Link href="/course">Course</Link>
             <Link href="/pricing">Pricing</Link>
             <Link href="/store">Blog</Link>
             <Link href="/store">Documentation</Link>
