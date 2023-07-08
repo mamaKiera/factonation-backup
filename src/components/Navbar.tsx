@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Navbar: FC = () => {
   return (
-    <div className="sticky top-0 inset-x-0 h-fit z-[10] py-4 bg-[#0B0E0C] opacity-90 ">
+    <div className="sticky top-0 inset-x-0 h-fit z-[10] py-4 bg-[#0B0E0C] text-background opacity-90 ">
       <div className="container h-full mx-auto flex items-center justify-between gap-2">
         <div className="flex justify-start gap-12 items-center">
           <Avatar>
