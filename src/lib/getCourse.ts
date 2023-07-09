@@ -1,4 +1,4 @@
-import { CourseDto } from "@/types/dto";
+import { CourseDto, CourseWithLessonDto } from "@/types/dto";
 
 export async function getCourses(): Promise<CourseDto[]> {
   const res = await fetch("http://localhost:8000/course");
@@ -6,7 +6,7 @@ export async function getCourses(): Promise<CourseDto[]> {
   return coursesData.data;
 }
 
-export async function getCourse(id: string): Promise<CourseDto> {
+export async function getCourse(id: string): Promise<CourseWithLessonDto> {
   const res = await fetch(`http://localhost:8000/course/${id}`);
   const courseData = await res.json();
   return courseData.data;

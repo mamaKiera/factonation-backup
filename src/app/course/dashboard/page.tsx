@@ -1,5 +1,4 @@
 import CourseDashboard from "@/components/CourseDashboard";
-import { ProgressBar } from "@/components/ProgressBar";
 import { Button } from "@/components/ui/Button";
 import { FC } from "react";
 

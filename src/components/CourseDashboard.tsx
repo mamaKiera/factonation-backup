@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { ProgressBar } from "./ProgressBar";
 import { Button } from "./ui/Button";
+import { Progress } from "./ui/progress";
 
 interface CourseDashboardProps {}
 
@@ -12,7 +12,7 @@ const CourseDashboard: FC<CourseDashboardProps> = ({}) => {
         <h2 className="text-[#222] text-lg font-semibold">
           C# & .NET Fundamentals
         </h2>
-        <ProgressBar />
+        <Progress value={2} />
         <h2 className="text-[#222]">Jun 19, 2023</h2>
         <Button className="text-[#222] bg-[#fff]">Review</Button>
       </div>

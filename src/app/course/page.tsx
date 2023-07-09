@@ -7,8 +7,6 @@ import { FC } from "react";
 interface pageProps {}
 
 const page: FC<pageProps> = async () => {
-  const courses = await getCourses();
-  const coursesData = courses;
   return (
     <div className="h-[379px] py-24 opacity-90 text-[#222]">
       <div className="max-w-7xl mx-auto">

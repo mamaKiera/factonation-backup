@@ -3,25 +3,16 @@ export interface CourseDto {
   courseName: string;
   details: string;
   prerequisites: string[];
-  quizes: string[];
-  isCompleted: boolean[];
   instructorId: string;
-  lessons: {
-    id: string;
-    title: string;
-    week: number;
-    desc: string;
-    quizes: string[];
-    module: number;
-    video: number;
-    tag: string;
-    courseId: string;
-  }[];
   students: string[];
   instructor: {
     id: string;
     name: string;
   };
+}
+
+export interface CourseWithLessonDto extends CourseDto {
+  lessons: LessonDto[];
 }
 
 export interface LessonDto {
@@ -31,7 +22,9 @@ export interface LessonDto {
   desc: string;
   quizes: string[];
   module: number;
-  video: number;
-  tag: string;
+  episode: number;
+  videoUrl: string;
+  order: number;
   courseId: string;
+  isLessonCompleted: boolean;
 }
