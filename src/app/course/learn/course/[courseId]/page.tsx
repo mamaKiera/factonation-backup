@@ -64,7 +64,7 @@ const page: FC<pageProps> = async ({ params }: pageProps) => {
               <Accordion
                 key={i}
                 type="multiple"
-                className="border-secondary-button border-b mx-auto decoration-none"
+                className="border-secondary-button border-b mx-auto decoration-none no-scrollbar"
               >
                 <AccordionItem
                   key={i}
@@ -74,7 +74,7 @@ const page: FC<pageProps> = async ({ params }: pageProps) => {
                   <AccordionTrigger className="underline-none">
                     <div className="flex items-center gap-8">
                       <h1 className="font-semibold">{`Week ${i + 1}`}</h1>
-                      <p className="p-1 rounded-lg bg-secondary-button">
+                      <p className="py-1 text-md px-2 rounded-2xl bg-secondary-button border-accent border">
                         {`${completedLesson} / ${lesson.length}`}
                       </p>
                     </div>
@@ -84,7 +84,7 @@ const page: FC<pageProps> = async ({ params }: pageProps) => {
                       return (
                         <AccordionContent
                           key={l.id}
-                          className="hover:bg-primary-button ease-in-out duration-200"
+                          className="hover:bg-secondary-button rounded-lg ease-in-out duration-200"
                         >
                           {l.title}
                         </AccordionContent>
@@ -108,6 +108,7 @@ const page: FC<pageProps> = async ({ params }: pageProps) => {
             "https://player.vimeo.com/video/738671414?h=3b018417ad&badge=0&autopause=0&player_id=0&app_id=58479/embed"
           }
         />
+        {/* <div className=""></div> */}
       </div>
     </div>
   );

@@ -1,10 +1,12 @@
 import CourseDashboard from "@/components/CourseDashboard";
 import { Button } from "@/components/ui/Button";
+import { getCourses } from "@/lib/getCourse";
 import { FC } from "react";
 
 interface pageProps {}
 
-const page: FC<pageProps> = ({}) => {
+const page: FC<pageProps> = async ({}) => {
+  const courses = await getCourses();
   return (
     <>
       <div className="max-w-7xl mx-auto min-h-screen">
@@ -23,9 +25,16 @@ const page: FC<pageProps> = ({}) => {
           Way to go! Here are all the courses you’ve finished.
         </p>
         <div className="flex gap-4 flex-col my-12">
-          <CourseDashboard />
-          <CourseDashboard />
-          <CourseDashboard />
+          {courses.map((course, i) => {
+            return (
+              <CourseDashboard
+                key={course.id}
+                courseName={course.courseName}
+                module={i + 1}
+                isCompleted={course.isCompleted}
+              />
+            );
+          })}
         </div>
       </div>
     </>
