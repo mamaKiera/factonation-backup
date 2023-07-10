@@ -17,6 +17,5 @@ export async function getLessonByModuleFormatted(module: number) {
     `http://localhost:8000/lesson/moduleAndweek/${module}`
   );
   const lessonData = await res.json();
-  console.log(lessonData);
   return lessonData.data;
 }
