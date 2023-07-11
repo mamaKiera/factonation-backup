@@ -8,10 +8,11 @@ import {
 } from "@/components/ui/accordion";
 import { Progress } from "@/components/ui/progress";
 import { getLessonByModuleFormatted } from "@/lib/getLessons";
+import { cn } from "@/lib/utils";
 import { LessonDto } from "@/types/dto";
 import { PlayCircleIcon, Trophy } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { FC } from "react";
+import Link from "next/link";
+import { FC, useEffect, useState } from "react";
 
 interface layoutProps {
   params: {
@@ -19,16 +20,25 @@ interface layoutProps {
   };
 
   children: React.ReactNode;
+  lessons: any;
 }
 
-const page: FC<layoutProps> = async ({ children, params }) => {
-  const router = useRouter();
-  const lessons: LessonDto[][] = await getLessonByModuleFormatted(
-    params.courseId
-  );
+export const page: FC<layoutProps> = ({ children, params }) => {
+  // const [hasMounted, setHasMounted] = useState(false);
+  const [lessons, setLessons] = useState<LessonDto[][]>([]);
+
+  useEffect(() => {
+    const fetLessons = async () => {
+      const _lessons = await getLessonByModuleFormatted(params.courseId);
+      setLessons(_lessons);
+    };
+    // setHasMounted(true);
+    fetLessons();
+  }, [params.courseId]);
+
   return (
     <div className="flex gap-4 h-full bg-background">
-      <div className="bg-[#fff] w-[380px] max-h-screen overflow-scroll flex gap-2 flex-col  justify-start text-[#222] border-r-secondary-button border-r-[1px]">
+      <div className="bg-[#fff] w-[580px] max-h-screen overflow-scroll flex gap-2 flex-col  justify-start text-[#222] border-r-secondary-button border-r-[1px]">
         <div className="p-4 border-secondary-button border-b ">
           {/* <h1 className="font-medium text-xl">{title}</h1> */}
           <div className="flex items-center">
@@ -41,9 +51,9 @@ const page: FC<layoutProps> = async ({ children, params }) => {
           <p>0% Complete</p>
         </div>
         <div className="">
-          {lessons.map((lesson, i) => {
+          {lessons.map((lesson: any, i: number) => {
             const completedLesson = lesson.filter(
-              (l) => l.isLessonCompleted
+              (l: any) => l.isLessonCompleted
             ).length;
             return (
               <Accordion
@@ -57,7 +67,7 @@ const page: FC<layoutProps> = async ({ children, params }) => {
                   className="border-none mx-6"
                 >
                   <AccordionTrigger className="underline-none">
-                    <div className="flex items-center gap-8">
+                    <div className="flex items-center gap-8 justify-between">
                       <h1 className="font-semibold">{`Week ${i + 1}`}</h1>
                       <p className="py-1 text-md px-2 rounded-2xl bg-secondary-button border-accent border">
                         {`${completedLesson} / ${lesson.length}`}
@@ -69,17 +79,26 @@ const page: FC<layoutProps> = async ({ children, params }) => {
                       return (
                         <AccordionContent
                           key={l.id}
-                          className="hover:bg-secondary-button rounded-lg ease-in-out duration-200"
-                          onClick={() =>
-                            router.push(
-                              `/course/learn/course/${params.courseId}/video/${l.id}`
-                            )
-                          }
+                          className={cn(
+                            "hover:bg-secondary-button rounded-lg ease-in-out duration-200 my-1",
+                            {
+                              "bg-complete": l.isLessonCompleted,
+                              "hover:bg-complete": l.isLessonCompleted,
+                            }
+                          )}
                         >
-                          <div className="flex items-center justify-between">
-                            <h1 className="text-accent">{l.title}</h1>
-                            <PlayCircleIcon color={"#768f93"} />
-                          </div>
+                          <Link
+                            href={`/dashboard/learn/course/${params.courseId}/video/${l.id}`}
+                            className={cn(
+                              "text-accent flex items-center justify-between hover:cursor-pointer",
+                              { "text-[#fff]": l.isLessonCompleted }
+                            )}
+                          >
+                            <p>{l.title}</p>
+                            <PlayCircleIcon
+                              color={l.isLessonCompleted ? "#fff" : "#768f93"}
+                            />
+                          </Link>
                         </AccordionContent>
                       );
                     })}

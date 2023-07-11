@@ -20,7 +20,7 @@ const Navbar: FC = () => {
             </h1>
           </Link>
           <div className="md:flex md:items-center md:justify-start md:gap-8">
-            <Link href="/course">Course</Link>
+            <Link href="/dashboard">Dashboard</Link>
             <Link href="/pricing">Pricing</Link>
             <Link href="/store">Blog</Link>
             <Link href="/store">Documentation</Link>

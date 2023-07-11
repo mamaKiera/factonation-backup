@@ -32,8 +32,6 @@ const page: FC<pageProps> = async () => {
           >
             Learn
           </Link>
-
-          <div style={{ padding: "56.25% 0 0 0;", position: "relative" }}></div>
         </div>
       </div>
     </div>

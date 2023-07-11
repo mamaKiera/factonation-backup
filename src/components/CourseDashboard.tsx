@@ -3,6 +3,14 @@ import { Button, buttonVariants } from "./ui/Button";
 import { Progress } from "./ui/progress";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./ui/table";
 
 interface CourseDashboardProps {
   courseName: string;
@@ -18,9 +26,23 @@ const CourseDashboard: FC<CourseDashboardProps> = ({
 }) => {
   return (
     <>
-      <div className="flex items-center justify-around rounded-lg px-10 py-8 bg-secondary-button">
+      {/* <Table>
+        <TableCaption>Almost done, fighting!🔥</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px]">Course Title</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Last Access</TableHead>
+            <TableHead className="text-right">Amount</TableHead>
+          </TableRow>
+          <TableBody></TableBody>
+        </TableHeader>
+      </Table> */}
+      <div className="flex items-center justify-between rounded-lg px-10 py-8 bg-secondary-button">
         <h2 className="text-[#222] text-lg font-semibold">{courseName}</h2>
-        <Progress value={2} />
+        <div className="w-full max-w-xl">
+          <Progress value={10} className="bg-primary-button h-2" />
+        </div>
         <h2 className="text-[#222]">Jun 19, 2023</h2>
         <Link
           href={`/course/learn/course/${module}`}

@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-"use client";
 import { buttonVariants } from "@/components/ui/Button";
 import { getCourses } from "@/lib/getCourse";
 import { cn } from "@/lib/utils";
