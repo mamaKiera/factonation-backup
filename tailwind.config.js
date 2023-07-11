@@ -21,6 +21,7 @@ module.exports = {
       darkBackground: "#2C3730",
       "secondary-button": "#efebeb",
       accent: "#768f93",
+      "secondary-background": "#f8f8f8",
     },
     extend: {
       backgroundImage: {
