@@ -15,11 +15,13 @@ const Navbar: FC = () => {
               Factonation
             </h1>
           </Link>
+
           <div className="hidden md:flex md:items-center md:justify-start md:gap-8">
             <Link href="/course">คอร์สเรียน</Link>
             <Link href="/pricing">ราคาคอร์ส</Link>
             <Link href="/store">บทความ</Link>
             <Link href="/store">คำถามที่พบบ่อย</Link>
+
           </div>
         </div>
         <div className="flex items-center gap-3">

@@ -1,11 +1,12 @@
 import { buttonVariants } from "@/components/ui/Button";
+import { getCourses } from "@/lib/getCourse";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { FC } from "react";
 
 interface pageProps {}
 
-const page: FC<pageProps> = ({}) => {
+const page: FC<pageProps> = async () => {
   return (
     <div className="h-[379px] py-24 opacity-90 text-[#222]">
       <div className="max-w-7xl mx-auto">
@@ -31,7 +32,6 @@ const page: FC<pageProps> = ({}) => {
           >
             Learn
           </Link>
-          <div style={{ padding: "56.25% 0 0 0;", position: "relative" }}></div>
         </div>
       </div>
     </div>
