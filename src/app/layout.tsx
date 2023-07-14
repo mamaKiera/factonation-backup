@@ -3,7 +3,10 @@ import { Inter } from "next/font/google";
 import { cn } from "../lib/utils";
 import Navbar from "@/components/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+
+import {IBM_Plex_Sans_Thai} from 'next/font/google'
+
+const imb_plex_sans_thai = IBM_Plex_Sans_Thai({subsets: ['thai'], weight: ['100','200','400', '600']})
 
 export const metadata = {
   title: "Create Next App",
@@ -16,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cn(inter.className)}>
+    <html lang="en" className={cn(imb_plex_sans_thai.className)}>
       <body className={cn("min-h-screen mx-auto")}>
         <Navbar />
         {children}
