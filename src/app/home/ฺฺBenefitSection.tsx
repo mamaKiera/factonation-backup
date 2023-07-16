@@ -2,9 +2,7 @@ import { Rocket } from 'lucide-react';
 import { UploadCloud } from 'lucide-react';
 import { FileCode2 } from 'lucide-react';
 
-
-
-function Benefitsection(){
+function BenefitSection() {
     return(
         
           <div className="flex flex-col w-10/12  mx-auto my-24 gap-10 text-gray-900 ">
@@ -44,4 +42,4 @@ function Benefitsection(){
     )
 }
 
-export default Benefitsection
+export default BenefitSection

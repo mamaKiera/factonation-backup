@@ -4,7 +4,7 @@ import { Youtube } from 'lucide-react';
 import Image from "next/image"
 import lineIcon from '../../../public/line (3).png'
 
-function Lastsection(){
+function LastSection(){
     return(
         <div className="flex justify-center h-auto my-10 " >
            <div className="flex flex-col items-center gap-10 ">
@@ -32,4 +32,4 @@ function Lastsection(){
     )
 }
 
-export default Lastsection
+export default LastSection

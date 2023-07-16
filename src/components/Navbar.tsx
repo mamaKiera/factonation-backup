@@ -29,14 +29,14 @@ const Navbar: FC = () => {
             className={cn(buttonVariants({ variant: "ghost" }))}
             href="/sign-in"
           >
-            เข้าสู้ระบบ
+            เข้าสู่ระบบ
           </Link>
           <Link
             className={cn(
               buttonVariants({ variant: "ghost" }),
               "bg-secondary-button text-[#222]"
             )}
-            href="/"
+            href="/sign-up"
           >
             ลงทะเบียน
           </Link>

@@ -6,7 +6,7 @@ import { Star } from 'lucide-react';
 
 
 
-function Reviewsection(){
+function ReviewSection(){
     return(
         <div >
         <div className="flex flex-col w-4/5 mx-auto my-20 gap-16 ">
@@ -22,13 +22,14 @@ function Reviewsection(){
                         <p>คุณปรานต์ ฉันทจิรพร</p>
                         <p>“อาจารย์สอนเป็นขั้นตอน ทำให้เรื่องที่ซับซ้อนเข้าใจได้ง่ายขึ้น ได้นำความรู้ที่เรียนมาสร้างระบบ SCADA ใช้ที่โรงงานได้จริง ตอนนี้ทำงานสะดวกขึ้นมากครับ ติดตามสถานะเครื่องจักรได้จากทุกที่ทุกเวลา แนะนำเลยครับ”</p>
                         </div>
-                        <div className="flex border border-white rounded-xl justify-center w-24 h-4 items-center gap-0.5">
+                        {/* <div className="flex border border-white rounded-xl justify-center w-24 h-4 items-center gap-0.5"> */}
                         <Star color="#0ac5a8" size={14}/>
                         <Star color="#0ac5a8" size={14}/>
                         <Star color="#0ac5a8" size={14}/>
                         <Star color="#0ac5a8" size={14}/>
                         <Star color="#0ac5a8" size={14}/>      
-                        </div>
+                        
+                        {/* </div> */}
                     </div>  
                 </div>
                 <div>
@@ -56,4 +57,4 @@ function Reviewsection(){
         </div>
     )
 }
-export default Reviewsection
+export default ReviewSection

@@ -5,7 +5,7 @@ import { CheckCircle2 } from 'lucide-react';
 
 
 
-function Problemsection(){
+function ProblemSection(){
     return (
         <div className="w-full bg-[#f8f8f8] py-6">
         <div className="flex flex-col mx-auto my-10 gap-5  text-stone-900 max-w-4xl items-center">
@@ -46,4 +46,4 @@ function Problemsection(){
     )
 }
 
-export default Problemsection
+export default ProblemSection

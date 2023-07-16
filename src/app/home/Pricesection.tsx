@@ -2,7 +2,7 @@ import { CheckSquare } from 'lucide-react';
 
 
 
-function Pricesection(){
+function PriceSection(){
     return(
         <div className="my-28">
           <div className="flex flex-col gap-3 w-11/12 mx-auto my-14 ">
@@ -131,4 +131,4 @@ function Pricesection(){
     )
 }
 
-export default Pricesection
+export default PriceSection

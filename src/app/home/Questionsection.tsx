@@ -18,7 +18,7 @@ const QnA2 = [
 
 
 
-function Questionsection(){
+function QuestionSection(){
     return(
         <div>
           <div>
@@ -66,7 +66,7 @@ function Questionsection(){
 
 
 
-export default Questionsection
+export default QuestionSection
 
 
 

@@ -1,25 +1,27 @@
 "use client";
-import { Metadata } from "next";
+// import { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { Command } from "lucide-react";
+import loginImage from '../../../../public/IMG_1798.webp'
+// import Link from "next/link";
+// import { Command } from "lucide-react";
 
-import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/components/ui/Button";
-import { UserAuthForm } from "@/components/UserAuthForm";
-import bootcampImage from "../../../../public/scada-bootcamp-1200px.webp";
-import { Icons } from "@/components/Icon";
+// import { cn } from "@/lib/utils";
+// import { Button, buttonVariants } from "@/components/ui/Button";
+import { UserAuthForm, UserAuthFormPage } from "@/components/UserAuthForm";
+// import { Icons } from "@/components/Icon";
 import React from "react";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+// import { Label } from "@/components/ui/label";
+// import { Input } from "@/components/ui/input";
+import { FC } from "react";
+import { useState } from "react";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export default function AuthenticationPage({
+const Page: FC<UserAuthFormProps> = async ({
   className,
   ...props
-}: UserAuthFormProps) {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+}) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
@@ -31,28 +33,19 @@ export default function AuthenticationPage({
   }
 
   return (
-    <div className="z-[999] bg-background flex h-screen">
-      <div className="grid place-content-center bg-secondary-button w-1/2">
-        <div className="max-w-xl">
-          <div className="flex flex-col justify-center items-center mt-50 rounded-lg overflow-hidden">
-            <Image
-              src={bootcampImage}
-              width={1200}
-              height={800}
-              alt="bootcamp image"
-            />
-          </div>
-          <h1 className="text-lg my-6 text-center">
-            เริ่มตั้งแต่สอนเขียน C# ตั้งแต่ศูนย์
-            ไม่จำเป็นต้องมีพื้นฐานการเขียนโปรแกรม เรียนแบบ On-demand สัปดาห์ละ 2
-            วิดีโอ ในกลุ่ม Private ถามตอบได้ตลอดเวลา
-          </h1>
+    <div className="flex min-h-screen flex-1">
+     
+        <UserAuthForm page={UserAuthFormPage.SignIn}  />
+        <div className="relative hidden w-0 flex-1 lg:block">
+          <Image
+            className="absolute inset-0 h-full w-full object-cover"
+            src={loginImage}
+            alt=""
+          />
         </div>
-      </div>
-
-      <div className="w-1/2 bg-background my-auto">
-        <UserAuthForm className="max-w-lg mx-auto" />
-      </div>
+      
     </div>
   );
 }
+
+export default Page;

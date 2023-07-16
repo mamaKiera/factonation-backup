@@ -3,7 +3,7 @@ import Image from "next/image"
 import heroImage from '../../../public/IMG_1737.webp'
 
 
-function Herosection(){
+function HeroSection(){
     return (
         <div>
            <div className="flex justify-center my-20 text-gray-900">
@@ -36,4 +36,4 @@ function Herosection(){
     )
 }
 
-export default Herosection
+export default HeroSection
