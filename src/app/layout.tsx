@@ -3,8 +3,12 @@ import { Inter } from "next/font/google";
 import { cn } from "../lib/utils";
 import Navbar from "@/components/Navbar";
 // import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AuthProvider } from "@/contexts/authContext";
 
-const inter = Inter({ subsets: ["latin"] });
+
+import {IBM_Plex_Sans_Thai} from 'next/font/google'
+
+const imb_plex_sans_thai = IBM_Plex_Sans_Thai({subsets: ['thai'], weight: ['100','200','400', '600']})
 
 // const queryClient = new QueryClient();
 
@@ -19,12 +23,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cn(inter.className)}>
-      {/* <QueryClientProvider client={queryClient}> */}
-      <body className={cn("min-h-screen mx-auto")}>
-        <Navbar />
-        {children}
-      </body>
+
+    <html lang="en" className={cn(imb_plex_sans_thai.className)}>
+      <AuthProvider>
+        <body className={cn("min-h-screen mx-auto")}>
+          <Navbar />
+          {children}
+        </body>
+      </AuthProvider>
       {/* </QueryClientProvider> */}
     </html>
   );
