@@ -1,4 +1,5 @@
 
+
 'use client'
 import * as React from "react"
 import * as AccordionPrimitive from "@radix-ui/react-accordion"
@@ -59,10 +60,12 @@ const AccordionContent = React.forwardRef<
     )}
     {...props}
   >
-
-    <div className="pb-4 pt-0">{children}</div>
+    <div className="py-3 px-2">{children}</div>
   </AccordionPrimitive.Content>
-))
-AccordionContent.displayName = AccordionPrimitive.Content.displayName
+));
+AccordionContent.displayName = AccordionPrimitive.Content.displayName;
+
+
+
 
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }

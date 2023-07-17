@@ -1,12 +1,13 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
 import { cn } from "../lib/utils";
+
+import { IBM_Plex_Sans_Thai } from "next/font/google";
+import Provider from "./provider";
 import Navbar from "@/components/Navbar";
 // import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/contexts/authContext";
 
 
-import {IBM_Plex_Sans_Thai} from 'next/font/google'
 
 const imb_plex_sans_thai = IBM_Plex_Sans_Thai({subsets: ['thai'], weight: ['100','200','400', '600']})
 

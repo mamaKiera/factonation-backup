@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
+import AccordianComponent from "@/components/coursePage/AccordianComponent";
 import {
   Accordion,
   AccordionContent,
@@ -7,16 +8,19 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Progress } from "@/components/ui/progress";
-import { getLessonByModuleFormatted } from "@/lib/getLessons";
+import { Toaster } from "@/components/ui/toaster";
+import { useToast } from "@/components/ui/use-toast";
+import { getCourse } from "@/lib/getCourse";
+import { getLessonByCourseIdFormetted } from "@/lib/getLessons";
 import { cn } from "@/lib/utils";
-import { LessonDto } from "@/types/dto";
+import { CourseDto, CourseWithLessonDto, LessonDto } from "@/types/dto";
 import { PlayCircleIcon, Trophy } from "lucide-react";
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 
 interface layoutProps {
   params: {
-    courseId: number;
+    courseId: string;
   };
 
   children: React.ReactNode;
@@ -24,23 +28,56 @@ interface layoutProps {
 }
 
 export const page: FC<layoutProps> = ({ children, params }) => {
-  // const [hasMounted, setHasMounted] = useState(false);
   const [lessons, setLessons] = useState<LessonDto[][]>([]);
+  const [course, setCourse] = useState<CourseWithLessonDto>();
+  const [status, setStatus] = useState<{
+    all: number;
+    complete: number;
+    percentage: number;
+  }>();
 
   useEffect(() => {
     const fetLessons = async () => {
-      const _lessons = await getLessonByModuleFormatted(params.courseId);
+      const _lessons = await getLessonByCourseIdFormetted(params.courseId);
       setLessons(_lessons);
     };
-    // setHasMounted(true);
+
     fetLessons();
   }, [params.courseId]);
 
+  useEffect(() => {
+    const fetchCourse = async () => {
+      const _course = await getCourse(params.courseId);
+      console.log(_course);
+      setCourse(_course);
+    };
+
+    fetchCourse();
+  }, [params.courseId]);
+
+  useEffect(() => {
+    const getLesson = async () => {
+      const res = await fetch("http://localhost:8000/lesson/status/course", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          courseId: params.courseId,
+          studentId: "baee72df-80d5-4ada-99bf-86bf8caf14b6",
+        }),
+      });
+      const _status = await res.json();
+      setStatus(_status.data);
+    };
+
+    getLesson();
+  });
+
   return (
-    <div className="flex gap-4 h-full bg-background">
-      <div className="bg-[#fff] w-[580px] max-h-screen overflow-scroll flex gap-2 flex-col  justify-start text-[#222] border-r-secondary-button border-r-[1px]">
+    <div className="flex gap-4 h-full bg-secondary-background shadow-sm">
+      <Toaster />
+      <div className="bg-[#fff] min-w-[380px] max-h-screen overflow-scroll flex gap-2 flex-col  justify-start text-[#222] border-r-secondary-button border-r-[1px]">
         <div className="p-4 border-secondary-button border-b ">
-          {/* <h1 className="font-medium text-xl">{title}</h1> */}
+          <h1 className="font-medium text-xl">Course Progress</h1>
           <div className="flex items-center">
             <Progress value={20} className="bg-primary-button h-1" />
             <Trophy
@@ -48,7 +85,7 @@ export const page: FC<layoutProps> = ({ children, params }) => {
               size={32}
             />
           </div>
-          <p>0% Complete</p>
+          <p>{status?.percentage} % </p>
         </div>
         <div className="">
           {lessons.map((lesson: any, i: number) => {
@@ -56,55 +93,12 @@ export const page: FC<layoutProps> = ({ children, params }) => {
               (l: any) => l.isLessonCompleted
             ).length;
             return (
-              <Accordion
+              <AccordianComponent
+                params={params}
                 key={i}
-                type="multiple"
-                className="border-secondary-button border-b mx-auto decoration-none no-scrollbar"
-              >
-                <AccordionItem
-                  key={i}
-                  value={String(lesson.length)}
-                  className="border-none mx-6"
-                >
-                  <AccordionTrigger className="underline-none">
-                    <div className="flex items-center gap-8 justify-between">
-                      <h1 className="font-semibold">{`Week ${i + 1}`}</h1>
-                      <p className="py-1 text-md px-2 rounded-2xl bg-secondary-button border-accent border">
-                        {`${completedLesson} / ${lesson.length}`}
-                      </p>
-                    </div>
-                  </AccordionTrigger>
-                  <div className="flex flex-col my-2 rounded-lg">
-                    {lesson.map((l: LessonDto) => {
-                      return (
-                        <AccordionContent
-                          key={l.id}
-                          className={cn(
-                            "hover:bg-secondary-button rounded-lg ease-in-out duration-200 my-1",
-                            {
-                              "bg-complete": l.isLessonCompleted,
-                              "hover:bg-complete": l.isLessonCompleted,
-                            }
-                          )}
-                        >
-                          <Link
-                            href={`/dashboard/learn/course/${params.courseId}/video/${l.id}`}
-                            className={cn(
-                              "text-accent flex items-center justify-between hover:cursor-pointer",
-                              { "text-[#fff]": l.isLessonCompleted }
-                            )}
-                          >
-                            <p>{l.title}</p>
-                            <PlayCircleIcon
-                              color={l.isLessonCompleted ? "#fff" : "#768f93"}
-                            />
-                          </Link>
-                        </AccordionContent>
-                      );
-                    })}
-                  </div>
-                </AccordionItem>
-              </Accordion>
+                lesson={lesson}
+                completedLesson={completedLesson}
+              />
             );
           })}
         </div>
