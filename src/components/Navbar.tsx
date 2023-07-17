@@ -28,7 +28,7 @@ const Navbar: FC = () => {
         <div className="flex items-center gap-3">
           <Link
             className={cn(buttonVariants({ variant: "ghost" }))}
-            href="/sign-in"
+            href="/login"
           >
             เข้าสู่ระบบ
           </Link>
@@ -37,7 +37,7 @@ const Navbar: FC = () => {
               buttonVariants({ variant: "ghost" }),
               "bg-secondary-button text-[#222]"
             )}
-            href="/sign-up"
+            href="/register"
           >
             ลงทะเบียน
           </Link>

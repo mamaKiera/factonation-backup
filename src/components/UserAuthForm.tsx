@@ -56,16 +56,17 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     }
 
     if (page === UserAuthFormPage.Register) {
-      const userInfo = { usernameInput, nameInput, passwordInput }
+      const userInfo = { email:usernameInput, name:nameInput, password:passwordInput }
 
       try {
-        const response = await fetch(`http://localhost:8000/register`, {
+        const response = await fetch(`http://localhost:8000/user/register`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(userInfo),
         })
+        console.log('hello foo')
         if (response.status !== 201) {
           console.log('error')
         } else {
@@ -97,11 +98,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             </Link>
           </p> ) : ( <></>) }
         </div>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} action="#" method="POST" >
         <div className="mt-10">
-          <div>
-            <form action="#" method="POST" className="space-y-6">
-              <div>
+            <div className="space-y-6">
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                   อีเมลล์
                 </label>
@@ -115,8 +114,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                     className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
                   />
                 </div>
-              </div>
-
+            
               { page === UserAuthFormPage.Register ? ( 
               <div>
                 <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
@@ -133,7 +131,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                   />
                 </div>
               </div>) : ( <></>) }
-
 
               <div>
                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
@@ -179,10 +176,10 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                     { page === UserAuthFormPage.LogIn ? 'เข้าสู่ระบบ' : 'สมัครสมาชิก' }
                 </button>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
       </form>
+        
       </div>
     </div>
   
