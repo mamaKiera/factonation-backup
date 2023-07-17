@@ -28,15 +28,13 @@ const Page: FC<UserAuthFormProps> = async ({className,
 
   return (
   <div className="flex min-h-screen flex-1">
-
-    <UserAuthForm page={UserAuthFormPage.SignUp} />
+    <UserAuthForm page={UserAuthFormPage.Register} />
     <div className="relative hidden w-0 flex-1 lg:block">
       <Image
         className="absolute inset-0 h-full w-full object-cover"
         src={loginImage}
         alt="" />
     </div>
-
   </div>
   )
 };

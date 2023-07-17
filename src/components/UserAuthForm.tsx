@@ -10,21 +10,33 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image"
 import smallLogo from '../../public/small-logo.png'
+import * as z from "zod";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useAuthContext } from "@/contexts/authContext";
+import { useRouter } from 'next/navigation'
+
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> 
 {
   page: UserAuthFormPage
 }
 
-// where?
+// เก็บไหนดี
 export enum UserAuthFormPage {
-  SignIn,
-  SignUp
+  LogIn,
+  Register
 }
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const page: UserAuthFormPage = props.page
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [usernameInput, setUsernameInput] = React.useState("");
+  const [nameInput, setNameInput] = React.useState("");
+  const [passwordInput, setPasswordInput] = React.useState("");
+
+  const router = useRouter()
+  const { login } = useAuthContext()
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
@@ -33,6 +45,36 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     setTimeout(() => {
       setIsLoading(false);
     }, 3000);
+
+    if (page === UserAuthFormPage.LogIn) {
+      try {
+        await login(usernameInput, passwordInput) 
+        router.push('/') 
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    if (page === UserAuthFormPage.Register) {
+      const userInfo = { usernameInput, nameInput, passwordInput }
+
+      try {
+        const response = await fetch(`http://localhost:8000/register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userInfo),
+        })
+        if (response.status !== 201) {
+          console.log('error')
+        } else {
+          router.push('/sign-in') 
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
   }
 
   return (
@@ -46,16 +88,16 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 alt="Factonation logo"
               />
           <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            { page === UserAuthFormPage.SignIn ? 'เข้าสู่ระบบ' : 'สมัครสมาชิก' }
+            { page === UserAuthFormPage.LogIn ? 'เข้าสู่ระบบ' : 'สมัครสมาชิก' }
           </h2>
-          { page === UserAuthFormPage.SignIn ? ( <p className="mt-2 text-sm leading-6 text-gray-500">
+          { page === UserAuthFormPage.LogIn ? ( <p className="mt-2 text-sm leading-6 text-gray-500">
             ยังไม่ได้เป็นสมาชิก?{' '}
-            <Link href="/sign-up" className="font-semibold text-primary-button hover:text-accent">
+            <Link href="/register" className="font-semibold text-primary-button hover:text-accent">
               สมัครทันที
             </Link>
           </p> ) : ( <></>) }
         </div>
-
+      <form onSubmit={onSubmit}>
         <div className="mt-10">
           <div>
             <form action="#" method="POST" className="space-y-6">
@@ -65,8 +107,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 </label>
                 <div className="mt-2">
                   <input
+                    onChange={(e) => {setUsernameInput(e.target.value)}}
                     id="email"
-                    name="email"
                     type="email"
                     autoComplete="email"
                     required
@@ -75,13 +117,14 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 </div>
               </div>
 
-              { page === UserAuthFormPage.SignUp ? ( 
+              { page === UserAuthFormPage.Register ? ( 
               <div>
                 <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
                   ชื่อ
                 </label>
                 <div className="mt-2">
                   <input
+                   onChange={(e) => {setNameInput(e.target.value)}}
                     id="name"
                     name="name"
                     type="name"
@@ -98,8 +141,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 </label>
                 <div className="mt-2">
                   <input
+                    onChange={(e) => {setPasswordInput(e.target.value)}}
                     id="password"
-                    name="password"
                     type="password"
                     autoComplete="current-password"
                     required
@@ -133,13 +176,13 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-primary-button px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                    { page === UserAuthFormPage.SignIn ? 'เข้าสู่ระบบ' : 'สมัครสมาชิก' }
-                  
+                    { page === UserAuthFormPage.LogIn ? 'เข้าสู่ระบบ' : 'สมัครสมาชิก' }
                 </button>
               </div>
             </form>
           </div>
         </div>
+      </form>
       </div>
     </div>
   

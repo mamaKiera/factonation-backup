@@ -17,25 +17,11 @@ import { useState } from "react";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const Page: FC<UserAuthFormProps> = async ({
-  className,
-  ...props
-}) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault();
-    setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-  }
-
+const Page: FC<UserAuthFormProps> =  () => {
   return (
     <div className="flex min-h-screen flex-1">
      
-        <UserAuthForm page={UserAuthFormPage.SignIn}  />
+        <UserAuthForm page={UserAuthFormPage.LogIn}  />
         <div className="relative hidden w-0 flex-1 lg:block">
           <Image
             className="absolute inset-0 h-full w-full object-cover"
