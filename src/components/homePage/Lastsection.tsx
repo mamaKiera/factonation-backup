@@ -1,14 +1,30 @@
+"use client";
 import { Button } from "@/components/ui/Button";
 import { Facebook } from "lucide-react";
 import { Youtube } from "lucide-react";
 import Image from "next/image";
 import lineIcon from "../../../public/line (3).png";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 function Lastsection() {
   return (
     <div id="last-section" className="flex justify-center h-auto my-10 ">
       <div className="flex flex-col items-center gap-10 ">
-        <div
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: "some" }}
+          transition={{
+            duration: 0.3,
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+          }}
+          variants={{
+            hidden: { opacity: 0, x: -150 },
+            visible: { opacity: 1, x: 0 },
+          }}
           className="flex flex-col items-center justify-center border-2 border-stone-800 gap-5 p-10 "
           style={{ height: 250, width: 700 }}
         >
@@ -35,17 +51,23 @@ function Lastsection() {
           <Button size={"sm"} className="px-8 bg-black text-white">
             สมัครทันที
           </Button>
-        </div>
+        </motion.div>
 
         <div className="flex gap-3 items-center">
+        <Link href="https://web.facebook.com/officialfactonation">
           <Facebook />
+        </Link>
+        <Link href="https://www.youtube.com/@FactonationTH/featured">
           <Youtube />
+        </Link>
+        <Link href="https://page.line.me/559odtho?openQrModal=true">
           <Image
             src={lineIcon}
             alt="hero image"
             style={{ height: 22, width: 22 }}
             className="flex items-center rounded-xl"
           />
+          </Link>
         </div>
       </div>
     </div>

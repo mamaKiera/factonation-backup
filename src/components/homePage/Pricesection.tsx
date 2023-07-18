@@ -1,6 +1,8 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { CheckSquare } from "lucide-react";
 import { Badge } from "../ui/badge";
+import { motion } from "framer-motion";
 
 export interface IPriceDetails {
   module: string;
@@ -61,13 +63,41 @@ function Pricesection() {
   return (
     <div className="my-28" id="price-section">
       <div className="flex flex-col gap-3 w-11/12 mx-auto my-14 ">
-        <div className="flex gap-4 px-20 ">
+        <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: "some" }}
+        transition={{
+          duration: 0.3,
+          type: "spring",
+          stiffness: 260,
+          damping: 20,
+        }}
+        variants={{
+          hidden: { opacity: 0, x: -150 },
+          visible: { opacity: 1, x: 0 },
+        }} 
+          className="flex gap-4 px-20 ">
           <p className="text-3xl font-black">|</p>
           <p className="text-4xl font-bold">
             เริ่มเรียนได้เเล้ววันนี้ในราคาสุดคุ้ม
           </p>
-        </div>
-        <div className="flex items-center justify-center gap-3 ">
+        </motion.div>
+        
+        <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: "some" }}
+        transition={{
+          duration: 0.3,
+          type: "spring",
+          stiffness: 260,
+          damping: 20,
+        }}
+        variants={{
+          hidden: { opacity: 0, x: 150 },
+          visible: { opacity: 1, x: 0 },
+        }} className="flex items-center justify-center gap-3 ">
           <div className="flex gap-3 ">
             {priceDetails.map((priceDetail, i) => {
               return (
@@ -116,7 +146,7 @@ function Pricesection() {
               );
             })}
           </div>
-        </div>
+          </motion.div>
       </div>
     </div>
   );

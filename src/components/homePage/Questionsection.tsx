@@ -1,3 +1,4 @@
+"use client";
 import {
   Accordion,
   AccordionTrigger,
@@ -5,6 +6,7 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const QnA1 = [
   {
@@ -42,19 +44,46 @@ function Questionsection() {
     <div id="question-section">
       <div>
         <div className="flex flex-col bg-stone-900 h-56 w-full justify-center ">
-          <div className="flex flex-col gap-3 mx-32 text-white w-6/12">
-            <div className="flex gap-2">
+          <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: "some" }}
+          transition={{
+            duration: 0.3,
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+          }}
+          variants={{
+            hidden: { opacity: 0, x: -150 },
+            visible: { opacity: 1, x: 0 },
+          }}  className="flex flex-col gap-3 mx-32 text-white w-6/12">
+            <div  className="flex gap-2">
               <p className="text-3xl font-black">|</p>
               <p className="text-4xl">คำถามที่พบบ่อย</p>
             </div>
             <p className="text-xl w-5/6">
               ไม่พบคำถามที่คุณต้องการ? ติดต่อทีมงาน ของเราได้เลย
             </p>
-          </div>
+          </motion.div>
         </div>
         <div className="flex justify-center items-center">
           <div className="flex w-4/5 justify-center gap-10 ">
-            <div className="flex flex-col my-10 w-2/4 ">
+         <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: "some" }}
+          transition={{
+            duration: 0.3,
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+          }}
+          variants={{
+            hidden: { opacity: 0, x: -150 },
+            visible: { opacity: 1, x: 0 },
+          }}
+           className="flex flex-col my-10 w-2/4 ">
               {QnA1.map((qna, i) => {
                 return (
                   <Accordion type="single" collapsible className="w-54" key={i}>
@@ -65,8 +94,22 @@ function Questionsection() {
                   </Accordion>
                 );
               })}
-            </div>
-            <div className="flex flex-col my-10 w-2/4 ">
+            </motion.div>
+            <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: "some" }}
+          transition={{
+            duration: 0.3,
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+          }}
+          variants={{
+            hidden: { opacity: 0, x: 150 },
+            visible: { opacity: 1, x: 0 },
+          }} 
+          className="flex flex-col my-10 w-2/4 ">
               {QnA2.map((qna, i) => {
                 return (
                   <Accordion type="single" collapsible className="w-54" key={i}>
@@ -77,7 +120,7 @@ function Questionsection() {
                   </Accordion>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
