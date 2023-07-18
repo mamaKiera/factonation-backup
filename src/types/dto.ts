@@ -29,3 +29,16 @@ export interface LessonDto {
   courseId: string;
   isLessonCompleted: boolean;
 }
+
+export enum Role {
+  Admin = "Admin",
+  Student = "Student",
+}
+
+export interface UserDto {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  role: Role;
+}

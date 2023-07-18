@@ -1,26 +1,12 @@
 "use client";
 import useUserList from "@/hooks/useUsers";
+import { UserDto } from "@/types/dto";
 import Link from "next/link";
 
 interface pageProps {}
 
-// temp
-export interface IUser {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  role: Role;
-}
-
-// temp
-export interface Role {
-  Student: 'Student',
-  Admin: 'Admin'
-};
-
 const Page = () => {
-  const { users }: { users: IUser[] } = useUserList();
+  const { users }: { users: UserDto[] | null } = useUserList();
   console.log(users)
 
   return (
