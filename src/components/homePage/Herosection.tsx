@@ -56,7 +56,7 @@ function Herosection() {
               สมัครทันที
             </Link>
             <Link
-              href="/dashboard/courseOverview/af000670-fb5f-4a37-92b1-464b1e83947f"
+              href="/module"
               className={buttonVariants({ size: "xl", variant: "outline" })}
             >
               แนะนำคอร์ส
