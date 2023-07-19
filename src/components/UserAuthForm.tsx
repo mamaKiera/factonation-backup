@@ -66,11 +66,10 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           },
           body: JSON.stringify(userInfo),
         })
-        console.log('hello foo')
         if (response.status !== 201) {
           console.log('error')
         } else {
-          router.push('/sign-in') 
+          router.push('/login') 
         }
       } catch (err) {
         console.log(err)

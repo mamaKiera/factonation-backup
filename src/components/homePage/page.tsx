@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import Herosection from "./Herosection";
 import Problemsection from "./Problemsection";
 import Benefitsection from "./Benefitsection";

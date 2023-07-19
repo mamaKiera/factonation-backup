@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/Button"
+import { Button } from "@/components/ui/button"
 import { Facebook } from 'lucide-react';
 import { Youtube } from 'lucide-react';
 import Image from "next/image"

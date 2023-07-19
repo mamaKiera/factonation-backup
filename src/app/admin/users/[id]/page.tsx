@@ -11,8 +11,7 @@ interface pageProps {
       userId: string;
     };
   }
-  
-  const page: FC<pageProps> = async ({ params: { userId } }) => {
+    const page: FC<pageProps> = async ({ params: { userId } }) => {
 
     const tags = Array.from({ length: 50 }).map(
         (_, i, a) => `v1.2.0-beta.${a.length - i}`

@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/Button"
+import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import heroImage from '../../../public/IMG_1737.webp'
 

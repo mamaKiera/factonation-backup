@@ -1,5 +1,5 @@
 "use client";
-import { Button, buttonVariants } from "@/components/ui/Button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import Image from "next/image";
 import heroImage from "../../../public/IMG_1737.webp";
 import { useMemo } from "react";
