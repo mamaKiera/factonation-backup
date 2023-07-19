@@ -10,6 +10,7 @@ export interface CourseDto {
     name: string;
   };
   isCompleted: boolean;
+  lessons: LessonDto[];
 }
 
 export interface CourseWithLessonDto extends CourseDto {
