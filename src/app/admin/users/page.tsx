@@ -13,13 +13,34 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alertDialog"
+import { useRouter } from 'next/navigation'
 
-
-interface pageProps {}
+//interface pageProps {}
 
 const Page = () => {
   const { users }: { users: UserDto[] | null } = useUserList();
-  console.log(users)
+  const router = useRouter()
+
+  const HandleDelete = async (id: string) => {
+
+    //const accessToken = localStorage.getItem('token')
+
+    try {
+      const response = await fetch(`http://localhost:8000/user/student/${id}`, {
+        method: 'DELETE',
+        // headers: {
+        //   Authorization: `bearer ${accessToken}`,
+        // },
+      })
+    
+      if (response.ok) {
+        location.reload();
+      }
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <div className="py-8 px-4 sm:px-6 lg:px-8">
@@ -35,7 +56,7 @@ const Page = () => {
             type="button"
             className="block rounded-md bg-primary-button px-3 py-2 text-center text-sm font-semibold text-white hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            Add user
+            Create new user
           </button>
         </div>
       </div>
@@ -76,7 +97,9 @@ const Page = () => {
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                       <div className="text-gray-900">{user.id}</div>
                     </td>
-                    {/* <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">{user.enrollment}</td> */}
+                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">{user.enrollment.map((enroll) => (
+                      <p key={enroll.courseName}>{enroll.courseName}</p>
+                    )) }</td>
                     <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                       <Link href={`/admin/users/${user.id}`} className="text-indigo-600 hover:text-indigo-900">
                         Edit<span className="sr-only">, {user.name}</span>
@@ -95,12 +118,11 @@ const Page = () => {
                         </AlertDialogHeader>
                         <AlertDialogFooter>
                           <AlertDialogCancel>Cancel</AlertDialogCancel>
-                          <AlertDialogAction>Yes, delete</AlertDialogAction>
+                          <AlertDialogAction onClick={(e)=> HandleDelete(user.id)}> Yes, delete</AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>
                     </AlertDialog>
-                    </td>
-                    
+                    </td>             
                   </tr>
                 ))}
               </tbody>

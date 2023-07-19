@@ -37,8 +37,16 @@ export enum Role {
 
 export interface UserDto {
   id: string;
+  enrollment: EnrollmentDto[];
   name: string;
   email: string;
   password: string;
   role: Role;
+}
+
+export interface EnrollmentDto {
+  id: string;
+  studentId: string;
+  courseId: string;
+  courseName: string;
 }
