@@ -2,6 +2,18 @@
 import useUserList from "@/hooks/useUsers";
 import { UserDto } from "@/types/dto";
 import Link from "next/link";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alertDialog"
+
 
 interface pageProps {}
 
@@ -71,10 +83,24 @@ const Page = () => {
                       </Link>
                     </td>
                     <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                      <a href="#" className="text-red-600 hover:text-red-900">
-                        Delete<span className="sr-only">, {user.name}</span>
-                      </a>
+                    <AlertDialog>
+                      <AlertDialogTrigger>Delete</AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            This action cannot be undone. This will permanently delete the account
+                            and remove the data from servers.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction>Yes, delete</AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                     </td>
+                    
                   </tr>
                 ))}
               </tbody>
@@ -87,4 +113,4 @@ const Page = () => {
 }
 
 
-export default Page;
+export default Page

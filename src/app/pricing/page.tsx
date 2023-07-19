@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { Icons } from "@/components/Icon";
-import { buttonVariants } from "@/components/ui/Button";
+import { buttonVariants } from "@/components/ui/button";
 import PriceCard from "./PriceCard";
 import { pricingPlans } from "./pricing_plans";
 import { pricingPlan } from "@/types";
