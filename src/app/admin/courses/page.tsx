@@ -20,12 +20,14 @@ const page: FC<pageProps> = async () => {
           </p>
         </div>
         <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+          <Link href="/admin/courses/create">
           <button
             type="button"
             className="block rounded-md bg-primary-button px-3 py-2 text-center text-sm font-semibold text-white hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Create new course
           </button>
+          </Link>
         </div>
       </div>
     </div>
