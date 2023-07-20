@@ -70,7 +70,7 @@ function Benefitsection() {
             >
               <div className="flex flex-col gap-10 justify-center items-center">
                 {benefit.icon}
-                <p className="text-xl">{benefit.desc}</p>
+                <p className="text-xl px-4 font-extralight">{benefit.desc}</p>
               </div>
             </div>
           );
