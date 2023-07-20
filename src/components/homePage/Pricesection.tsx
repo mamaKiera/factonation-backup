@@ -3,6 +3,10 @@ import { cn } from "@/lib/utils";
 import { CheckSquare } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { motion } from "framer-motion";
+import { useAuthContext } from "@/contexts/authContext";
+import { FC } from "react";
+import { Url } from "url";
+import Link from "next/link";
 
 export interface IPriceDetails {
   module: string;
@@ -11,6 +15,11 @@ export interface IPriceDetails {
   benefits: string[];
   saledPrice?: string;
   actions: string;
+  paymaent: Url
+}
+
+interface ILogin {
+  isLoggedIn: boolean;
 }
 
 const priceDetails = [
@@ -23,6 +32,7 @@ const priceDetails = [
       "กลุ่ม Private ผ่าน Discord สำหรับการพูดคุยและถามตอบระหว่างอาจารย์และนักเรียนที่ เรียนในคอร์สเดียวกัน",
     ],
     actions: "Buy Module 1",
+    payment: "https://buy.stripe.com/28o3e2elY6bs2acdQQ",
   },
   {
     module: "2",
@@ -33,6 +43,7 @@ const priceDetails = [
       "กลุ่ม Private ผ่าน Discord สำหรับการพูดคุยและถามตอบระหว่างอาจารย์และนักเรียนที่ เรียนในคอร์สเดียวกัน",
     ],
     actions: "Buy Module 2",
+    payment: "https://buy.stripe.com/4gw5ma4Lo57o6qs4gh",
   },
   {
     module: "3",
@@ -43,6 +54,7 @@ const priceDetails = [
       "กลุ่ม Private ผ่าน Discord สำหรับการพูดคุยและถามตอบระหว่างอาจารย์และนักเรียนที่ เรียนในคอร์สเดียวกัน",
     ],
     actions: "Buy Module 3",
+    payment: "https://buy.stripe.com/3csg0O0v80R82ac7su",
   },
   {
     module: "1+2+3",
@@ -55,11 +67,14 @@ const priceDetails = [
       "กลุ่ม Private ผ่าน Discord สำหรับการพูดคุยและถามตอบระหว่างอาจารย์และนักเรียนที่เรียนในคอร์สเดียวกัน",
     ],
     actions: "Buy Module 1+2+3",
+    payment: "https://buy.stripe.com/8wMbKydhU8jA7uwcMP",
   },
   ,
 ];
 
-function Pricesection() {
+const  Pricesection: FC<ILogin> = () => {
+
+  const {isLoggedIn} = useAuthContext();
   return (
     <div className="my-28" id="price-section">
       <div className="flex flex-col gap-3 w-11/12 mx-auto my-14 ">
@@ -139,9 +154,12 @@ function Pricesection() {
                       })}
                     </div>
                   </div>
-                  <button className="bg-stone-900 h-8 rounded-lg text-white">
+                  {isLoggedIn ? 
+                 ( <Link href={`${priceDetail?.payment}`} className="flex justify-center items-center bg-stone-900 h-8 rounded-lg text-white">
                     {priceDetail!.actions}
-                  </button>
+                  </Link>):( <Link href="/login" className="flex justify-center items-center bg-stone-900 h-8 rounded-lg text-white">
+                    {priceDetail!.actions}
+                  </Link>)}
                 </div>
               );
             })}

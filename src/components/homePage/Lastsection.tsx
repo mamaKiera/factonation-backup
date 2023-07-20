@@ -1,6 +1,6 @@
 
 "use client";
-import { Button } from "@/components/ui/Button";
+import { Button, buttonVariants } from "@/components/ui/Button";
 
 import { Facebook } from "lucide-react";
 import { Youtube } from "lucide-react";
@@ -8,8 +8,15 @@ import Image from "next/image";
 import lineIcon from "../../../public/line (3).png";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useAuthContext } from "@/contexts/authContext";
+import { FC } from "react";
+import { cn } from "@/lib/utils";
 
-function Lastsection() {
+interface ILogin {
+  isLoggedIn:boolean;
+}
+const  Lastsection: FC<ILogin> = () => {
+  const {isLoggedIn} = useAuthContext();
   return (
     <div id="last-section" className="flex justify-center h-auto my-10 ">
       <div className="flex flex-col items-center gap-10 ">
@@ -50,9 +57,12 @@ function Lastsection() {
               เพียงสัปดาห์ละไม่เกิน 30 นาทีก็สามารถสร้าง Future Skill ไปกับเรา
             </p>
           </div>
-          <Button size={"sm"} className="px-8 bg-black text-white">
+          {isLoggedIn ? 
+          (<Link href='#price-section' className={cn(buttonVariants({size: 'sm'}),"px-8 bg-black text-white")}>
             สมัครทันที
-          </Button>
+          </Link>):(<Link href='/login' className={cn(buttonVariants({size: 'sm'}),"px-8 bg-black text-white")}>
+            สมัครทันที
+          </Link>)}
         </motion.div>
 
         <div className="flex gap-3 items-center">
