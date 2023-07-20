@@ -69,7 +69,7 @@ function Questionsection() {
             </div>
             <div className="flex flex-col gap-1">
             <p className="text-xl">
-              ไม่พบคำถามที่คุณต้องการ? ติดต่อทีมงาน ของเราได้เลย
+              ไม่พบคำถามที่คุณต้องการ ติดต่อทีมงาน ของเราได้เลย
             </p>
             <div className="flex gap-3 text-primary-button w-auto text-xs">
             <p>เบอร์โทร: 062-179-9526</p>
