@@ -1,17 +1,22 @@
 "use client";
 
-//import { getCourse } from "@/lib/getCourse";
 import * as React from "react"
 import { FC } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
+import { useParams } from "next/navigation";
+import useUser from "@/hooks/useUser";
 
 interface pageProps {
     params: {
-      userId: string;
+      id: string;
     };
   }
-    const page: FC<pageProps> = async ({ params: { userId } }) => {
+
+const Page: FC<pageProps> = () => {
+
+  const { id } = useParams()
+  const { user, loading } = useUser(id)
 
     const tags = Array.from({ length: 50 }).map(
         (_, i, a) => `v1.2.0-beta.${a.length - i}`
@@ -36,7 +41,8 @@ interface pageProps {
                     name="userid"
                     id="userid"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder="janesmith"
+                    placeholder={user?.id}
+                    value={user?.id}
                   />
                 </div>
               </div>
@@ -54,7 +60,7 @@ interface pageProps {
                     id="name"
                     autoComplete="name"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder="janesmith"
+                    placeholder={user?.name}
                   />
                 </div>
               </div>
@@ -72,7 +78,7 @@ interface pageProps {
                     id="email"
                     autoComplete="email"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder="email"
+                    placeholder={user?.email}
                   />
                 </div>
               </div>
@@ -90,7 +96,7 @@ interface pageProps {
                     id="password"
                     autoComplete="password"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder="secret123"
+                    placeholder={user?.password}
                   />
                 </div>
               </div>
@@ -132,6 +138,4 @@ interface pageProps {
     );
   };
   
-  export default page;
-  
-    
+  export default Page;
