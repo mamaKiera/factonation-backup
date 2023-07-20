@@ -24,7 +24,7 @@ const page: FC<pageProps> = async () => {
             type="button"
             className="block rounded-md bg-primary-button px-3 py-2 text-center text-sm font-semibold text-white hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            Add user
+            Create new course
           </button>
         </div>
       </div>

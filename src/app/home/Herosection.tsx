@@ -20,7 +20,7 @@ function HeroSection(){
               <p>เริ่มตั้งแต่สอนเขียน C# ไม่จำเป็นต้อง</p>
               <p>มีพื้นฐานการเขียนโปรแกรม เรียนแบบ</p>
               <p>On-demand สัปดาห์ละ 2 วิดีโอ ในกลุ่ม</p>
-              <p>Private ถามตอบได้ตลอดเวลา”</p>
+              <p>Private ถามตอบได้ตลอดเวลา</p>
             </div>
             <div className="flex gap-8 text-2xl items-center">
                 <Button size={'xl'} className="px-8 bg-black text-white">สมัครทันที</Button>
