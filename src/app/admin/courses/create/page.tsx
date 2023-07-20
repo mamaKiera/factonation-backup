@@ -6,7 +6,7 @@ import { FC } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { PhotoIcon } from '@heroicons/react/24/solid'
-import CourseForm from "@/components/adminCoursePage/CourseForm";
+import CourseForm, { AdminCoursePage } from "@/components/adminCoursePage/CourseForm";
 import { getCourse } from "@/lib/getCourse";
 
 interface pageProps {
@@ -15,12 +15,12 @@ interface pageProps {
   };
 }
   
-const page = ({ params: { courseId } }: pageProps) => { 
+const Page = ({ params: { courseId } }: pageProps) => { 
   return (
     <>
-      <CourseForm />
+    <CourseForm page= {AdminCoursePage.Create}/>
     </>
   );
 };
   
-  export default page;
+  export default Page;

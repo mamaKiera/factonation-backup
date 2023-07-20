@@ -15,7 +15,6 @@ interface pageProps {
   };
 }
 
-
   
 const page = ({ params: { courseId } }: pageProps) => { 
   return (
