@@ -37,6 +37,11 @@ const QnA2 = [
     answer:
       "เนื้อหาทั้งหมดถูกสอนโดย อาจารธีร์ Founder ของ Factonation ซึ่งมีประสบการณ์การเขียนโปรแกรม SCADA ในโรงงานมาตั้งแต่เรียนจบจากคณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทลัย (เกียรตินิยมอันดับ 1)",
   },
+  {
+    question: "ถามคำถามผู้สอนอย่างไร?",
+    answer:
+      "หลังจากที่ นักเรียนสมัครคอร์สของเราแล้วจะได้ลิ้งค์เข้าร่วมกลุ่ม Private Discord ที่สามารถถามคำถามอาจารย์เกี่ยวกับบทเรียนได้ทุกเมื่อ",
+  },
 ];
 
 function Questionsection() {
@@ -57,14 +62,20 @@ function Questionsection() {
           variants={{
             hidden: { opacity: 0, x: -150 },
             visible: { opacity: 1, x: 0 },
-          }}  className="flex flex-col gap-3 mx-32 text-white w-6/12">
+          }}  className="flex flex-col gap-3 mx-32 text-white w-10/12">
             <div  className="flex gap-2">
               <p className="text-3xl font-black">|</p>
               <p className="text-4xl">คำถามที่พบบ่อย</p>
             </div>
-            <p className="text-xl w-5/6">
-              ไม่พบคำถามที่คุณต้องการ? ติดต่อทีมงาน ของเราได้เลย
+            <div className="flex flex-col gap-1">
+            <p className="text-xl">
+              ไม่พบคำถามที่คุณต้องการ ติดต่อทีมงาน ของเราได้เลย
             </p>
+            <div className="flex gap-3 text-primary-button w-auto text-xs">
+            <p>เบอร์โทร: 062-179-9526</p>
+            <p>Line Official ID: @factonation</p>
+            </div>
+            </div>
           </motion.div>
         </div>
         <div className="flex justify-center items-center">
