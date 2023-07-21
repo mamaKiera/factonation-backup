@@ -1,20 +1,35 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import AddCourseForm from "@/components/AddCourseForm";
+import AddLessonForm from "@/components/AddLessonForm";
 import { Button } from "@/components/ui/Button";
+import { getCourses } from "@/lib/getCourse";
+import { CourseDto, LessonDto } from "@/types/dto";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 
 interface pageProps {}
 
 const page: FC<pageProps> = () => {
-  const courses = [
-    {
-      name: "C# & .NET Fundamentals",
-      id: "550e8400-e29b-41d4-a716-446655440000",
-      instructor: "Chayn",
-    },
-    // More people...
-  ];
+  const [courses, setCourses] = useState<CourseDto[]>();
+  const [lessons, setLessons] = useState<LessonDto[]>([]);
+  useEffect(() => {
+    const fetchCourse = async () => {
+      const _course = await getCourses();
+      console.log(_course);
+      setCourses(_course);
+    };
+
+    fetchCourse();
+  }, []);
+  // const courses = [
+  //   {
+  //     name: "C# & .NET Fundamentals",
+  //     id: "550e8400-e29b-41d4-a716-446655440000",
+  //     instructor: "Chayn",
+  //   },
+  //   // More people...
+  // ];
 
   return (
     <div>
@@ -61,6 +76,12 @@ const page: FC<pageProps> = () => {
                 </th>
                 <th
                   scope="col"
+                  className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
+                >
+                  Videos
+                </th>
+                <th
+                  scope="col"
                   className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 md:table-cell"
                 >
                   Instructor
@@ -72,10 +93,10 @@ const page: FC<pageProps> = () => {
               </tr>
             </thead>
             <tbody>
-              {courses.map((course) => (
-                <tr key={course.name}>
+              {courses?.map((course) => (
+                <tr key={course.id}>
                   <td className="relative py-4 pr-3 text-sm font-medium text-gray-900">
-                    {course.name}
+                    {course.courseName}
                     <div className="absolute bottom-0 right-full h-px w-screen bg-gray-100" />
                     <div className="absolute bottom-0 left-0 h-px w-screen bg-gray-100" />
                   </td>
@@ -83,20 +104,32 @@ const page: FC<pageProps> = () => {
                     {course.id}
                   </td>
                   <td className="hidden px-3 py-4 text-sm text-gray-500 md:table-cell">
-                    {course.instructor}
+                    {course.instructor.name}
                   </td>
+                  <td className="hidden px-3 py-4 text-sm text-gray-500 md:table-cell">
+                    {course.lessons.length}
+                  </td>
+
                   <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                     <Link
                       href={`/admin/courses/${course.id}`}
                       className="text-indigo-600 hover:text-indigo-900"
                     >
-                      Edit<span className="sr-only">, {course.name}</span>
+                      Edit<span className="sr-only">, {course.courseName}</span>
                     </Link>
                   </td>
                   <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                     <a href="#" className="text-red-600 hover:text-red-900">
-                      Delete<span className="sr-only">, {course.name}</span>
+                      Delete
+                      <span className="sr-only">, {course.courseName}</span>
                     </a>
+                  </td>
+                  <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                    <AddLessonForm
+                      lessons={lessons}
+                      setLessons={setLessons}
+                      courseId={course.id}
+                    />
                   </td>
                 </tr>
               ))}

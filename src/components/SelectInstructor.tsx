@@ -1,5 +1,5 @@
 "use client";
-import { FC, useEffect, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/Button";
 import { Check, PersonStanding } from "lucide-react";
@@ -13,10 +13,12 @@ import {
 import { cn } from "@/lib/utils";
 import { getInstructors } from "@/lib";
 
-interface SelectInstructorProps {}
+interface SelectInstructorProps {
+  setInstructor: Dispatch<SetStateAction<string>>;
+}
 
-const SelectInstructor: FC<SelectInstructorProps> = ({}) => {
-  const [instructor, setInstructor] =
+const SelectInstructor: FC<SelectInstructorProps> = ({ setInstructor }) => {
+  const [instructors, setInstructors] =
     useState<{ id: string; name: string }[]>();
   const [value, setValue] = useState("");
   const [open, setOpen] = useState(false);
@@ -24,11 +26,13 @@ const SelectInstructor: FC<SelectInstructorProps> = ({}) => {
   useEffect(() => {
     const fetchInstructor = async () => {
       const response = await getInstructors();
-      setInstructor(response);
+      console.log(response);
+      setInstructors(response);
     };
     fetchInstructor();
   }, []);
 
+  // this is the best course of soyscript
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild className="text-black mb-3">
@@ -39,8 +43,9 @@ const SelectInstructor: FC<SelectInstructorProps> = ({}) => {
           className="w-[200px] justify-between text-black"
         >
           {value
-            ? instructor && instructor.find((ins) => ins.id == value)?.name
+            ? instructors && instructors.find((ins) => ins.id == value)?.name
             : "Select instructor..."}
+          {/* {value} */}
           <PersonStanding />
         </Button>
       </PopoverTrigger>
@@ -49,13 +54,19 @@ const SelectInstructor: FC<SelectInstructorProps> = ({}) => {
           <CommandInput placeholder="select instructor..." className="h-9" />{" "}
           <CommandEmpty>No Instructor found.</CommandEmpty>
           <CommandGroup className="bg-white">
-            {instructor &&
-              instructor.map((ins, i) => {
+            {instructors &&
+              instructors.map((ins, i) => {
                 return (
                   <CommandItem
                     key={ins.id}
                     onSelect={(currVal) => {
-                      setValue(currVal == value ? "" : currVal);
+                      console.log(currVal);
+                      const id = instructors.find(
+                        (ins) => ins.name.toLowerCase() == currVal
+                      )?.id;
+                      setValue(id!);
+                      setInstructor(id!);
+                      console.log(id);
                       setOpen(false);
                     }}
                   >

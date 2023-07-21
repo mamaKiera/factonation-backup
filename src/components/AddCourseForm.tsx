@@ -17,7 +17,7 @@ import { LessonDto } from "@/types/dto";
 import AddLessonForm from "./AddLessonForm";
 
 export default function AddCourseForm() {
-  const [file, setFile] = useState();
+  const [file, setFile] = useState<Blob>();
   const [imageId, setImageId] = useState("");
   const [price, setPrice] = useState("");
   const [saledPrice, setSaledPrice] = useState("");
@@ -32,7 +32,7 @@ export default function AddCourseForm() {
 
     try {
       const formData = new FormData();
-      formData.append("image", file);
+      formData.append("image", file as Blob);
       formData.append("imageId", imageId);
       formData.append("price", price);
       formData.append("saledPrice", saledPrice);
@@ -40,16 +40,12 @@ export default function AddCourseForm() {
       formData.append("courseName", courseName);
       formData.append("instructor", instructor);
       // formData.append("lessons", lessons);
+
+      await axios.post("http://localhost:8000/course", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
       console.log(formData);
-
-      await axios.post(
-        "http://localhost:8000/course",
-        { formData, lessons },
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
-
       // await fetch("http://localhost:8000/course", {
       //   method: "POST",
       //   body: JSON.stringify({ formData, caption }),
@@ -74,7 +70,7 @@ export default function AddCourseForm() {
             กด submit เพื่อสร้างคอรสเรียนสุดมหัศจรรย์
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={submit} className="flex flex-col">
+        <form onSubmit={submit} className="flex flex-col w-full">
           <Label htmlFor="file">Course Image</Label>
           <input
             onChange={(e) => setFile(e.target.files[0])}
@@ -120,7 +116,7 @@ export default function AddCourseForm() {
             className="rounded-lg bg-stone-100 p-2 mt-1 mb-3"
           />
           <Label htmlFor="instructor">instructorId</Label>
-          <SelectInstructor />
+          <SelectInstructor setInstructor={setInstructor} />
           <Label htmlFor="lesson">Lessons</Label>
           <AddLessonForm lessons={lessons} setLessons={setLessons} />
           {/* Lesson form */}

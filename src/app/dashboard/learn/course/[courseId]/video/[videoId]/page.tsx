@@ -63,6 +63,7 @@ const page: FC<pageProps> = ({ params: { videoId, courseId } }) => {
         <p className="mb-2">{desc}</p>
       </div>
       <ReactPlayer controls url={url} style={{ width: "full" }} />
+      {/* <iframe src={url} width={"full"} /> */}
       <div className="flex items-center gap-4">
         <label
           htmlFor="terms"

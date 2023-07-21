@@ -35,6 +35,7 @@ const page: FC<pageProps> = async () => {
           </p>
           <div className="flex gap-4 flex-wrap m-8 border-secondary-button border-t-[1.4px] w-fit pt-6">
             {courses.map((course, i) => {
+              console.log(course.imageUrl);
               return (
                 <Link
                   href={`/dashboard/learn/course/${course.id}`}
@@ -43,7 +44,14 @@ const page: FC<pageProps> = async () => {
                 >
                   <div>
                     {/* TODO: Replace with photo*/}
-                    <div className="h-[160px] w-[350px] bg-primary-button"></div>{" "}
+                    <Image
+                      src={course.imageUrl}
+                      alt={`course ${course.courseName}`}
+                      width={350}
+                      height={160}
+                      className="object-cover object-center"
+                    />
+                    {/* <div className="h-[160px] w-[350px] bg-primary-button"></div>{" "} */}
                     <div className="px-4 py-2">
                       <h1 className="text-lg">{course.courseName}</h1>
                       <div className="flex gap-4 items-center text-md">

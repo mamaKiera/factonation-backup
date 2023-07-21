@@ -2,6 +2,7 @@ export interface CourseDto {
   id: string;
   courseName: string;
   details: string;
+  imageUrl: string;
   prerequisites: string[];
   instructorId: string;
   students: string[];
@@ -27,5 +28,4 @@ export interface LessonDto {
   videoUrl: string;
   order: number;
   courseId: string;
-  isLessonCompleted: boolean;
 }
