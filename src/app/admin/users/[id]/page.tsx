@@ -6,6 +6,18 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { useParams } from "next/navigation";
 import useUser from "@/hooks/useUser";
+import { Trash2 } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alertDialog"
 
 interface pageProps {
     params: {
@@ -21,6 +33,7 @@ const Page: FC<pageProps> = () => {
   const [name, setName] = useState(user?.name)
   const [email, setEmail] = useState(user?.email)
   const [password, setPassword] = useState(user?.password)
+  const [enroll, setEnroll] = useState(user?.enrollment)
 
   useEffect(() => {
     if (user ) {
@@ -29,10 +42,6 @@ const Page: FC<pageProps> = () => {
       setPassword(user.password);
     }
   }, [user]);
-
-  const tags = Array.from({ length: 50 }).map(
-      (_, i, a) => `v1.2.0-beta.${a.length - i}`
-    )
     
     return (
     <form className="ml-8 mt-16 mr-8">
@@ -54,6 +63,7 @@ const Page: FC<pageProps> = () => {
                     id="userid"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                     value={user?.id}
+                    disabled
                   />
                 </div>
               </div>
@@ -120,10 +130,11 @@ const Page: FC<pageProps> = () => {
               </label>
             <ScrollArea className="block w-full max-w-2xl h-72 rounded-md border">
             <div className="p-4">
-                {tags.map((tag) => (
-                <React.Fragment  key={tag}>
-                    <div className="text-sm">
-                    {tag}
+                {user?.enrollment.map((enroll) => (
+                <React.Fragment  key={enroll.courseId}>
+                    <div className="text-sm flex justify-between">
+                      {enroll.courseName} 
+                      <button><Trash2 size={20} color="red" /></button>
                     </div>
                     <Separator className="my-2" />
                 </React.Fragment>
