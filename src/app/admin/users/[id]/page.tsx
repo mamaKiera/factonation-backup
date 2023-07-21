@@ -33,7 +33,6 @@ const Page: FC<pageProps> = () => {
   const [name, setName] = useState(user?.name)
   const [email, setEmail] = useState(user?.email)
   const [password, setPassword] = useState(user?.password)
-  const [enroll, setEnroll] = useState(user?.enrollment)
 
   useEffect(() => {
     if (user ) {
@@ -42,6 +41,30 @@ const Page: FC<pageProps> = () => {
       setPassword(user.password);
     }
   }, [user]);
+
+  const HandleDelete = async (courseId: string, studentId: string) => {
+
+    //const accessToken = localStorage.getItem('token')
+
+    try {
+      const response = await fetch(`http://localhost:8000/user/enrollment`, {
+        method: 'DELETE',
+        headers: {
+          // Authorization: `bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({courseId, studentId}),
+      })
+      
+      console.log(response)
+      if (response.ok) {
+        location.reload();
+      }
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
     
     return (
     <form className="ml-8 mt-16 mr-8">
@@ -134,7 +157,21 @@ const Page: FC<pageProps> = () => {
                 <React.Fragment  key={enroll.courseId}>
                     <div className="text-sm flex justify-between">
                       {enroll.courseName} 
-                      <button><Trash2 size={20} color="red" /></button>
+                      <AlertDialog>
+                      <AlertDialogTrigger><Trash2 size={20} color="red" /></AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            The right to access this course will be removed from this user.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction onClick={(e)=> HandleDelete(enroll.courseId, enroll.studentId)}> Yes, delete</AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                     </div>
                     <Separator className="my-2" />
                 </React.Fragment>
