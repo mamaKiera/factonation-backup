@@ -35,16 +35,16 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
     const [username, setUsername] = useState(user)
 
     const login = async (username: string, password: string) => {
-        const loginInfo = { username, password }
+        const loginInfo = { email: username, password }
         try {
-          const res = await fetch(`http://localhost:8000/login`, {
+          const res = await fetch(`http://localhost:8000/user/login`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(loginInfo),
           })
-          const data = await res.json()
+          const data = (await res.json()).data
           if (data.statusCode === 401) {
             throw new Error(data.message) 
           }

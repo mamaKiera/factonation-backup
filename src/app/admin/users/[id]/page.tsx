@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react"
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { useParams } from "next/navigation";
@@ -18,9 +18,21 @@ const Page: FC<pageProps> = () => {
   const { id } = useParams()
   const { user, loading } = useUser(id)
 
-    const tags = Array.from({ length: 50 }).map(
-        (_, i, a) => `v1.2.0-beta.${a.length - i}`
-      )
+  const [name, setName] = useState(user?.name)
+  const [email, setEmail] = useState(user?.email)
+  const [password, setPassword] = useState(user?.password)
+
+  useEffect(() => {
+    if (user ) {
+      setName(user.name);
+      setEmail(user.email);
+      setPassword(user.password);
+    }
+  }, [user]);
+
+  const tags = Array.from({ length: 50 }).map(
+      (_, i, a) => `v1.2.0-beta.${a.length - i}`
+    )
     
     return (
     <form className="ml-8 mt-16 mr-8">
@@ -32,7 +44,7 @@ const Page: FC<pageProps> = () => {
 
           <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
               <label htmlFor="userid" className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">
-                User ID
+                User ID (auto-generated)
               </label>
               <div className="mt-2 sm:col-span-2 sm:mt-0">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
@@ -41,7 +53,6 @@ const Page: FC<pageProps> = () => {
                     name="userid"
                     id="userid"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder={user?.id}
                     value={user?.id}
                   />
                 </div>
@@ -56,11 +67,10 @@ const Page: FC<pageProps> = () => {
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                   <input
                     type="text"
-                    name="name"
                     id="name"
-                    autoComplete="name"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder={user?.name}
+                    value={name}
+                    onChange={(e) => {setName(e.target.value)}}
                   />
                 </div>
               </div>
@@ -78,7 +88,8 @@ const Page: FC<pageProps> = () => {
                     id="email"
                     autoComplete="email"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder={user?.email}
+                    value={email}
+                    onChange={(e) => {setEmail(e.target.value)}}
                   />
                 </div>
               </div>
@@ -96,7 +107,8 @@ const Page: FC<pageProps> = () => {
                     id="password"
                     autoComplete="password"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder={user?.password}
+                    value={password}
+                    onChange={(e) => {setPassword(e.target.value)}}
                   />
                 </div>
               </div>
