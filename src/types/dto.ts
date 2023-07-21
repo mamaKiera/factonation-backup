@@ -22,7 +22,6 @@ export interface LessonDto {
   title: string;
   week: number;
   desc: string;
-  quizes: string[];
   module: number;
   episode: number;
   videoUrl: string;

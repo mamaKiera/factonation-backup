@@ -38,7 +38,20 @@ export const page: FC<layoutProps> = ({ children, params }) => {
 
   useEffect(() => {
     const fetLessons = async () => {
+      // const _lessons = await getLessonByCourseIdFormetted(params.courseId);
+      console.log(localStorage.getItem("token"));
+      // const res = await fetch(
+      //   `http://localhost:8000/course/${params.courseId}`,
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+      //       "Content-type": "application/json",
+      //     },
+      //   }
+      // );
+      // const _lessons = await res.json();
       const _lessons = await getLessonByCourseIdFormetted(params.courseId);
+      console.log(_lessons);
       setLessons(_lessons);
     };
 
@@ -62,7 +75,7 @@ export const page: FC<layoutProps> = ({ children, params }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           courseId: params.courseId,
-          studentId: "baee72df-80d5-4ada-99bf-86bf8caf14b6",
+          studentId: "1ac78d03-3d75-415f-999d-bc9854085a5c",
         }),
       });
       const _status = await res.json();
@@ -70,7 +83,7 @@ export const page: FC<layoutProps> = ({ children, params }) => {
     };
 
     getLesson();
-  });
+  }, [params.courseId]);
 
   return (
     <div className="flex gap-4 h-full bg-secondary-background shadow-sm">
@@ -88,12 +101,14 @@ export const page: FC<layoutProps> = ({ children, params }) => {
           <p>{status?.percentage} % </p>
         </div>
         <div className="">
-          {lessons.map((lesson: any, i: number) => {
+          {lessons.map((lesson, i) => {
+            console.log(lesson);
             const completedLesson = lesson.filter(
               (l: any) => l.isLessonCompleted
             ).length;
             return (
               <AccordianComponent
+                week={i}
                 params={params}
                 key={i}
                 lesson={lesson}

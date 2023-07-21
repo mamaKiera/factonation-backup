@@ -7,7 +7,12 @@ export async function getCourses(): Promise<CourseDto[]> {
 }
 
 export async function getCourse(id: string): Promise<CourseWithLessonDto> {
-  const res = await fetch(`http://localhost:8000/course/${id}`);
+  const res = await fetch(`http://localhost:8000/course/${id}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-type": "Application/json",
+    },
+  });
   const courseData = await res.json();
   return courseData.data;
 }

@@ -1,5 +1,20 @@
+"use client";
 import axios from "axios";
-import { FormEvent, useState } from "react";
+import { FormEvent, SetStateAction, useState } from "react";
+import { Label } from "./ui/label";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
+import { Button } from "./ui/Button";
+import SelectInstructor from "./SelectInstructor";
+import { LessonDto } from "@/types/dto";
+import AddLessonForm from "./AddLessonForm";
 
 export default function AddCourseForm() {
   const [file, setFile] = useState();
@@ -9,6 +24,8 @@ export default function AddCourseForm() {
   const [details, setDetails] = useState("");
   const [courseName, setCourseName] = useState("");
   const [instructor, setInstructor] = useState("");
+
+  const [lessons, setLessons] = useState<LessonDto>();
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
@@ -22,11 +39,16 @@ export default function AddCourseForm() {
       formData.append("details", details);
       formData.append("courseName", courseName);
       formData.append("instructor", instructor);
+      // formData.append("lessons", lessons);
       console.log(formData);
 
-      await axios.post("http://localhost:8000/course", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.post(
+        "http://localhost:8000/course",
+        { formData, lessons },
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
       // await fetch("http://localhost:8000/course", {
       //   method: "POST",
@@ -41,49 +63,72 @@ export default function AddCourseForm() {
   };
 
   return (
-    <form onSubmit={submit} className="flex flex-col">
-      <input
-        onChange={(e) => setFile(e.target.files[0])}
-        type="file"
-        accept="image/*"
-        className="rounded-lg bg-stone-100 p-2 my-2"
-      />
-      <input
-        value={price}
-        onChange={(e) => setPrice(Number(e.target.value))}
-        type="text"
-        placeholder="9999"
-        className="rounded-lg bg-stone-100 p-2 my-2"
-      />
-      <input
-        value={saledPrice}
-        onChange={(e) => setSaledPrice(Number(e.target.value))}
-        type="text"
-        placeholder="20"
-        className="rounded-lg bg-stone-100 p-2 my-2"
-      />
-      <input
-        value={details}
-        onChange={(e) => setDetails(e.target.value)}
-        type="text"
-        placeholder="details"
-        className="rounded-lg bg-stone-100 p-2 my-2"
-      />
-      <input
-        value={courseName}
-        onChange={(e) => setCourseName(e.target.value)}
-        type="text"
-        placeholder="courseName"
-        className="rounded-lg bg-stone-100 p-2 my-2"
-      />
-      <input
-        value={instructor}
-        onChange={(e) => setInstructor(e.target.value)}
-        type="text"
-        placeholder="instructor"
-        className="rounded-lg bg-stone-100 p-2 my-2"
-      />
-      <button type="submit">Submit</button>
-    </form>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Create Course</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Create New Course</DialogTitle>
+          <DialogDescription>
+            กด submit เพื่อสร้างคอรสเรียนสุดมหัศจรรย์
+          </DialogDescription>
+        </DialogHeader>
+        <form onSubmit={submit} className="flex flex-col">
+          <Label htmlFor="file">Course Image</Label>
+          <input
+            onChange={(e) => setFile(e.target.files[0])}
+            id="file"
+            type="file"
+            accept="image/*"
+            className="rounded-lg bg-stone-100 p-2 mt-1 mb-3"
+          />
+          <Label htmlFor="price">Price</Label>
+          <input
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            type="text"
+            id="price"
+            placeholder="9999"
+            className="rounded-lg bg-stone-100 p-2 mt-1 mb-3"
+          />
+          <Label htmlFor="saledPrice">Saled Price</Label>
+          <input
+            value={saledPrice}
+            onChange={(e) => setSaledPrice(e.target.value)}
+            type="text"
+            id="saledPrice"
+            placeholder="20"
+            className="rounded-lg bg-stone-100 p-2 mt-1 mb-3"
+          />
+          <Label htmlFor="details">details</Label>
+          <input
+            value={details}
+            onChange={(e) => setDetails(e.target.value)}
+            type="text"
+            id="details"
+            placeholder="details"
+            className="rounded-lg bg-stone-100 p-2 mt-1 mb-3"
+          />
+          <Label htmlFor="courseName">courseName</Label>
+          <input
+            value={courseName}
+            onChange={(e) => setCourseName(e.target.value)}
+            type="text"
+            id="courseName"
+            placeholder="courseName"
+            className="rounded-lg bg-stone-100 p-2 mt-1 mb-3"
+          />
+          <Label htmlFor="instructor">instructorId</Label>
+          <SelectInstructor />
+          <Label htmlFor="lesson">Lessons</Label>
+          <AddLessonForm lessons={lessons} setLessons={setLessons} />
+          {/* Lesson form */}
+          <DialogFooter>
+            <Button type="submit">Submit</Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 }
