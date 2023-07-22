@@ -17,6 +17,7 @@ interface AccordianComponentProps {
   lesson: any;
   key: number;
   completedLesson: number;
+  week: number;
 }
 
 const AccordianComponent: FC<AccordianComponentProps> = ({
@@ -24,6 +25,7 @@ const AccordianComponent: FC<AccordianComponentProps> = ({
   lesson,
   completedLesson,
   key,
+  week,
 }) => {
   return (
     <Accordion
@@ -33,7 +35,7 @@ const AccordianComponent: FC<AccordianComponentProps> = ({
       <AccordionItem value={String(lesson.length)} className="border-none mx-6">
         <AccordionTrigger className="underline-none">
           <div className="flex items-center gap-8 justify-between">
-            <h1 className="font-semibold">{`Week ${key + 1}`}</h1>
+            <h1 className="font-semibold">{`Week ${week + 1}`}</h1>
             <p className="py-1 text-md px-2 rounded-2xl bg-secondary-button border-accent border">
               {`${completedLesson} / ${lesson.length}`}
             </p>
