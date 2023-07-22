@@ -1,4 +1,10 @@
-import { Button, buttonVariants } from "@/components/ui/button";
+
+"use client";
+import CourseStatus from "@/components/CourseStatus";
+import UserSummary from "@/components/UserSummary";
+/* eslint-disable react-hooks/rules-of-hooks */
+import { Button, buttonVariants } from "@/components/ui/Button";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Card,
@@ -11,18 +17,40 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
-import { getCourses } from "@/lib/getCourse";
+import { useAuthContext } from "@/contexts/authContext";
+import { useCourseStatus } from "@/hooks/useCourseStatus";
+import { useCourses } from "@/hooks/useCourses";
+import { getCourseStatus, getCourses } from "@/lib/getCourse";
 import { cn } from "@/lib/utils";
+import { CourseDto } from "@/types/dto";
 import { BookOpenCheckIcon, PresentationIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useEffect, useState, use } from "react";
 
 interface pageProps {}
 
-const page: FC<pageProps> = async () => {
-  const courses = await getCourses();
+const courseFetch = getCourses();
+
+const page: FC<pageProps> = () => {
+  // const { id, name } = useAuthContext();
+  // // const [courses, setCourses] = useState<CourseDto[]>();
+  // console.log({ id, name });
+  const { courses, isLoading, isError } = useCourses();
   console.log(courses);
+  if (isLoading) return <div>Loading....</div>;
+  if (isError) return <div>Error!!!!!!</div>;
+  const id = localStorage.getItem("id");
+  console.log(id);
+  // const courses = await getCourses();
+  // useEffect(() => {
+  //   const fetchCourse = async () => {
+  //     const res = await getCourses();
+  //     console.log(res);
+  //     setCourses(res);
+  //   };
+  //   fetchCourse();
+  // }, []);
   return (
     <main className=" mt-12">
       <div className="max-w-8xl mx-auto bg-background p-6 h-fit min-h-screen my-12 flex">
@@ -31,55 +59,65 @@ const page: FC<pageProps> = async () => {
             My Dashboard
           </h1>
           <p className="text-[#222] mx-8">
-            Way to go! Here are all the courses you’ve finished.
+            Way to go! Here are all the courses you&apos;ve finished.
           </p>
           <div className="flex gap-4 flex-wrap m-8 border-secondary-button border-t-[1.4px] w-fit pt-6">
-            {courses.map((course, i) => {
-              return (
-                <Link
-                  href={`/dashboard/learn/course/${course.id}`}
-                  className="w-[260px] rounded-lg border-none shadow-md bg-secondary-background overflow-hidden flex flex-col justify-between"
-                  key={course.id}
-                >
-                  <div>
-                    {/* TODO: Replace with photo*/}
-                    <div className="h-[160px] w-[350px] bg-primary-button"></div>{" "}
-                    <div className="px-4 py-2">
-                      <h1 className="text-lg">{course.courseName}</h1>
-                      <div className="flex gap-4 items-center text-md">
-                        <Avatar className="w-10 h-10">
-                          <AvatarImage
-                            className="rounded-full"
-                            src="https://github.com/factonation.png"
-                            alt="@shadcn"
-                          />
-                          <AvatarFallback className="bg-primary-button">
-                            F
-                          </AvatarFallback>
-                        </Avatar>
-                        <p className="text-sm font-normal">
-                          Mr. {course.instructor.name}
-                        </p>
+            {courses.data &&
+              courses.data.map((course: CourseDto, i: number) => {
+                // const courseStatus = await getCourseStatus(id!, course.id);
+                // const courseStatus = useCourseStatus(id!, course.id);
+                return (
+                  <Link
+                    href={`/dashboard/learn/course/${course.id}`}
+                    className="w-[260px] rounded-lg border-none shadow-md bg-secondary-background overflow-hidden flex flex-col justify-between"
+                    key={course.id}
+                  >
+                    <div>
+                      {/* TODO: Replace with photo*/}
+                      <Image
+                        src={course.imageUrl}
+                        alt={`course ${course.courseName}`}
+                        width={350}
+                        height={160}
+                        className="object-cover object-center"
+                      />
+                      {/* <div className="h-[160px] w-[350px] bg-primary-button"></div>{" "} */}
+                      <div className="px-4 py-2">
+                        <h1 className="text-lg">{course.courseName}</h1>
+                        <div className="flex gap-4 items-center text-md">
+                          <Avatar className="w-10 h-10">
+                            <AvatarImage
+                              className="rounded-full"
+                              src="https://github.com/factonation.png"
+                              alt="@shadcn"
+                            />
+                            <AvatarFallback className="bg-primary-button">
+                              F
+                            </AvatarFallback>
+                          </Avatar>
+                          <p className="text-sm font-normal">
+                            Mr. {course.instructor.name}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="flex flex-col gap-2 px-4 py-2">
-                    <div className="flex items-center gap-3">
-                      <p>เรียนไปเเล้ว</p>
-                      <p>80%</p>
+                    <div className="flex flex-col gap-2 px-4 py-2">
+                      <div className="flex items-center gap-3">
+                        <p>เรียนไปเเล้ว</p>
+                        {/* <CourseStatus courseId={course.id} studentId={id!} /> */}
+                      </div>
+                      <Progress
+                        value={20}
+                        className="h-1 max-w-xl bg-green-400"
+                      />
+                      <p className="self-end">
+                        {" "}
+                        {course.isCompleted ? "Completed" : "In Progress"}
+                      </p>
                     </div>
-                    <Progress
-                      value={20}
-                      className="h-1 max-w-xl bg-green-400"
-                    />
-                    <p className="self-end">
-                      {" "}
-                      {course.isCompleted ? "Completed" : "In Progress"}
-                    </p>
-                  </div>
-                </Link>
-              );
-            })}
+                  </Link>
+                );
+              })}
           </div>
         </div>
         <div className="rounded-xl p-6 bg-gray-100 flex flex-col gap-2 w-1/3 h-fit">
