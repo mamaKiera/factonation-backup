@@ -1,14 +1,22 @@
 "use client";
-import { Button, buttonVariants } from "@/components/ui/Button";
+
 import Image from "next/image";
 import heroImage from "../../../public/IMG_1737.webp";
-import { useMemo } from "react";
 import Link from "next/link";
-import { sign } from "crypto";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { buttonVariants } from "../ui/Button";
+import { useAuthContext } from "@/contexts/authContext";
+import { FC } from "react";
 
-function Herosection() {
+interface ILogin {
+  isLoggedIn: boolean;
+}
+
+const  Herosection : FC<ILogin> = () => {
+
+  const {isLoggedIn} = useAuthContext();
+
   return (
     // <div className="min-h-screen">
     <div
@@ -43,18 +51,27 @@ function Herosection() {
             <p>เริ่มตั้งแต่สอนเขียน C# ไม่จำเป็นต้อง</p>
             <p>มีพื้นฐานการเขียนโปรแกรม เรียนแบบ</p>
             <p>On-demand สัปดาห์ละ 2 วิดีโอ ในกลุ่ม</p>
-            <p>Private ถามตอบได้ตลอดเวลา”</p>
+            <p>Private ถามตอบได้ตลอดเวลา</p>
           </div>
           <div className="flex gap-8 text-2xl items-center">
+            {isLoggedIn ?(
             <Link
-              href="/dashboard"
+              href="#price-section"
               className={cn(
                 buttonVariants({ size: "xl" }),
                 "px-8 bg-black text-white"
               )}
             >
               สมัครทันที
-            </Link>
+            </Link>):(<Link
+              href="/login"
+              className={cn(
+                buttonVariants({ size: "xl" }),
+                "px-8 bg-black text-white"
+              )}
+            >
+              สมัครทันที
+            </Link>)}
             <Link
               href="/module"
               className={buttonVariants({ size: "xl", variant: "outline" })}

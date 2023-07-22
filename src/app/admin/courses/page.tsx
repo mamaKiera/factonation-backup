@@ -33,6 +33,7 @@ const page: FC<pageProps> = () => {
 
   return (
     <div>
+
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
@@ -53,6 +54,7 @@ const page: FC<pageProps> = () => {
 
             <AddCourseForm />
           </div>
+
         </div>
       </div>
       <div className="mt-8 flow-root overflow-hidden">

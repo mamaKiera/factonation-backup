@@ -1,8 +1,10 @@
+
 "use client";
 import CourseStatus from "@/components/CourseStatus";
 import UserSummary from "@/components/UserSummary";
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Button, buttonVariants } from "@/components/ui/Button";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Card,

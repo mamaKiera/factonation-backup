@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 import { IBM_Plex_Sans_Thai } from "next/font/google";
 import Herosection from "@/components/homePage/Herosection";

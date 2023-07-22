@@ -35,3 +35,24 @@ export interface CourseStatusDto {
   complete: number;
   percentage: number;
 }
+
+export enum Role {
+  Admin = "Admin",
+  Student = "Student",
+}
+
+export interface UserDto {
+  id: string;
+  enrollment: EnrollmentDto[];
+  name: string;
+  email: string;
+  password: string;
+  role: Role;
+}
+
+export interface EnrollmentDto {
+  id: string;
+  studentId: string;
+  courseId: string;
+  courseName: string;
+}

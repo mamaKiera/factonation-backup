@@ -14,15 +14,13 @@ interface pageProps {
     courseId: string;
   };
 }
-
   
-const page = ({ params: { courseId } }: pageProps) => { 
+const Page = ({ params: { courseId } }: pageProps) => { 
   return (
     <>
-      <CourseForm page= {AdminCoursePage.Edit}/>
+    <CourseForm page= {AdminCoursePage.Create}/>
     </>
   );
 };
   
-  export default page;
-  
+  export default Page;
