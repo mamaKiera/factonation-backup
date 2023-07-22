@@ -7,6 +7,8 @@ export interface IAuthContext {
   username: string | null;
   login: (username: string, password: string) => Promise<unknown>;
   logout: () => void;
+  id: string;
+  name: string;
 }
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -32,6 +34,8 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(!!token);
   const [username, setUsername] = useState(user);
+  const [name, setName] = useState("");
+  const [id, setId] = useState("");
 
   const login = async (username: string, password: string) => {
     const loginInfo = { email: username, password };
@@ -51,8 +55,12 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", username);
+      localStorage.setItem("id", data.id);
       setIsLoggedIn(true);
       setUsername(username);
+      setName(data.name);
+      setId(id);
+      console.log(id, name);
     } catch (err: any) {
       throw new Error(err.message);
     }
@@ -61,13 +69,18 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
   const logout = () => {
     localStorage.removeItem("token");
     setToken("");
+    setName("");
+    setId("");
     localStorage.removeItem("user");
     setIsLoggedIn(false);
     setUsername("");
   };
 
+  console.log(id, name);
   return (
-    <AuthContext.Provider value={{ isLoggedIn, username, login, logout }}>
+    <AuthContext.Provider
+      value={{ isLoggedIn, username, login, logout, id, name }}
+    >
       {children}
     </AuthContext.Provider>
   );

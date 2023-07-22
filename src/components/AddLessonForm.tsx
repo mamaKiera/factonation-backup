@@ -56,8 +56,8 @@ const AddLessonForm: FC<AddLessonFormProps> = ({
       };
       // formData.append("lessons", lessons);
 
-      await axios.post("http://localhost:8000/course", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+      await axios.post("http://localhost:8000/lesson", formData, {
+        headers: { "Content-Type": "application/json" },
       });
 
       console.log(formData);

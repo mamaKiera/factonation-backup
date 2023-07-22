@@ -76,15 +76,15 @@ const page: FC<pageProps> = () => {
                 </th>
                 <th
                   scope="col"
-                  className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
-                >
-                  Videos
-                </th>
-                <th
-                  scope="col"
                   className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 md:table-cell"
                 >
                   Instructor
+                </th>
+                <th
+                  scope="col"
+                  className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
+                >
+                  Lessons
                 </th>
 
                 <th scope="col" className="relative py-3.5 pl-3">

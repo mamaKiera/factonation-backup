@@ -29,3 +29,9 @@ export interface LessonDto {
   order: number;
   courseId: string;
 }
+
+export interface CourseStatusDto {
+  all: number;
+  complete: number;
+  percentage: number;
+}

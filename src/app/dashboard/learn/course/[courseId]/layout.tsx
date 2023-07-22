@@ -38,18 +38,8 @@ export const page: FC<layoutProps> = ({ children, params }) => {
 
   useEffect(() => {
     const fetLessons = async () => {
-      // const _lessons = await getLessonByCourseIdFormetted(params.courseId);
       console.log(localStorage.getItem("token"));
-      // const res = await fetch(
-      //   `http://localhost:8000/course/${params.courseId}`,
-      //   {
-      //     headers: {
-      //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-      //       "Content-type": "application/json",
-      //     },
-      //   }
-      // );
-      // const _lessons = await res.json();
+      console.log(params.courseId);
       const _lessons = await getLessonByCourseIdFormetted(params.courseId);
       console.log(_lessons);
       setLessons(_lessons);
@@ -86,7 +76,7 @@ export const page: FC<layoutProps> = ({ children, params }) => {
   }, [params.courseId]);
 
   return (
-    <div className="flex gap-4 h-full bg-secondary-background shadow-sm">
+    <div className="flex gap-4 h-full bg-secondary-background shadow-sm min-h-screen">
       <Toaster />
       <div className="bg-[#fff] min-w-[380px] max-h-screen overflow-scroll flex gap-2 flex-col  justify-start text-[#222] border-r-secondary-button border-r-[1px]">
         <div className="p-4 border-secondary-button border-b ">
@@ -101,21 +91,22 @@ export const page: FC<layoutProps> = ({ children, params }) => {
           <p>{status?.percentage} % </p>
         </div>
         <div className="">
-          {lessons.map((lesson, i) => {
-            console.log(lesson);
-            const completedLesson = lesson.filter(
-              (l: any) => l.isLessonCompleted
-            ).length;
-            return (
-              <AccordianComponent
-                week={i}
-                params={params}
-                key={i}
-                lesson={lesson}
-                completedLesson={completedLesson}
-              />
-            );
-          })}
+          {lessons &&
+            lessons.map((lesson, i) => {
+              console.log(lesson);
+              const completedLesson = lesson.filter(
+                (l: any) => l.isLessonCompleted
+              ).length;
+              return (
+                <AccordianComponent
+                  week={i}
+                  params={params}
+                  key={i}
+                  lesson={lesson}
+                  completedLesson={completedLesson}
+                />
+              );
+            })}
         </div>
       </div>
       {children}

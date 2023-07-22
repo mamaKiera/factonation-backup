@@ -117,8 +117,6 @@ export default function AddCourseForm() {
           />
           <Label htmlFor="instructor">instructorId</Label>
           <SelectInstructor setInstructor={setInstructor} />
-          <Label htmlFor="lesson">Lessons</Label>
-          <AddLessonForm lessons={lessons} setLessons={setLessons} />
           {/* Lesson form */}
           <DialogFooter>
             <Button type="submit">Submit</Button>
