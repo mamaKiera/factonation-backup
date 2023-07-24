@@ -32,25 +32,26 @@ interface pageProps {
 const Page: FC<pageProps> = () => {
   const { id } = useParams();
   const { user } = useUser(id);
+  const { courses } = useCourses();
 
   const [name, setName] = useState(user?.name);
   const [email, setEmail] = useState(user?.email);
+  const [enrolledCourses, setEnrolledCourses] = useState(user?.enrollment);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
-  const enrolledCourses = user?.enrollment;
-  const { courses } = useCourses();
-
-  console.log(courses);
-  console.log(enrolledCourses);
 
   useEffect(() => {
     if (user) {
       setName(user.name);
       setEmail(user.email);
+      setEnrolledCourses(user.enrollment);
+      setIsLoading(false);
     }
   }, [user]);
 
+  console.log(enrolledCourses);
   const handleDelete = async (courseId: string, studentId: string) => {
     //const accessToken = localStorage.getItem('token')
 
@@ -221,11 +222,16 @@ const Page: FC<pageProps> = () => {
           </div>
         </div>
 
-        <AddCourseModal
-          open={open}
-          setClose={handleChildCancel}
-          enrolledCourses
-        />
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <AddCourseModal
+            open={open}
+            setClose={handleChildCancel}
+            user={user}
+            enrolledCourses={enrolledCourses}
+          />
+        )}
 
         <div className="border-t mt-8">
           <div className="mt-6 flex items-center justify-end gap-x-6">

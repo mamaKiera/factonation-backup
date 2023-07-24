@@ -1,24 +1,61 @@
 "use client";
 
 import * as React from "react";
-import { FC, useEffect, useState } from "react";
+import { useState } from "react";
 import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { PlusCircle } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
 import { useCourses } from "@/hooks/useCourses";
-import useUser from "@/hooks/useUser";
 
 export default function AddCourseModal({
   open,
   setClose,
   enrolledCourses,
+  user,
 }: any) {
   const cancelButtonRef = useRef(null);
   const { courses, isLoading, isError } = useCourses();
+  const [selectedCourses, setSelectedCourses] = useState<string[]>([]);
 
   if (isLoading) return <div>Loading....</div>;
-  if (isError) return <div>Error!!!!!!</div>;
+  if (isError) return <div>Error</div>;
+
+  //get only unique courses to display on the list
+  const allCoursesArr = courses.data;
+  const uniqueCourseIds: Set<string> = new Set(
+    enrolledCourses.map((course) => course.courseId)
+  );
+  const uniqueCourses = allCoursesArr.filter(
+    (course) => !uniqueCourseIds.has(course.id)
+  );
+
+  const createEnrollment = async (selectedCourses: string[]) => {
+    //const accessToken = localStorage.getItem('token')
+
+    try {
+      for (let i = 0; i < selectedCourses.length; i++) {
+        const courseId = selectedCourses[i];
+        const response = await fetch(
+          `http://localhost:8000/user/student/enroll`,
+          {
+            method: "POST",
+            headers: {
+              // Authorization: `bearer ${accessToken}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              studentId: user.id,
+              courseId,
+            }),
+          }
+        );
+        if (response.ok) {
+          location.reload();
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -61,16 +98,51 @@ export default function AddCourseModal({
                   </Dialog.Title>
                   <div className="mt-2">
                     <div className="p-4">
-                      {courses.data &&
-                        courses.data.map((course) => (
-                          <React.Fragment key={course.id}>
-                            <div className="text-sm flex justify-between">
-                              {course.courseName}
-                              <PlusCircle size={20} color="green" />
-                            </div>
-                            <Separator className="my-2" />
-                          </React.Fragment>
-                        ))}
+                      <fieldset>
+                        <div className="mt-4 divide-y divide-gray-200 border-b border-t border-gray-200">
+                          {uniqueCourses &&
+                            uniqueCourses.map((course) => (
+                              <div
+                                key={course.id}
+                                className="relative flex py-4 justify-between"
+                              >
+                                <div className="min-w-0 flex items-start text-sm leading-6">
+                                  <label
+                                    htmlFor={`course-${course.courseName}`}
+                                    className="select-none font-medium text-gray-900"
+                                  >
+                                    {course.courseName}
+                                  </label>
+                                </div>
+                                <div className="ml-3 flex h-6 items-center">
+                                  <input
+                                    id={`course-${course.id}`}
+                                    name={`course-${course.courseName}`}
+                                    type="checkbox"
+                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                    onChange={(e) => {
+                                      const courseId = course.id;
+                                      if (e.target.checked) {
+                                        setSelectedCourses(
+                                          (selectedCourses) => [
+                                            ...selectedCourses,
+                                            courseId,
+                                          ]
+                                        );
+                                      } else {
+                                        setSelectedCourses((selectedCourses) =>
+                                          selectedCourses.filter(
+                                            (id) => id !== courseId
+                                          )
+                                        );
+                                      }
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                      </fieldset>
                     </div>
                   </div>
                 </div>
@@ -78,7 +150,7 @@ export default function AddCourseModal({
                   <button
                     type="button"
                     className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
-                    // onClick={() => setOpen(false)}
+                    onClick={(e) => createEnrollment(selectedCourses)}
                   >
                     Add
                   </button>
