@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { FC, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { useParams } from "next/navigation";
@@ -18,8 +19,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alertDialog";
-import { Fragment, useRef } from "react";
-import { Dialog, Transition } from "@headlessui/react";
+import { useRef } from "react";
 import AddCourseModal from "@/components/AddCourseModal";
 import { useCourses } from "@/hooks/useCourses";
 
@@ -41,6 +41,7 @@ const Page: FC<pageProps> = () => {
 
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (user) {
@@ -51,7 +52,6 @@ const Page: FC<pageProps> = () => {
     }
   }, [user]);
 
-  console.log(enrolledCourses);
   const handleDelete = async (courseId: string, studentId: string) => {
     //const accessToken = localStorage.getItem('token')
 
@@ -74,7 +74,29 @@ const Page: FC<pageProps> = () => {
     }
   };
 
-  const handleAddCourse = (e: any) => {
+  const handleUpdate = async (name: string | undefined, email: string) => {
+    //const accessToken = localStorage.getItem('token')
+
+    try {
+      const response = await fetch(`http://localhost:8000/user/${user?.id}`, {
+        method: "PATCH",
+        headers: {
+          // Authorization: `bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email }),
+      });
+
+      console.log(response);
+      if (response.ok) {
+        router.push("/admin/users");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleAddCourse = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     setOpen(true);
@@ -244,6 +266,7 @@ const Page: FC<pageProps> = () => {
             <button
               type="submit"
               className="rounded-md bg-primary-button px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              onClick={(e) => handleUpdate(name, email)}
             >
               Save
             </button>
