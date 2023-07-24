@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useCourses } from "@/hooks/useCourses";
+import { CourseDto } from "@/types/dto";
 
 export default function AddCourseModal({
   open,
@@ -20,9 +21,9 @@ export default function AddCourseModal({
   if (isError) return <div>Error</div>;
 
   //get only unique courses to display on the list
-  const allCoursesArr = courses.data;
+  const allCoursesArr: CourseDto[] = courses.data;
   const uniqueCourseIds: Set<string> = new Set(
-    enrolledCourses.map((course) => course.courseId)
+    enrolledCourses.map((course: CourseDto) => course.id)
   );
   const uniqueCourses = allCoursesArr.filter(
     (course) => !uniqueCourseIds.has(course.id)
