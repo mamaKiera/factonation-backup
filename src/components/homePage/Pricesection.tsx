@@ -72,12 +72,12 @@ const priceDetails = [
   ,
 ];
 
-const  Pricesection: FC<ILogin> = () => {
+const  Pricesection: FC<> = () => {
 
   const {isLoggedIn} = useAuthContext();
   return (
-    <div className="my-28" id="price-section">
-      <div className="flex flex-col gap-3 w-11/12 mx-auto my-14 ">
+    <div className="lg:my-28 my-5" id="price-section">
+      <div className="flex flex-col gap-3 w-full mx-auto my-14 ">
         <motion.div
         initial="hidden"
         whileInView="visible"
@@ -92,9 +92,9 @@ const  Pricesection: FC<ILogin> = () => {
           hidden: { opacity: 0, x: -150 },
           visible: { opacity: 1, x: 0 },
         }} 
-          className="flex gap-4 px-20 ">
-          <p className="text-3xl font-black">|</p>
-          <p className="text-4xl font-bold">
+          className="flex lg:gap-4 gap-2 lg:mx-0 mx-4  ">
+          <p className="lg:text-3xl font-black text-xl">|</p>
+          <p className="lg:text-4xl font-bold text-xl">
             เริ่มเรียนได้เเล้ววันนี้ในราคาสุดคุ้ม
           </p>
         </motion.div>
@@ -113,12 +113,12 @@ const  Pricesection: FC<ILogin> = () => {
           hidden: { opacity: 0, x: 150 },
           visible: { opacity: 1, x: 0 },
         }} className="flex items-center justify-center gap-3 ">
-          <div className="flex gap-3 ">
+          <div className="flex lg:flex-row lg:flex-nowrap flex-col flex-wrap gap-3 items-center ">
             {priceDetails.map((priceDetail, i) => {
               return (
                 <div
                   className={cn(
-                    "border border-stone-200 p-6 rounded-xl w-60 flex flex-col justify-between backdrop-blur-3xl",
+                    "border border-stone-200 lg:p-6 rounded-xl lg:w-60 lg:gap-0 w-11/12 flex flex-col justify-between backdrop-blur-3xl lg:h-[510px] h-auto p-3 gap-7  ",
                     {
                       "bg-teal-900 bg-clip-padding backdrop-filter backdrop-blur-3xl bg-opacity-10 border border-gray-100":
                         priceDetail!.saledPrice,
@@ -126,22 +126,22 @@ const  Pricesection: FC<ILogin> = () => {
                   )}
                   key={i}
                 >
-                  <div className="flex flex-col gap-3">
+                  <div className="flex lg:flex-col flex-row gap-3">
                     <div className="flex flex-col gap-2">
                       <Badge>Module {priceDetail!.module}</Badge>
-                      <p className="font-semibold text-xl w-52">
+                      <p className="font-semibold lg:text-xl lg:w-52 w-28 text-base">
                         {priceDetail!.courseName}
                       </p>
                       {priceDetail!.saledPrice && (
-                        <p className="font-semibold text-xl line-through decoration-stone-600 text-stone-600">
+                        <p className="font-semibold lg:text-xl line-through decoration-stone-600 text-stone-600 text-base">
                           {priceDetail!.saledPrice}
                         </p>
                       )}
-                      <p className="font-semibold text-3xl">
+                      <p className="font-semibold lg:text-3xl text-2xl">
                         {priceDetail!.price} ฿
                       </p>
                     </div>
-                    <div className="flex flex-col gap-3 border-y py-4 ">
+                    <div className="flex flex-col gap-3 lg:border-y lg:border-l-0 border-l lg:py-4 lg:px-0 px-3 py-2 justify-center  ">
                       {priceDetail!.benefits.map((benefit, i) => {
                         return (
                           <div className="flex gap-2" key={i}>
@@ -155,7 +155,7 @@ const  Pricesection: FC<ILogin> = () => {
                     </div>
                   </div>
                   {isLoggedIn ? 
-                 ( <Link href={`${priceDetail?.payment}`} className="flex justify-center items-center bg-stone-900 h-8 rounded-lg text-white">
+                 ( <Link href={`${priceDetail?.payment}`} className="flex justify-center items-center bg-stone-900 h-8 rounded-lg text-white ">
                     {priceDetail!.actions}
                   </Link>):( <Link href="/login" className="flex justify-center items-center bg-stone-900 h-8 rounded-lg text-white">
                     {priceDetail!.actions}
