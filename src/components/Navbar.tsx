@@ -1,11 +1,14 @@
 "use client";
+
 import { FC, useState } from "react";
+
 import { Button, buttonVariants } from "./ui/Button";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ScrollLink from "./ScrollLink";
+
 import { AlignJustify } from 'lucide-react';
 import { BookMarked } from 'lucide-react';
 import { Newspaper } from 'lucide-react';
@@ -17,6 +20,7 @@ import { motion } from "framer-motion";
 
 const Navbar: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
+
 
   return (
     <div className="sticky top-0 z-[10]">
@@ -39,22 +43,44 @@ const Navbar: FC = () => {
             <ScrollLink href="/#question-section">คำถามที่พบบ่อย</ScrollLink>
           </div>
         </div>
-        <div className="hidden lg:flex items-center lg:gap-3">
-          <Link
-            className={cn(buttonVariants({ variant: "ghost" }))}
-            href="/login"
-          >
-            เข้าสู่ระบบ
-          </Link>
-          <Link
-            className={cn(
-              buttonVariants({ variant: "ghost" }),
-              "bg-secondary-button text-[#222]"
-            )}
-            href="/register"
-          >
-            ลงทะเบียน
-          </Link>
+
+        <div className="flex items-center gap-3">
+          {isLoggedIn ? (
+            <>
+              <Avatar>
+                <AvatarImage></AvatarImage>
+                <AvatarFallback>{username![0]}</AvatarFallback>
+              </Avatar>
+              <Link
+                href={"/"}
+                className={cn(
+                  buttonVariants({ variant: "ghost" }),
+                  "bg-secondary-button text-[#222]"
+                )}
+              >
+                Log out
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                className={cn(buttonVariants({ variant: "ghost" }))}
+                href="/login"
+              >
+                เข้าสู่ระบบ
+              </Link>
+              <Link
+                className={cn(
+                  buttonVariants({ variant: "ghost" }),
+                  "bg-secondary-button text-[#222]"
+                )}
+                href="/register"
+              >
+                ลงทะเบียน
+              </Link>
+            </>
+          )}
+
         </div>
         <button className="lg:hidden" >
         <AlignJustify type="button" className={`${open ? ("hidden"):("w-[25px] h-[25px]") }`} onClick={() => setOpen(!open)}  />
