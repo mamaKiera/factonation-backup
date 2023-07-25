@@ -51,13 +51,14 @@ const ModuleCard: FC<ModuleCardProps> = ({ course }) => {
   return (
     <div className="flex flex-col gap-6 mx-auto">
       <div className="flex gap-5 rounded-xl w-[920px] h-[340px] bg-neutral-100 px-6 items-center drop-shadow-md ">
-        <Button></Button>
-        <div>
-          {/* <Image
-            src={course.image}
+        <div className="maw-w-[460px] max-h-[280px] grid place-content-center overflow-hidden">
+          <Image
+            src={course.imageUrl}
             alt="Industry image"
-            className="flex items-center rounded-xl h-[250px] w-[480px]"
-        /> */}
+            className=""
+            width={1080}
+            height={1920}
+          />
         </div>
         <div className="flex flex-col w-[710px] h-[320px] p-2 gap-3 justify-center">
           <div className="flex flex-col gap-2">
