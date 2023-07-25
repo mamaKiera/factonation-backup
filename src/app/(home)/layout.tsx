@@ -1,6 +1,4 @@
-
 import { FC } from "react";
-
 import { IBM_Plex_Sans_Thai } from "next/font/google";
 import Herosection from "@/components/homePage/Herosection";
 import Problemsection from "@/components/homePage/Problemsection";
@@ -11,29 +9,26 @@ import Questionsection from "@/components/homePage/Questionsection";
 import Lastsection from "@/components/homePage/Lastsection";
 import Footer from "@/components/homePage/Foooter";
 import { cn } from "@/lib/utils";
-
 import Navbar from "@/components/Navbar";
 
-interface pageProps {}   
-const page: FC<pageProps> = ({}) => {
+interface layoutProps {
+  children: React.ReactNode;
+}
+
+const ibm_plex_sans_thai = IBM_Plex_Sans_Thai({
+  subsets: ["thai"],
+  weight: ["100", "200", "400", "600"],
+});
+
+const layout: FC<layoutProps> = ({ children }) => {
   //   const { isLoggedIn } = useAuthContext();
   //   console.log(isLoggedIn, "eieifoobar");
   return (
-    <div>
+    <>
       <Navbar />
-      <Herosection isLoggedIn={false} />
-
-      <Problemsection />
-      <Benefitsection />
-      <Reviewsection />
-      <Pricesection isLoggedIn={false} />
-      <Questionsection />
-      <Lastsection isLoggedIn={false} />
-      <Footer />
-    </div>
+      {children}
+    </>
   );
-
 };
 
-export default page;
-
+export default layout;

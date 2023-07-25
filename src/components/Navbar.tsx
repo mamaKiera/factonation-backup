@@ -28,8 +28,10 @@ const Navbar: FC = () => {
               Factonation
             </h1>
           </Link>
-          <div className="hidden lg:flex md:items-center lg:justify-start lg:gap-8">
-            <Link href="/module">คอร์สเรียน</Link>
+
+          <div className="hidden md:flex md:items-center md:justify-start md:gap-8">
+            <Link href="/dashboard">คอร์สเรียน</Link>
+
             <Link href="/#price-section" className="scroll-smooth">
               ราคาคอร์ส
             </Link>

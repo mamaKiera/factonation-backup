@@ -1,17 +1,18 @@
-import { UserDto } from '@/types/dto'
+import { UserDto } from '@/types/dto';
 import { useEffect, useState } from 'react'
 
-const useUserList = () => {
-  const [users, setUsers] = useState<UserDto[] | null>(null);
+const useUser = (id: string) => {
+  const [user, setUser] = useState<UserDto | null>(null);
   const [error, setError] = useState<null | unknown>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
+    setLoading(true)
       try {
-        const res = await fetch("http://localhost:8000/user/")
+        const res = await fetch(`http://localhost:8000/user/${id}`)
         const responseBody = await res.json()
-        setUsers(responseBody.data)
+        setUser(responseBody.data)
         setError(false);
         setLoading(false);
       } catch (err) {
@@ -24,11 +25,11 @@ const useUserList = () => {
   }, [])
 
   return {
-    users,
-    setUsers,
+    user,
+    setUser,
     loading,
     error,
   }
 }
 
-export default useUserList;
+export default useUser 

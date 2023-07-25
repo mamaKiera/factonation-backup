@@ -13,9 +13,8 @@ interface ILogin {
   isLoggedIn: boolean;
 }
 
-const  Herosection : FC<ILogin> = () => {
-
-  const {isLoggedIn} = useAuthContext();
+const Herosection: FC<ILogin> = () => {
+  const { isLoggedIn } = useAuthContext();
 
   return (
     // <div className="min-h-screen">
@@ -53,6 +52,7 @@ const  Herosection : FC<ILogin> = () => {
             <p>On-demand สัปดาห์ละ 2 วิดีโอ ในกลุ่ม</p>
             <p>Private ถามตอบได้ตลอดเวลา</p>
           </div>
+
           <div className="flex xl:gap-8 text-2xl justify-center md:gap-5 gap-2">
             {isLoggedIn ?(
             <Link
@@ -72,6 +72,7 @@ const  Herosection : FC<ILogin> = () => {
             >
               เริ่มเรียนทันที
             </Link>)}
+
             <Link
               href="/module"
               className={cn(
@@ -108,6 +109,6 @@ const  Herosection : FC<ILogin> = () => {
     </div>
     // </div>
   );
-}
+};
 
 export default Herosection;

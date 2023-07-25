@@ -16,8 +16,13 @@ interface pageProps {
 }
 
 async function toggleLesson(id: string) {
-  const res = await fetch(`http://localhost:8000/lesson/toggle/${id}`, {
+  const studentId = localStorage.getItem("id");
+  const res = await fetch(`http://localhost:8000/lesson/toggle`, {
     method: "POST",
+    body: JSON.stringify({ lessonId: id, studentId }),
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
   const status = await res.json();
   console.log(status);
@@ -63,6 +68,7 @@ const page: FC<pageProps> = ({ params: { videoId, courseId } }) => {
         <p className="mb-2">{desc}</p>
       </div>
       <ReactPlayer controls url={url} style={{ width: "full" }} />
+      {/* <iframe src={url} width={"full"} /> */}
       <div className="flex items-center gap-4">
         <label
           htmlFor="terms"
