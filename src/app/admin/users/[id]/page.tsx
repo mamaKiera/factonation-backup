@@ -65,7 +65,6 @@ const Page: FC<pageProps> = () => {
         body: JSON.stringify({ courseId, studentId }),
       });
 
-      console.log(response);
       if (response.ok) {
         location.reload();
       }
@@ -74,7 +73,7 @@ const Page: FC<pageProps> = () => {
     }
   };
 
-  const handleUpdate = async (name: string | undefined, email: string) => {
+  const handleUpdate = async (name: string, email: string) => {
     //const accessToken = localStorage.getItem('token')
 
     try {
@@ -89,7 +88,7 @@ const Page: FC<pageProps> = () => {
 
       console.log(response);
       if (response.ok) {
-        router.push("/admin/users");
+        window.location.href = "/admin/users";
       }
     } catch (err) {
       console.log(err);
@@ -210,7 +209,7 @@ const Page: FC<pageProps> = () => {
                             <AlertDialogFooter>
                               <AlertDialogCancel>Cancel</AlertDialogCancel>
                               <AlertDialogAction
-                                onClick={(e) =>
+                                onClick={() =>
                                   handleDelete(
                                     enroll.courseId,
                                     enroll.studentId
@@ -266,7 +265,7 @@ const Page: FC<pageProps> = () => {
             <button
               type="submit"
               className="rounded-md bg-primary-button px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={(e) => handleUpdate(name, email)}
+              onClick={() => handleUpdate(name, email)}
             >
               Save
             </button>

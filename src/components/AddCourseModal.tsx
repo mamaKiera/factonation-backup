@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useCourses } from "@/hooks/useCourses";
-import { CourseDto } from "@/types/dto";
+import { CourseDto, EnrollmentDto } from "@/types/dto";
 
 export default function AddCourseModal({
   open,
@@ -23,11 +23,15 @@ export default function AddCourseModal({
   //get only unique courses to display on the list
   const allCoursesArr: CourseDto[] = courses.data;
   const uniqueCourseIds: Set<string> = new Set(
-    enrolledCourses.map((course: CourseDto) => course.id)
+    enrolledCourses.map((course: EnrollmentDto) => course.courseId)
   );
-  const uniqueCourses = allCoursesArr.filter(
-    (course) => !uniqueCourseIds.has(course.id)
-  );
+
+  const uniqueCourses = allCoursesArr.filter((course) => {
+    console.log(!uniqueCourseIds.has(course.id));
+    return !uniqueCourseIds.has(course.id);
+  });
+
+  //enrolled courses
 
   const createEnrollment = async (selectedCourses: string[]) => {
     //const accessToken = localStorage.getItem('token')
@@ -35,24 +39,21 @@ export default function AddCourseModal({
     try {
       for (let i = 0; i < selectedCourses.length; i++) {
         const courseId = selectedCourses[i];
-        const response = await fetch(
-          `http://localhost:8000/user/student/enroll`,
-          {
-            method: "POST",
-            headers: {
-              // Authorization: `bearer ${accessToken}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              studentId: user.id,
-              courseId,
-            }),
-          }
-        );
-        if (response.ok) {
-          location.reload();
-        }
+        console.log(courseId);
+        await fetch(`http://localhost:8000/user/student/enroll`, {
+          method: "POST",
+          headers: {
+            // Authorization: `bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            studentId: user.id,
+            courseId,
+          }),
+        });
       }
+
+      location.reload();
     } catch (err) {
       console.log(err);
     }
