@@ -46,9 +46,9 @@ const QnA2 = [
 
 function Questionsection() {
   return (
-    <div id="question-section">
+    <div id="question-section" className="w-full">
       <div>
-        <div className="flex flex-col bg-stone-900 h-56 w-full justify-center ">
+        <div className="flex flex-col bg-stone-900 justify-center lg:h-56 h-36 ">
           <motion.div
           initial="hidden"
           whileInView="visible"
@@ -62,16 +62,16 @@ function Questionsection() {
           variants={{
             hidden: { opacity: 0, x: -150 },
             visible: { opacity: 1, x: 0 },
-          }}  className="flex flex-col gap-3 mx-32 text-white w-10/12">
+          }}  className="flex flex-col lg:gap-3 gap-1 text-white w-10/12 mx-auto">
             <div  className="flex gap-2">
-              <p className="text-3xl font-black">|</p>
-              <p className="text-4xl">คำถามที่พบบ่อย</p>
+              <p className="lg:text-3xl text-xl">|</p>
+              <p className="lg:text-4xl text-xl">คำถามที่พบบ่อย</p>
             </div>
             <div className="flex flex-col gap-1">
-            <p className="text-xl">
+            <p className="lg:text-xl lg:font-medium text-[12px] w-auto font-light ">
               ไม่พบคำถามที่คุณต้องการ ติดต่อทีมงาน ของเราได้เลย
             </p>
-            <div className="flex gap-3 text-primary-button w-auto text-xs">
+            <div className="flex flex-wrap gap-3 text-primary-button w-auto lg:font-normal lg:text-xs text-[10px] font-light ">
             <p>เบอร์โทร: 062-179-9526</p>
             <p>Line Official ID: @factonation</p>
             </div>
@@ -79,7 +79,7 @@ function Questionsection() {
           </motion.div>
         </div>
         <div className="flex justify-center items-center">
-          <div className="flex w-4/5 justify-center gap-10 ">
+          <div className="flex lg:flex-row lg:my-10 my-5 flex-col w-4/5 justify-center lg:gap-10 gap-0 items-center ">
          <motion.div
           initial="hidden"
           whileInView="visible"
@@ -94,7 +94,7 @@ function Questionsection() {
             hidden: { opacity: 0, x: -150 },
             visible: { opacity: 1, x: 0 },
           }}
-           className="flex flex-col my-10 w-2/4 ">
+           className="flex flex-col lg:w-2/4 w-4/5 lg:text-lg text-sm ">
               {QnA1.map((qna, i) => {
                 return (
                   <Accordion type="single" collapsible className="w-54" key={i}>
@@ -120,7 +120,7 @@ function Questionsection() {
             hidden: { opacity: 0, x: 150 },
             visible: { opacity: 1, x: 0 },
           }} 
-          className="flex flex-col my-10 w-2/4 ">
+          className="flex flex-col lg:w-2/4 w-4/5 lg:text-lg text-sm ">
               {QnA2.map((qna, i) => {
                 return (
                   <Accordion type="single" collapsible className="w-54" key={i}>

@@ -66,7 +66,7 @@ const reviews: {
 function Reviewsection() {
   return (
     <div className="bg-[#f8f8f8] py-4">
-      <div className="flex flex-col w-4/5 mx-auto my-20 gap-6 ">
+      <div className="flex flex-col w-4/5 mx-auto lg:my-20 my-10 gap-6 ">
         <motion.div
         initial="hidden"
         whileInView="visible"
@@ -81,9 +81,9 @@ function Reviewsection() {
           hidden: { opacity: 0, x: -150 },
           visible: { opacity: 1, x: 0 },
         }} 
-        className="flex gap-4">
-          <p className="text-3xl font-black">|</p>
-          <p className="text-4xl font-bold">รีวิวจากผู้เรียน</p>
+        className="flex lg:gap-4 lg:mx-0 mx-3 gap-2 ">
+          <p className="lg:text-3xl lg:font-black text-xl font-semibold">|</p>
+          <p className="lg:text-4xl lg:font-bold text-xl font-semibold">รีวิวจากผู้เรียน</p>
         </motion.div>
 
 
@@ -102,15 +102,15 @@ function Reviewsection() {
           hidden: { opacity: 0, x: 150 },
           visible: { opacity: 1, x: 0 },
         }} 
-        className="flex gap-8  flex-wrap justify-center">
+        className="flex lg:gap-8 gap-3  flex-wrap justify-center">
         {reviews.map((review, i) => {
             return (
          
-          <div key={i}  className="flex flex-col p-8 justify-between w-[480px] h-[250px] rounded-xl bg-stone-800 text-white  ">
+          <div key={i}  className="flex flex-col lg:p-8 justify-between lg:w-[480px] lg:h-[250px] h-[220px] w-[290px] p-6 rounded-xl bg-stone-800 text-white  ">
             <div>
             {/* <MessagesSquare size={20} /> */}
 
-            <p className="text-base font-normal ">
+            <p className="lg:text-base font-normal text-xs ">
           {review.desc}
           </p >
           </div>
@@ -123,7 +123,7 @@ function Reviewsection() {
                 />
             <div className="flex flex-col gap-1">
               <div>{review.icon}</div>
-              <p className="text-base font-semibold">{review.name}</p>
+              <p className="lg:text-base font-semibold text-sm">{review.name}</p>
               <p className="text-xs font-light">{review.posit}</p>
             </div>
           </div>
