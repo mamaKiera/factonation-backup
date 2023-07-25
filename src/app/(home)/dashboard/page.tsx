@@ -37,6 +37,7 @@ const page: FC<pageProps> = () => {
   // // const [courses, setCourses] = useState<CourseDto[]>();
   // console.log({ id, name });
   const { courses, isLoading, isError } = useCourses();
+
   console.log(courses);
   if (isLoading) return <div>Loading....</div>;
   if (isError) return <div>Error!!!!!!</div>;
