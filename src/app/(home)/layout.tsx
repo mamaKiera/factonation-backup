@@ -11,30 +11,24 @@ import Footer from "@/components/homePage/Foooter";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
 
-interface pageProps {}
+interface layoutProps {
+  children: React.ReactNode;
+}
 
-interface layoutProps {}
 const ibm_plex_sans_thai = IBM_Plex_Sans_Thai({
   subsets: ["thai"],
   weight: ["100", "200", "400", "600"],
 });
 
-const page: FC<pageProps> = ({}) => {
+const layout: FC<layoutProps> = ({ children }) => {
   //   const { isLoggedIn } = useAuthContext();
   //   console.log(isLoggedIn, "eieifoobar");
   return (
-    <div>
+    <>
       <Navbar />
-      <Herosection isLoggedIn={false} />
-      <Problemsection />
-      <Benefitsection />
-      <Reviewsection />
-      <Pricesection isLoggedIn={false} />
-      <Questionsection />
-      <Lastsection isLoggedIn={false} />
-      <Footer />
-    </div>
+      {children}
+    </>
   );
 };
 
-export default page;
+export default layout;

@@ -57,6 +57,7 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
       localStorage.setItem("user", username);
       setIsLoggedIn(true);
       setUsername(username);
+      console.log(isLoggedIn);
     } catch (err: any) {
       throw new Error(err.message);
     }

@@ -16,8 +16,13 @@ interface pageProps {
 }
 
 async function toggleLesson(id: string) {
-  const res = await fetch(`http://localhost:8000/lesson/toggle/${id}`, {
+  const studentId = localStorage.getItem("id");
+  const res = await fetch(`http://localhost:8000/lesson/toggle`, {
     method: "POST",
+    body: JSON.stringify({ lessonId: id, studentId }),
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
   const status = await res.json();
   console.log(status);

@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import AccordianComponent from "@/components/coursePage/AccordianComponent";
+import { buttonVariants } from "@/components/ui/Button";
 import {
   Accordion,
   AccordionContent,
@@ -75,11 +76,13 @@ export const page: FC<layoutProps> = ({ children, params }) => {
     getLesson();
   }, [params.courseId]);
 
+  console.log(course?.courseName);
   return (
     <div className="flex gap-4 h-full bg-secondary-background shadow-sm min-h-screen">
       <Toaster />
       <div className="bg-[#fff] min-w-[380px] max-h-screen overflow-scroll flex gap-2 flex-col  justify-start text-[#222] border-r-secondary-button border-r-[1px]">
         <div className="p-4 border-secondary-button border-b ">
+          <h1 className="font-medium text-xl">{course?.courseName}</h1>
           <h1 className="font-medium text-xl">Course Progress</h1>
           <div className="flex items-center">
             <Progress value={20} className="bg-primary-button h-1" />

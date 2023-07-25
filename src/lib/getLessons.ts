@@ -8,7 +8,7 @@ export async function getAllLesson(): Promise<LessonDto[]> {
 
 export async function getLessonByCourseIdFormetted(courseId: string) {
   const res = await fetch(
-    `http://localhost:8000/lesson/moduleAndweek/${courseId}`,
+    `http://localhost:8000/lesson/formatted/${courseId}`,
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,

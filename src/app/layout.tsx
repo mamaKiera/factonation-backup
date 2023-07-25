@@ -28,7 +28,7 @@ export default function RootLayout({
     <AuthProvider>
       <html lang="en" className={cn(imb_plex_sans_thai.className)}>
         <body className={cn("min-h-screen mx-auto")}>
-          <Navbar />
+          {/* <Navbar /> */}
           {children}
         </body>
         {/* </QueryClientProvider> */}
