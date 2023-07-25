@@ -16,6 +16,9 @@ const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 export const AuthProvider = ({ children }: any): React.ReactNode => {
   //const token = localStorage.getItem('token')
   const [token, setToken] = useState("");
+  const [name, setName] = useState("");
+  const [id, setId] = useState("");
+
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
@@ -34,8 +37,6 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(!!token);
   const [username, setUsername] = useState(user);
-  const [name, setName] = useState("");
-  const [id, setId] = useState("");
 
   const login = async (username: string, password: string) => {
     const loginInfo = { email: username, password };
@@ -48,19 +49,14 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
         body: JSON.stringify(loginInfo),
       });
       const data = (await res.json()).data;
-      console.log(data);
       if (data.statusCode === 401) {
         throw new Error(data.message);
       }
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", username);
-      localStorage.setItem("id", data.id);
       setIsLoggedIn(true);
       setUsername(username);
-      setName(data.name);
-      setId(id);
-      console.log(id, name);
     } catch (err: any) {
       throw new Error(err.message);
     }
@@ -76,7 +72,6 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
     setUsername("");
   };
 
-  console.log(id, name);
   return (
     <AuthContext.Provider
       value={{ isLoggedIn, username, login, logout, id, name }}

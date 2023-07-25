@@ -12,6 +12,7 @@ export interface CourseDto {
   };
   isCompleted: boolean;
   lessons: LessonDto[];
+  enrollment: EnrollmentDto[];
 }
 
 export interface CourseWithLessonDto extends CourseDto {

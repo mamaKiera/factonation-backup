@@ -13,9 +13,8 @@ interface ILogin {
   isLoggedIn: boolean;
 }
 
-const  Herosection : FC<ILogin> = () => {
-
-  const {isLoggedIn} = useAuthContext();
+const Herosection: FC<ILogin> = () => {
+  const { isLoggedIn } = useAuthContext();
 
   return (
     // <div className="min-h-screen">
@@ -54,24 +53,27 @@ const  Herosection : FC<ILogin> = () => {
             <p>Private ถามตอบได้ตลอดเวลา</p>
           </div>
           <div className="flex gap-8 text-2xl items-center">
-            {isLoggedIn ?(
-            <Link
-              href="#price-section"
-              className={cn(
-                buttonVariants({ size: "xl" }),
-                "px-8 bg-black text-white"
-              )}
-            >
-              สมัครทันที
-            </Link>):(<Link
-              href="/login"
-              className={cn(
-                buttonVariants({ size: "xl" }),
-                "px-8 bg-black text-white"
-              )}
-            >
-              สมัครทันที
-            </Link>)}
+            {isLoggedIn ? (
+              <Link
+                href="#price-section"
+                className={cn(
+                  buttonVariants({ size: "xl" }),
+                  "px-8 bg-black text-white"
+                )}
+              >
+                สมัครทันที
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className={cn(
+                  buttonVariants({ size: "xl" }),
+                  "px-8 bg-black text-white"
+                )}
+              >
+                สมัครทันที
+              </Link>
+            )}
             <Link
               href="/module"
               className={buttonVariants({ size: "xl", variant: "outline" })}
@@ -107,6 +109,6 @@ const  Herosection : FC<ILogin> = () => {
     </div>
     // </div>
   );
-}
+};
 
 export default Herosection;
