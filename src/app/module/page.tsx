@@ -9,7 +9,7 @@ const imb_plex_sans_thai = IBM_Plex_Sans_Thai({
 
 import { FC } from "react";
 import { Button } from "@/components/ui/Button";
-import { getCourse, getCourses } from "@/lib/getCourse";
+import { getCourses } from "@/lib/getCourse";
 
 interface pageProps {}
 
