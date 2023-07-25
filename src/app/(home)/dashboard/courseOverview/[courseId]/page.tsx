@@ -1,3 +1,4 @@
+"use client";
 /* eslint-disable react-hooks/rules-of-hooks */
 import Details from "@/components/courseOverviewPage/Details";
 import Header from "@/components/courseOverviewPage/Header";
