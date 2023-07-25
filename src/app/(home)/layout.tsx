@@ -9,7 +9,7 @@ import Questionsection from "@/components/homePage/Questionsection";
 import Lastsection from "@/components/homePage/Lastsection";
 import Footer from "@/components/homePage/Foooter";
 import { cn } from "@/lib/utils";
-import Navbar from "@/components/Navbar";
+import NavbarUser from "@/components/NavbarUser";
 
 interface layoutProps {
   children: React.ReactNode;
@@ -25,7 +25,7 @@ const layout: FC<layoutProps> = ({ children }) => {
   //   console.log(isLoggedIn, "eieifoobar");
   return (
     <>
-      <Navbar />
+      <NavbarUser />
       {children}
     </>
   );

@@ -1,4 +1,3 @@
-
 import { FC } from "react";
 
 import { IBM_Plex_Sans_Thai } from "next/font/google";
@@ -12,9 +11,9 @@ import Lastsection from "@/components/homePage/Lastsection";
 import Footer from "@/components/homePage/Foooter";
 import { cn } from "@/lib/utils";
 
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/NavbarUser";
 
-interface pageProps {}   
+interface pageProps {}
 const page: FC<pageProps> = ({}) => {
   //   const { isLoggedIn } = useAuthContext();
   //   console.log(isLoggedIn, "eieifoobar");
@@ -32,8 +31,6 @@ const page: FC<pageProps> = ({}) => {
       <Footer />
     </div>
   );
-
 };
 
 export default page;
-
