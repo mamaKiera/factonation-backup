@@ -16,8 +16,9 @@ interface pageProps {
 
 const page: FC<pageProps> = async ({ params: { courseId } }) => {
   // const { data, isError, isLoading } = useCourse(courseId);
-  // // console.log(courseId);
+  // console.log(courseId);
   const course = await getCourse(courseId);
+  console.log(course);
   // if (isLoading) return <h1>Loading.......</h1>;
   // if (!data) return <NOTFOUND />;
 

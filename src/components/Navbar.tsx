@@ -17,7 +17,7 @@ const Navbar: FC = () => {
             </h1>
           </Link>
           <div className="hidden md:flex md:items-center md:justify-start md:gap-8">
-            <Link href="/module">คอร์สเรียน</Link>
+            <Link href="/dashboard">คอร์สเรียน</Link>
             <Link href="/#price-section" className="scroll-smooth">
               ราคาคอร์ส
             </Link>

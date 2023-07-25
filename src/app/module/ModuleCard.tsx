@@ -41,6 +41,7 @@ const courses: {
   },
 ];
 import { FC } from "react";
+import Link from "next/link";
 
 interface ModuleCardProps {
   course: CourseDto;
@@ -50,6 +51,7 @@ const ModuleCard: FC<ModuleCardProps> = ({ course }) => {
   return (
     <div className="flex flex-col gap-6 mx-auto">
       <div className="flex gap-5 rounded-xl w-[920px] h-[340px] bg-neutral-100 px-6 items-center drop-shadow-md ">
+        <Button></Button>
         <div>
           {/* <Image
             src={course.image}
@@ -69,9 +71,12 @@ const ModuleCard: FC<ModuleCardProps> = ({ course }) => {
           <div className="flex gap-10 justify-between border-t border-primary-button py-1 ">
             <p className="text-xs font-semibold my-2  bg-neutral-100">{4000}</p>
             <div className="flex items-center gap-0">
-              <Button className="text-xs font-semibold bg-neutral-100">
+              <Link
+                href={`/dashboard/courseOverview/${course.id}`}
+                className="text-xs font-semibold bg-neutral-100"
+              >
                 ดูรายละเอียดคอร์์ส
-              </Button>
+              </Link>
               <ArrowRight size={10} />
             </div>
           </div>

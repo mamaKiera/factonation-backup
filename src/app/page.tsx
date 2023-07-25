@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 
 import { IBM_Plex_Sans_Thai } from "next/font/google";
 import Herosection from "@/components/homePage/Herosection";
@@ -19,13 +19,13 @@ const imb_plex_sans_thai = IBM_Plex_Sans_Thai({
 export default function Home() {
   return (
     <div className={cn(imb_plex_sans_thai.className)}>
-      <Herosection />
+      <Herosection isLoggedIn={false} />
       <Problemsection />
       <Benefitsection />
       <Reviewsection />
-      <Pricesection />
+      <Pricesection isLoggedIn={false} />
       <Questionsection />
-      <Lastsection />
+      <Lastsection isLoggedIn={false} />
       <Footer />
     </div>
   );
