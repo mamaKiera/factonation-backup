@@ -1,4 +1,4 @@
-"use client";
+import AddCourseForm from "@/components/AddCourseForm";
 
 import Link from "next/link";
 import {
@@ -13,10 +13,9 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alertDialog";
 import { useRouter } from "next/navigation";
+import { UserDto } from "@/types/dto";
 import useUserList from "@/hooks/useUsers";
 import { FC } from "react";
-import { UserDto } from "@/types/dto";
-import { useCourses } from "@/hooks/useCourses";
 
 interface pageProps {}
 
