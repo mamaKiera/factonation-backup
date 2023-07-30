@@ -78,7 +78,7 @@ export const page: FC<layoutProps> = ({ children, params }) => {
 
   console.log(course?.courseName);
   return (
-    <div className="flex gap-4 h-full bg-secondary-background shadow-sm min-h-screen">
+    <div className="flex justify-between gap-4 h-full bg-secondary-background shadow-sm min-h-screen">
       <Toaster />
       <div className="bg-[#fff] min-w-[380px] max-h-screen overflow-scroll flex gap-2 flex-col  justify-start text-[#222] border-r-secondary-button border-r-[1px]">
         <div className="p-4 border-secondary-button border-b ">

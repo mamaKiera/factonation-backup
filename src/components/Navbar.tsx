@@ -28,8 +28,8 @@ import {
 const Navbar: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const { isLoggedIn, username } = useAuthContext();
-  console.log(isLoggedIn);
+  const { isLoggedIn, email, name } = useAuthContext();
+  console.log(isLoggedIn, email, name);
   return (
     <div className="sticky top-0 z-[10]">
       <div className="sticky top-0 inset-x-0 h-fit z-[10] py-4 bg-[#0B0E0C] text-background backdrop-blur-lg  ">
@@ -58,16 +58,25 @@ const Navbar: FC = () => {
                 <DropdownMenuTrigger>
                   <Avatar className=" bg-primary-button">
                     <AvatarImage></AvatarImage>
-                    <AvatarFallback>{username![0]}</AvatarFallback>
+                    <AvatarFallback>{email![0]}</AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-white" align="end">
                   {/* Name & Email */}
-                  <div className="flex items-center justify-start gap-2 p-2">
-                    <div className="flex flex-col space-y-1 leading-none">
-                      {username && (
-                        <p className="font-xl font-semibold">{username}</p>
-                      )}
+                  <div className="flex items-center">
+                    <Avatar className=" bg-primary-button">
+                      <AvatarImage></AvatarImage>
+                      <AvatarFallback>{email![0]}</AvatarFallback>
+                    </Avatar>
+                    <div className="flex items-center justify-start gap-2 p-2">
+                      <div className="flex flex-col space-y-1 leading-none">
+                        {isLoggedIn && (
+                          <>
+                            <p className="font-xl font-semibold">{email}</p>
+                            <p className="font-lg">{name}</p>
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
                   <DropdownMenuSeparator className="bg-slate-200 px-4" />

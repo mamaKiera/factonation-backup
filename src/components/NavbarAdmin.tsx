@@ -19,7 +19,7 @@ import { useAuthContext } from "@/contexts/authContext";
 
 const NavbarAdmin: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const { isLoggedIn, username } = useAuthContext();
+  const { isLoggedIn, name } = useAuthContext();
 
   return (
     <div className="sticky top-0 z-[10]">
@@ -46,7 +46,7 @@ const NavbarAdmin: FC = () => {
               <>
                 <Avatar>
                   <AvatarImage></AvatarImage>
-                  <AvatarFallback>{username![0]}</AvatarFallback>
+                  <AvatarFallback>{name![0]}</AvatarFallback>
                 </Avatar>
                 <Link
                   href={"/"}

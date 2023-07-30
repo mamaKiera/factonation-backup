@@ -5,11 +5,11 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 
 export interface IAuthContext {
   isLoggedIn: boolean;
-  username: string | null;
   login: (username: string, password: string) => Promise<unknown>;
   logout: () => void;
   id: string;
   name: string;
+  email: string;
 }
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -19,8 +19,7 @@ const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider = ({ children }: any): React.ReactNode => {
   const [token, setToken] = useState("");
-  const [user, setUser] = useState("");
-  const [username, setUsername] = useState(user);
+  const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [id, setId] = useState("");
 
@@ -49,8 +48,9 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
       localStorage.setItem("email", data.email);
       localStorage.setItem("name", data.name);
       setIsLoggedIn(true);
-      setUsername(username);
+      setEmail(data.email);
       setId(data.id);
+      setName(data.name);
     } catch (err: any) {
       throw new Error(err.message);
     }
@@ -63,12 +63,12 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
     setId("");
     localStorage.removeItem("user");
     setIsLoggedIn(false);
-    setUsername("");
+    setEmail("");
   };
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, username, login, logout, id, name }}
+      value={{ isLoggedIn, login, logout, id, name, email }}
     >
       {children}
     </AuthContext.Provider>

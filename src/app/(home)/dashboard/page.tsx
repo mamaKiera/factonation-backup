@@ -14,31 +14,35 @@ import Image from "next/image";
 import Link from "next/link";
 import { FC, useEffect, useState, use } from "react";
 import { useUserCourses } from "@/hooks/useUserCourses";
+import axios from "axios";
+import { host } from "@/types";
 
 interface pageProps {}
 
 const courseFetch = getCourses();
 
 const page: FC<pageProps> = () => {
-  const { courses, isLoading, isError } = useUserCourses();
+  // const { courses, isLoading, isError } = useCourses();
+  const [courses, setCourses] = useState<CourseDto[]>();
 
-  console.log(courses);
-  if (isLoading) return <div>Loading....</div>;
-  if (isError) return <div>Error!!!!!!</div>;
-  const id = localStorage.getItem("id");
-  console.log(id);
-  // const courses = await getCourses();
-  // useEffect(() => {
-  //   const fetchCourse = async () => {
-  //     const res = await getCourses();
-  //     console.log(res);
-  //     setCourses(res);
-  //   };
-  //   fetchCourse();
-  // }, []);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const fetchCourse = async () => {
+      console.log(token);
+      const res = await fetch(`http://localhost:8000/course/student/enrolled`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const courses = await res.json();
+      console.log(courses);
+      setCourses(courses.data);
+    };
+    fetchCourse();
+  }, []);
   return (
     <main className=" mt-12">
-      <div className="max-w-8xl mx-auto bg-background p-6 h-fit min-h-screen my-12 flex">
+      <div className="max-w-8xl mx-auto bg-background p-6 h-fit min-h-screen my-12 flex justify-between">
         <div>
           <h1 className="text-4xl font-semibold text-primary-button my-2 mx-8">
             My Dashboard
@@ -47,8 +51,8 @@ const page: FC<pageProps> = () => {
             Way to go! Here are all the courses you&apos;ve finished.
           </p>
           <div className="flex gap-4 flex-wrap m-8 border-secondary-button border-t-[1.4px] w-fit pt-6">
-            {courses.data &&
-              courses.data.map((course: CourseDto, i: number) => {
+            {courses &&
+              courses.map((course: CourseDto, i: number) => {
                 // const courseStatus = await getCourseStatus(id!, course.id);
                 // const courseStatus = useCourseStatus(id!, course.id);
                 return (

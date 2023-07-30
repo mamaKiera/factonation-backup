@@ -11,7 +11,7 @@ import { useState } from "react";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const Page: FC<UserAuthFormProps> = ({ className, ...props }) => {
+const Page: FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function onSubmit(event: React.SyntheticEvent) {
