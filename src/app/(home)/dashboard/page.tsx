@@ -27,6 +27,7 @@ const page: FC<pageProps> = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("id");
     const fetchCourse = async () => {
       console.log(token);
       const res = await fetch(`http://localhost:8000/course/student/enrolled`, {
