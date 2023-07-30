@@ -1,22 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import AccordianComponent from "@/components/coursePage/AccordianComponent";
-import { buttonVariants } from "@/components/ui/button";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Progress } from "@/components/ui/progress";
 import { Toaster } from "@/components/ui/toaster";
-import { useToast } from "@/components/ui/use-toast";
 import { getCourse } from "@/lib/getCourse";
 import { getLessonByCourseIdFormetted } from "@/lib/getLessons";
-import { cn } from "@/lib/utils";
-import { CourseDto, CourseWithLessonDto, LessonDto } from "@/types/dto";
-import { PlayCircleIcon, Trophy } from "lucide-react";
-import Link from "next/link";
+import { CourseWithLessonDto, LessonDto } from "@/types/dto";
+import { Trophy } from "lucide-react";
 import { FC, useEffect, useState } from "react";
 
 interface layoutProps {
@@ -39,10 +29,7 @@ export const page: FC<layoutProps> = ({ children, params }) => {
 
   useEffect(() => {
     const fetLessons = async () => {
-      console.log(localStorage.getItem("token"));
-      console.log(params.courseId);
       const _lessons = await getLessonByCourseIdFormetted(params.courseId);
-      console.log(_lessons);
       setLessons(_lessons);
     };
 
@@ -52,7 +39,6 @@ export const page: FC<layoutProps> = ({ children, params }) => {
   useEffect(() => {
     const fetchCourse = async () => {
       const _course = await getCourse(params.courseId);
-      console.log(_course);
       setCourse(_course);
     };
 
