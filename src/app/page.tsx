@@ -7,7 +7,7 @@ import Benefitsection from "@/components/homePage/Benefitsection";
 import Reviewsection from "@/components/homePage/Reviewsection";
 import Pricesection from "@/components/homePage/Pricesection";
 import Questionsection from "@/components/homePage/Questionsection";
-import Lastsection from "@/components/homePage/Lastsection";
+import Lastsection from "@/components/homePage/LastSection";
 import Footer from "@/components/homePage/Foooter";
 import { cn } from "@/lib/utils";
 
