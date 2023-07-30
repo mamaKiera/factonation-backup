@@ -2,7 +2,6 @@
 
 import { FC, useState } from "react";
 
-import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -89,17 +88,11 @@ const Navbar: FC = () => {
               </DropdownMenu>
             ) : (
               <>
-                <Link
-                  className={cn(buttonVariants({ variant: "ghost" }))}
-                  href="/login"
-                >
+                <Link className="" href="/login">
                   เข้าสู่ระบบ
                 </Link>
                 <Link
-                  className={cn(
-                    buttonVariants({ variant: "ghost" }),
-                    "bg-secondary-button text-[#222]"
-                  )}
+                  className={cn("bg-secondary-button text-[#222]")}
                   href="/register"
                 >
                   ลงทะเบียน
