@@ -1,5 +1,5 @@
 import { Icons } from "@/components/Icon";
-import { buttonVariants } from "@/components/ui/Button";
+import { buttonVariants } from "@/components/ui/uiButton";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { FC } from "react";

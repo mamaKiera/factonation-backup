@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { Button } from "./ui/Button";
+import { Button } from "./ui/uiButton";
 import SelectInstructor from "./SelectInstructor";
 import { LessonDto } from "@/types/dto";
 import AddLessonForm from "./AddLessonForm";
