@@ -1,8 +1,8 @@
 "use client";
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Progress } from "@/components/ui/progress";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
+import { Progress } from "@/components/ui/Progress";
 import { useAuthContext } from "@/contexts/authContext";
 import { useCourseStatus } from "@/hooks/useCourseStatus";
 import { useCourses } from "@/hooks/useCourses";

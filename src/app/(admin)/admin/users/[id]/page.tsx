@@ -3,8 +3,8 @@
 import * as React from "react";
 import { FC, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/Scroll-area";
+import { Separator } from "@/components/ui/Separator";
 import { useParams } from "next/navigation";
 import useUser from "@/hooks/useUser";
 import { Trash2, PlusCircle } from "lucide-react";
@@ -18,7 +18,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alertDialog";
+} from "@/components/ui/AlertDialog";
 import { useRef } from "react";
 import AddCourseModal from "@/components/AddCourseModal";
 import { useCourses } from "@/hooks/useCourses";

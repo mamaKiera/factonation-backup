@@ -2,11 +2,11 @@
 
 import { FC, useState } from "react";
 
-import { Button, buttonVariants } from "./ui/uiButton";
+import { Button, buttonVariants } from "./ui/MainButton";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import ScrollLink from "./ScrollLink";
 
 import { AlignJustify } from "lucide-react";

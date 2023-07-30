@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { FC } from "react";
-import { buttonVariants } from "../ui/uiButton";
+import { buttonVariants } from "../ui/MainButton";
 import { CourseWithLessonDto } from "@/types/dto";
 
 interface HeaderProps {

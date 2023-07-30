@@ -1,7 +1,7 @@
 "use client";
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Button } from "./ui/uiButton";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/Popover";
+import { Button } from "./ui/MainButton";
 import { Check, PersonStanding } from "lucide-react";
 import {
   Command,
@@ -9,7 +9,7 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
-} from "./ui/command";
+} from "./ui/Command";
 import { cn } from "@/lib/utils";
 import { getInstructors } from "@/lib";
 

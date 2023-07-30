@@ -4,7 +4,7 @@ import { FC, useState } from "react";
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import ScrollLink from "./ScrollLink";
 
 import { AlignJustify } from "lucide-react";
@@ -20,7 +20,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "./ui/Dropdown-menu";
 
 const Navbar: FC = () => {
   const [open, setOpen] = useState<boolean>(false);

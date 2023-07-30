@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { FormEvent, SetStateAction, useState } from "react";
-import { Label } from "./ui/label";
+import { Label } from "./ui/Label";
 import {
   Dialog,
   DialogContent,
@@ -10,8 +10,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
-import { Button } from "./ui/uiButton";
+} from "./ui/Dialog";
+import { Button } from "./ui/MainButton";
 import SelectInstructor from "./SelectInstructor";
 import { LessonDto } from "@/types/dto";
 import AddLessonForm from "./AddLessonForm";

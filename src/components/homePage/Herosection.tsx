@@ -5,7 +5,7 @@ import heroImage from "../../../public/IMG_1737.webp";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { buttonVariants } from "../ui/uiButton";
+import { buttonVariants } from "../ui/MainButton";
 import { useAuthContext } from "@/contexts/authContext";
 import { FC } from "react";
 

@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { Button, buttonVariants } from "./ui/uiButton";
-import { Progress } from "./ui/progress";
+import { Button, buttonVariants } from "./ui/MainButton";
+import { Progress } from "./ui/Progress";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
@@ -10,7 +10,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "./ui/table";
+} from "./ui/Table";
 
 interface CourseDashboardProps {
   courseName: string;

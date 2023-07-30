@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "@/components/ui/Checkbox";
 import { Checkbox as RadixCheckBox } from "@radix-ui/react-checkbox";
 import { useToast } from "@/components/ui/use-toast";
 import { getLessonByCourseIdFormetted } from "@/lib/getLessons";

@@ -11,7 +11,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alertDialog";
+} from "@/components/ui/AlertDialog";
 import { useRouter } from "next/navigation";
 import { UserDto } from "@/types/dto";
 import useUserList from "@/hooks/useUsers";

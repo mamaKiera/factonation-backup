@@ -1,15 +1,15 @@
 "use client";
 import { LessonDto } from "@/types/dto";
 import { Dispatch, FC, FormEvent, SetStateAction, useState } from "react";
-import { Label } from "./ui/label";
-import { Button } from "./ui/uiButton";
+import { Label } from "./ui/Label";
+import { Button } from "./ui/MainButton";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
+} from "./ui/Dialog";
 import axios from "axios";
 
 interface AddLessonFormProps {

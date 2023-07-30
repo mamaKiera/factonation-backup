@@ -1,6 +1,6 @@
 "use client";
 import { FC } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/Avatar";
 import { BookOpenCheckIcon, PresentationIcon } from "lucide-react";
 import { useCourseStatus } from "@/hooks/useCourseStatus";
 

@@ -1,4 +1,4 @@
-import { buttonVariants } from "@/components/ui/uiButton";
+import { buttonVariants } from "@/components/ui/MainButton";
 import { getCourses } from "@/lib/getCourse";
 import { cn } from "@/lib/utils";
 import Link from "next/link";

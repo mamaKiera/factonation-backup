@@ -1,5 +1,5 @@
 "use client";
-import { Button, buttonVariants } from "@/components/ui/uiButton";
+import { Button, buttonVariants } from "@/components/ui/MainButton";
 import { Facebook } from "lucide-react";
 import { Youtube } from "lucide-react";
 import Image from "next/image";

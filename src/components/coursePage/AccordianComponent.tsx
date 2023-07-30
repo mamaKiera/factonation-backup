@@ -4,7 +4,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "../ui/accordion";
+} from "../ui/Accordion";
 import Link from "next/link";
 import { LessonDto } from "@/types/dto";
 import { cn } from "@/lib/utils";
