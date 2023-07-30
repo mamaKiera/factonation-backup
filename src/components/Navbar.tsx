@@ -20,7 +20,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./ui/Dropdown-menu";
+} from "./ui/DropdownMenu";
 
 const Navbar: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
