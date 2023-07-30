@@ -2,7 +2,7 @@
 
 import { FC, useState } from "react";
 
-import { Button, buttonVariants } from "./ui/button";
+import { Button, buttonVariants } from "./ui/Button";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
