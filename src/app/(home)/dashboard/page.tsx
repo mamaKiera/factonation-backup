@@ -30,7 +30,7 @@ const page: FC<pageProps> = () => {
     const userId = localStorage.getItem("id");
     const fetchCourse = async () => {
       console.log(token);
-      const res = await fetch(`http://localhost:8000/course/student/enrolled`, {
+      const res = await fetch(`http://${host}/course/student/enrolled`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

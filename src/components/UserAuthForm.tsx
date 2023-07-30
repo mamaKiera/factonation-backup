@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthContext } from "@/contexts/authContext";
 import { useRouter } from "next/navigation";
+import { host } from "@/types";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
   page: UserAuthFormPage;
@@ -61,7 +62,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       };
 
       try {
-        const response = await fetch(`http://localhost:8000/user/register`, {
+        const response = await fetch(`http://${host}/user/register`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

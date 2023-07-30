@@ -22,6 +22,7 @@ import {
 import { useRef } from "react";
 import AddCourseModal from "@/components/AddCourseModal";
 import { useCourses } from "@/hooks/useCourses";
+import { host } from "@/types";
 
 interface pageProps {
   params: {
@@ -56,7 +57,7 @@ const Page: FC<pageProps> = () => {
     //const accessToken = localStorage.getItem('token')
 
     try {
-      const response = await fetch(`http://localhost:8000/user/enrollment`, {
+      const response = await fetch(`http://${host}/user/enrollment`, {
         method: "DELETE",
         headers: {
           // Authorization: `bearer ${accessToken}`,
@@ -77,7 +78,7 @@ const Page: FC<pageProps> = () => {
     //const accessToken = localStorage.getItem('token')
 
     try {
-      const response = await fetch(`http://localhost:8000/user/${user?.id}`, {
+      const response = await fetch(`http://${host}/user/${user?.id}`, {
         method: "PATCH",
         headers: {
           // Authorization: `bearer ${accessToken}`,

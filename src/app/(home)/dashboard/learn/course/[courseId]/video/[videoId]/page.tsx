@@ -7,6 +7,7 @@ import { getLessonByCourseIdFormetted } from "@/lib/getLessons";
 import { LessonDto } from "@/types/dto";
 import { FC, useEffect, useState } from "react";
 import ReactPlayer from "react-player";
+import { host } from "@/types";
 
 interface pageProps {
   params: {
@@ -17,7 +18,7 @@ interface pageProps {
 
 async function toggleLesson(id: string) {
   const studentId = localStorage.getItem("id");
-  const res = await fetch(`http://localhost:8000/lesson/toggle`, {
+  const res = await fetch(`http://${host}/lesson/toggle`, {
     method: "POST",
     body: JSON.stringify({ lessonId: id, studentId }),
     headers: {

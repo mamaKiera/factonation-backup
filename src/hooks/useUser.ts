@@ -1,3 +1,4 @@
+import { host } from "@/types";
 import { UserDto } from "@/types/dto";
 import { useEffect, useState } from "react";
 
@@ -10,7 +11,7 @@ const useUser = (id: string) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`http://localhost:8000/user/${id}`);
+        const res = await fetch(`http://${host}/user/${id}`);
         const responseBody = await res.json();
         setUser(responseBody.data);
         setError(false);
