@@ -2,7 +2,7 @@
 "use client";
 import AccordianComponent from "@/components/coursePage/AccordianComponent";
 import { Progress } from "@/components/ui/Progress";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/Toaster";
 import { getCourse } from "@/lib/getCourse";
 import { getLessonByCourseIdFormetted } from "@/lib/getLessons";
 import { CourseWithLessonDto, LessonDto } from "@/types/dto";
