@@ -47,16 +47,20 @@ export const page: FC<layoutProps> = ({ children, params }) => {
 
   useEffect(() => {
     const getLesson = async () => {
-      const res = await fetch("http://localhost:8000/lesson/status/course", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          courseId: params.courseId,
-          studentId: "1ac78d03-3d75-415f-999d-bc9854085a5c",
-        }),
-      });
-      const _status = await res.json();
-      setStatus(_status.data);
+      try {
+        const res = await fetch("http://localhost:8000/lesson/status/course", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            courseId: params.courseId,
+            studentId: "1ac78d03-3d75-415f-999d-bc9854085a5c",
+          }),
+        });
+        const _status = await res.json();
+        setStatus(_status.data);
+      } catch (err) {
+        console.error(err);
+      }
     };
 
     getLesson();

@@ -18,15 +18,19 @@ interface pageProps {
 
 async function toggleLesson(id: string) {
   const studentId = localStorage.getItem("id");
-  const res = await fetch(`http://${host}/lesson/toggle`, {
-    method: "POST",
-    body: JSON.stringify({ lessonId: id, studentId }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const status = await res.json();
-  console.log(status);
+  try {
+    const res = await fetch(`http://${host}/lesson/toggle`, {
+      method: "POST",
+      body: JSON.stringify({ lessonId: id, studentId }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const status = await res.json();
+    console.log(status);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 const page: FC<pageProps> = ({ params: { videoId, courseId } }) => {
