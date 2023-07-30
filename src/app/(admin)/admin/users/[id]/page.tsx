@@ -3,7 +3,7 @@
 import * as React from "react";
 import { FC, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ScrollArea } from "@/components/ui/Scroll-area";
+import { ScrollArea } from "@/components/ui/ScrollArea";
 import { Separator } from "@/components/ui/Separator";
 import { useParams } from "next/navigation";
 import useUser from "@/hooks/useUser";

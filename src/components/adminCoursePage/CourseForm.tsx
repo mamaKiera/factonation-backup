@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FC } from "react";
-import { ScrollArea } from "@/components/ui/Scroll-area";
+import { ScrollArea } from "@/components/ui/ScrollArea";
 import { Separator } from "@/components/ui/Separator";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 
