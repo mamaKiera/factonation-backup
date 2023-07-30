@@ -1,76 +1,78 @@
-'use client';
+"use client";
 
+import axios from "axios";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 export interface IAuthContext {
-    isLoggedIn: boolean,
-    username: string | null,
-    login: (username: string, password: string) => Promise<unknown>,
-    logout: () => void
+  isLoggedIn: boolean;
+  login: (username: string, password: string) => Promise<unknown>;
+  logout: () => void;
+  id: string;
+  name: string;
+  email: string;
 }
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
+// const token = localStorage.getItem("token");
+// const user = localStorage.getItem("user");
+
 export const AuthProvider = ({ children }: any): React.ReactNode => {
-    
-  //const token = localStorage.getItem('token')
-    const [token, setToken] = useState('')
-    useEffect(() => {
-      const storedToken = localStorage.getItem('token');
-      if (storedToken) {
-        setToken(storedToken);
-      }
-    }, [])
+  const [token, setToken] = useState("");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [id, setId] = useState("");
 
-    // const user = localStorage.getItem('user')
-    const [user, setUser] = useState('')
-    useEffect(() => {
-      const storedUser = localStorage.getItem('user');
-      if (storedUser) {
-        setUser(storedUser);
-      }
-    }, [])
-    
-    const [isLoggedIn, setIsLoggedIn] = useState(!!token)
-    const [username, setUsername] = useState(user)
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
 
-    const login = async (username: string, password: string) => {
-        const loginInfo = { username, password }
-        try {
-          const res = await fetch(`http://localhost:8000/login`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(loginInfo),
-          })
-          const data = await res.json()
-          if (data.statusCode === 401) {
-            throw new Error(data.message) 
-          }
-    
-          localStorage.setItem('token', data.token)
-          localStorage.setItem('user', username)
-          setIsLoggedIn(true)
-          setUsername(username)
-        } catch (err: any) {
-          throw new Error(err.message)
-        }
+    if (storedToken) {
+      setToken(storedToken);
     }
+  }, []);
 
-    const logout = () => {
-        localStorage.removeItem('token')
-        setToken('')
-        localStorage.removeItem('user')
-        setIsLoggedIn(false)
-        setUsername('')
+  const [isLoggedIn, setIsLoggedIn] = useState(!!token);
+
+  const login = async (email: string, password: string) => {
+    try {
+      const res = await axios.post(`http://localhost:8000/user/login`, {
+        email,
+        password,
+      });
+      if (res.status === 401) {
+        throw new Error(res.statusText);
+      }
+      const data = res.data;
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("email", data.email);
+      localStorage.setItem("name", data.name);
+      setIsLoggedIn(true);
+      setEmail(data.email);
+      setId(data.id);
+      setName(data.name);
+    } catch (err: any) {
+      throw new Error(err.message);
     }
+  };
 
-    return (
-        <AuthContext.Provider value={{ isLoggedIn, username, login, logout }}>
-            {children}
-        </AuthContext.Provider>
-    )
-}
+  const logout = () => {
+    localStorage.removeItem("token");
+    // setToken("");
+    setName("");
+    setId("");
+    localStorage.removeItem("user");
+    setIsLoggedIn(false);
+    setEmail("");
+  };
 
-export const useAuthContext = () => useContext(AuthContext)
+  return (
+    <AuthContext.Provider
+      value={{ isLoggedIn, login, logout, id, name, email }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuthContext = () => useContext(AuthContext);

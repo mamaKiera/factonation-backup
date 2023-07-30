@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/Button";
+import { FC } from "react";
 
 import { IBM_Plex_Sans_Thai } from "next/font/google";
 import Herosection from "@/components/homePage/Herosection";
@@ -11,22 +11,26 @@ import Lastsection from "@/components/homePage/Lastsection";
 import Footer from "@/components/homePage/Foooter";
 import { cn } from "@/lib/utils";
 
-const imb_plex_sans_thai = IBM_Plex_Sans_Thai({
-  subsets: ["thai"],
-  weight: ["100", "200", "400", "600"],
-});
+import Navbar from "@/components/Navbar";
 
-export default function Home() {
+interface pageProps {}
+const page: FC<pageProps> = ({}) => {
+  //   const { isLoggedIn } = useAuthContext();
+  //   console.log(isLoggedIn, "eieifoobar");
   return (
-    <div className={cn(imb_plex_sans_thai.className)}>
-      <Herosection />
+    <div>
+      <Navbar />
+      <Herosection isLoggedIn={false} />
+
       <Problemsection />
       <Benefitsection />
       <Reviewsection />
       <Pricesection />
       <Questionsection />
-      <Lastsection />
+      <Lastsection isLoggedIn={false} />
       <Footer />
     </div>
   );
-}
+};
+
+export default page;
