@@ -2,7 +2,7 @@
 import { LessonDto } from "@/types/dto";
 import { Dispatch, FC, FormEvent, SetStateAction, useState } from "react";
 import { Label } from "./ui/label";
-import { Button } from "./ui/Button";
+import { Button } from "./ui/button";
 import {
   Dialog,
   DialogContent,
@@ -61,13 +61,6 @@ const AddLessonForm: FC<AddLessonFormProps> = ({
       });
 
       console.log(formData);
-      // await fetch("http://localhost:8000/course", {
-      //   method: "POST",
-      //   body: JSON.stringify({ formData, caption }),
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // });
     } catch (error) {
       console.error("Error submitting form:", error);
     }

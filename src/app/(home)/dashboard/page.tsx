@@ -1,21 +1,7 @@
 "use client";
-import CourseStatus from "@/components/CourseStatus";
-import Navbar from "@/components/Navbar";
-import UserSummary from "@/components/UserSummary";
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Button, buttonVariants } from "@/components/ui/Button";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { useAuthContext } from "@/contexts/authContext";
 import { useCourseStatus } from "@/hooks/useCourseStatus";
@@ -27,16 +13,14 @@ import { BookOpenCheckIcon, PresentationIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, useEffect, useState, use } from "react";
+import { useUserCourses } from "@/hooks/useUserCourses";
 
 interface pageProps {}
 
 const courseFetch = getCourses();
 
 const page: FC<pageProps> = () => {
-  // const { id, name } = useAuthContext();
-  // // const [courses, setCourses] = useState<CourseDto[]>();
-  // console.log({ id, name });
-  const { courses, isLoading, isError } = useCourses();
+  const { courses, isLoading, isError } = useUserCourses();
 
   console.log(courses);
   if (isLoading) return <div>Loading....</div>;

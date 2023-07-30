@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 export interface IAuthContext {
@@ -13,48 +14,43 @@ export interface IAuthContext {
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
-const token = localStorage.getItem("token");
-const user = localStorage.getItem("user");
+// const token = localStorage.getItem("token");
+// const user = localStorage.getItem("user");
 
 export const AuthProvider = ({ children }: any): React.ReactNode => {
-  // const [token, setToken] = useState("");
-  // const [user, setUser] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(!!token);
+  const [token, setToken] = useState("");
+  const [user, setUser] = useState("");
   const [username, setUsername] = useState(user);
   const [name, setName] = useState("");
   const [id, setId] = useState("");
 
-  // useEffect(() => {
-  //   const storedToken = localStorage.getItem("token");
-  //   const storedUser = localStorage.getItem("user");
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
 
-  //   if (storedUser && storedToken) {
-  //     setUser(storedUser);
-  //     setToken(storedToken);
-  //   }
-  // }, []);
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
 
-  const login = async (username: string, password: string) => {
-    const loginInfo = { email: username, password };
+  const [isLoggedIn, setIsLoggedIn] = useState(!!token);
+
+  const login = async (email: string, password: string) => {
     try {
-      const res = await fetch(`http://localhost:8000/user/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(loginInfo),
+      const res = await axios.post(`http://localhost:8000/user/login`, {
+        email,
+        password,
       });
-      const data = (await res.json()).data;
-      if (data.statusCode === 401) {
-        throw new Error(data.message);
+      if (res.status === 401) {
+        throw new Error(res.statusText);
       }
+      const data = res.data;
 
       localStorage.setItem("token", data.token);
-      localStorage.setItem("user", username);
+      localStorage.setItem("email", data.email);
+      localStorage.setItem("name", data.name);
       setIsLoggedIn(true);
       setUsername(username);
       setId(data.id);
-      console.log(isLoggedIn);
     } catch (err: any) {
       throw new Error(err.message);
     }
