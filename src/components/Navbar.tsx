@@ -2,8 +2,7 @@
 
 import { FC, useState } from "react";
 
-import { Button, buttonVariants } from "./ui/button";
-import Image from "next/image";
+import { buttonVariants } from "./ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -15,7 +14,6 @@ import { Newspaper } from "lucide-react";
 import { BadgeHelp } from "lucide-react";
 import { DollarSign } from "lucide-react";
 import { X } from "lucide-react";
-import { motion } from "framer-motion";
 import { useAuthContext } from "@/contexts/authContext";
 import {
   DropdownMenu,
@@ -29,7 +27,6 @@ const Navbar: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   const { isLoggedIn, email, name } = useAuthContext();
-  console.log(isLoggedIn, email, name);
   return (
     <div className="sticky top-0 z-[10]">
       <div className="sticky top-0 inset-x-0 h-fit z-[10] py-4 bg-[#0B0E0C] text-background backdrop-blur-lg  ">
