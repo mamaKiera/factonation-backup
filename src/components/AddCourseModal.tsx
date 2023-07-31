@@ -41,7 +41,7 @@ export default function AddCourseModal({
       for (let i = 0; i < selectedCourses.length; i++) {
         const courseId = selectedCourses[i];
         console.log(courseId);
-        await fetch(`http://${host}/user/student/enroll`, {
+        await fetch(`${host}/user/student/enroll`, {
           method: "POST",
           headers: {
             // Authorization: `bearer ${accessToken}`,
