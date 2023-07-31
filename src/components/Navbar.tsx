@@ -22,6 +22,8 @@ import {
   DropdownMenuTrigger,
 } from "./ui/DropdownMenu";
 
+import { buttonVariants } from "./ui/MainButton";
+
 const Navbar: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
 
@@ -89,7 +91,7 @@ const Navbar: FC = () => {
               </DropdownMenu>
             ) : (
               <>
-                <Link className="" href="/login">
+                <Link className={cn(buttonVariants())} href="/login">
                   เข้าสู่ระบบ
                 </Link>
                 <Link
