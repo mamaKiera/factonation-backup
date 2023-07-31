@@ -3,8 +3,8 @@
 import * as React from "react";
 import { FC, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/ScrollArea";
+import { Separator } from "@/components/ui/Separator";
 import { useParams } from "next/navigation";
 import useUser from "@/hooks/useUser";
 import { Trash2, PlusCircle } from "lucide-react";
@@ -18,10 +18,11 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alertDialog";
+} from "@/components/ui/AlertDialog";
 import { useRef } from "react";
 import AddCourseModal from "@/components/AddCourseModal";
 import { useCourses } from "@/hooks/useCourses";
+import { host } from "@/types";
 
 interface pageProps {
   params: {
@@ -56,7 +57,7 @@ const Page: FC<pageProps> = () => {
     //const accessToken = localStorage.getItem('token')
 
     try {
-      const response = await fetch(`http://localhost:8000/user/enrollment`, {
+      const response = await fetch(`${host}/user/student/enroll`, {
         method: "DELETE",
         headers: {
           // Authorization: `bearer ${accessToken}`,
@@ -77,7 +78,7 @@ const Page: FC<pageProps> = () => {
     //const accessToken = localStorage.getItem('token')
 
     try {
-      const response = await fetch(`http://localhost:8000/user/${user?.id}`, {
+      const response = await fetch(`${host}/user/${user?.id}`, {
         method: "PATCH",
         headers: {
           // Authorization: `bearer ${accessToken}`,

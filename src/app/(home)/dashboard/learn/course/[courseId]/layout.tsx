@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import AccordianComponent from "@/components/coursePage/AccordianComponent";
-import { Progress } from "@/components/ui/progress";
-import { Toaster } from "@/components/ui/toaster";
+import { Progress } from "@/components/ui/Progress";
+import { Toaster } from "@/components/ui/Toaster";
 import { getCourse } from "@/lib/getCourse";
 import { getLessonByCourseIdFormetted } from "@/lib/getLessons";
+import { host } from "@/types";
 import { CourseWithLessonDto, LessonDto } from "@/types/dto";
 import { Trophy } from "lucide-react";
 import { FC, useEffect, useState } from "react";
@@ -47,16 +48,20 @@ export const page: FC<layoutProps> = ({ children, params }) => {
 
   useEffect(() => {
     const getLesson = async () => {
-      const res = await fetch("http://localhost:8000/lesson/status/course", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          courseId: params.courseId,
-          studentId: "1ac78d03-3d75-415f-999d-bc9854085a5c",
-        }),
-      });
-      const _status = await res.json();
-      setStatus(_status.data);
+      try {
+        const res = await fetch(`${host}/lesson/status/course`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            courseId: params.courseId,
+            studentId: "1ac78d03-3d75-415f-999d-bc9854085a5c",
+          }),
+        });
+        const _status = await res.json();
+        setStatus(_status.data);
+      } catch (err) {
+        console.error(err);
+      }
     };
 
     getLesson();
@@ -64,7 +69,7 @@ export const page: FC<layoutProps> = ({ children, params }) => {
 
   console.log(course?.courseName);
   return (
-    <div className="flex justify-between gap-4 h-full bg-secondary-background shadow-sm min-h-screen">
+    <div className="flex gap-4 h-full bg-secondary-background shadow-sm min-h-screen">
       <Toaster />
       <div className="bg-[#fff] min-w-[380px] max-h-screen overflow-scroll flex gap-2 flex-col  justify-start text-[#222] border-r-secondary-button border-r-[1px]">
         <div className="p-4 border-secondary-button border-b ">

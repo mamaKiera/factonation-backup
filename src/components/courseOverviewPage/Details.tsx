@@ -1,8 +1,8 @@
 import { FC } from "react";
 import Header from "@/components/courseOverviewPage/Header";
 import LessonList from "@/components/courseOverviewPage/LessonList";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button, buttonVariants } from "@/components/ui/MainButton";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { getCourse } from "@/lib/getCourse";
 import { cn } from "@/lib/utils";
 import { CourseWithLessonDto } from "@/types/dto";

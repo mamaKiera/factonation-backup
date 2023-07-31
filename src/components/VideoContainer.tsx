@@ -1,7 +1,7 @@
 "use client";
 import { FC } from "react";
 import ReactPlayer from "react-player";
-import { Checkbox } from "./ui/checkbox";
+import { Checkbox } from "./ui/Checkbox";
 
 interface videoProps {
   title: string;

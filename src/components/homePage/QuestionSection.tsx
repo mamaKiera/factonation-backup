@@ -4,7 +4,7 @@ import {
   AccordionTrigger,
   AccordionItem,
   AccordionContent,
-} from "@/components/ui/accordion";
+} from "@/components/ui/Accordion";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
@@ -50,51 +50,54 @@ function Questionsection() {
       <div>
         <div className="flex flex-col bg-stone-900 justify-center lg:h-56 h-36 ">
           <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: "some" }}
-          transition={{
-            duration: 0.3,
-            type: "spring",
-            stiffness: 260,
-            damping: 20,
-          }}
-          variants={{
-            hidden: { opacity: 0, x: -150 },
-            visible: { opacity: 1, x: 0 },
-          }}  className="flex flex-col lg:gap-3 gap-1 text-white w-10/12 mx-auto">
-            <div  className="flex gap-2">
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: "some" }}
+            transition={{
+              duration: 0.3,
+              type: "spring",
+              stiffness: 260,
+              damping: 20,
+            }}
+            variants={{
+              hidden: { opacity: 0, x: -150 },
+              visible: { opacity: 1, x: 0 },
+            }}
+            className="flex flex-col lg:gap-3 gap-1 text-white w-10/12 mx-auto"
+          >
+            <div className="flex gap-2">
               <p className="lg:text-3xl text-xl">|</p>
               <p className="lg:text-4xl text-xl">คำถามที่พบบ่อย</p>
             </div>
             <div className="flex flex-col gap-1">
-            <p className="lg:text-xl lg:font-medium text-[12px] w-auto font-light ">
-              ไม่พบคำถามที่คุณต้องการ ติดต่อทีมงาน ของเราได้เลย
-            </p>
-            <div className="flex flex-wrap gap-3 text-primary-button w-auto lg:font-normal lg:text-xs text-[10px] font-light ">
-            <p>เบอร์โทร: 062-179-9526</p>
-            <p>Line Official ID: @factonation</p>
-            </div>
+              <p className="lg:text-xl lg:font-medium text-[12px] w-auto font-light ">
+                ไม่พบคำถามที่คุณต้องการ ติดต่อทีมงาน ของเราได้เลย
+              </p>
+              <div className="flex flex-wrap gap-3 text-primary-button w-auto lg:font-normal lg:text-xs text-[10px] font-light ">
+                <p>เบอร์โทร: 062-179-9526</p>
+                <p>Line Official ID: @factonation</p>
+              </div>
             </div>
           </motion.div>
         </div>
         <div className="flex justify-center items-center">
           <div className="flex lg:flex-row lg:my-10 my-5 flex-col w-4/5 justify-center lg:gap-10 gap-0 items-center ">
-         <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: "some" }}
-          transition={{
-            duration: 0.3,
-            type: "spring",
-            stiffness: 260,
-            damping: 20,
-          }}
-          variants={{
-            hidden: { opacity: 0, x: -150 },
-            visible: { opacity: 1, x: 0 },
-          }}
-           className="flex flex-col lg:w-2/4 w-4/5 lg:text-lg text-sm ">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: "some" }}
+              transition={{
+                duration: 0.3,
+                type: "spring",
+                stiffness: 260,
+                damping: 20,
+              }}
+              variants={{
+                hidden: { opacity: 0, x: -150 },
+                visible: { opacity: 1, x: 0 },
+              }}
+              className="flex flex-col lg:w-2/4 w-4/5 lg:text-lg text-sm "
+            >
               {QnA1.map((qna, i) => {
                 return (
                   <Accordion type="single" collapsible className="w-54" key={i}>
@@ -107,20 +110,21 @@ function Questionsection() {
               })}
             </motion.div>
             <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: "some" }}
-          transition={{
-            duration: 0.3,
-            type: "spring",
-            stiffness: 260,
-            damping: 20,
-          }}
-          variants={{
-            hidden: { opacity: 0, x: 150 },
-            visible: { opacity: 1, x: 0 },
-          }} 
-          className="flex flex-col lg:w-2/4 w-4/5 lg:text-lg text-sm ">
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: "some" }}
+              transition={{
+                duration: 0.3,
+                type: "spring",
+                stiffness: 260,
+                damping: 20,
+              }}
+              variants={{
+                hidden: { opacity: 0, x: 150 },
+                visible: { opacity: 1, x: 0 },
+              }}
+              className="flex flex-col lg:w-2/4 w-4/5 lg:text-lg text-sm "
+            >
               {QnA2.map((qna, i) => {
                 return (
                   <Accordion type="single" collapsible className="w-54" key={i}>

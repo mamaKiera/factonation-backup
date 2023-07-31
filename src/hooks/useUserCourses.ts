@@ -5,6 +5,7 @@ import { CourseDto } from "@/types/dto";
 import { getCourses } from "@/lib/getCourse";
 
 import useSWR from "swr";
+import { host } from "@/types";
 
 const fetcher = (url: string) =>
   fetch(url, {
@@ -20,7 +21,7 @@ export function useUserCourses(): {
   isError: boolean;
 } {
   const { data, error, isLoading } = useSWR(
-    "http://localhost:8000/course/student/enrolled",
+    `${host}/course/student/enrolled`,
     fetcher
   );
   console.log(data);

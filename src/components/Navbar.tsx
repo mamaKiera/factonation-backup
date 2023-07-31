@@ -1,10 +1,10 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import ScrollLink from "./ScrollLink";
 
 import { AlignJustify } from "lucide-react";
@@ -20,12 +20,48 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "./ui/DropdownMenu";
+
+import { Button, buttonVariants } from "./ui/MainButton";
+import { host } from "@/types";
+import { useRouter } from "next/navigation";
 
 const Navbar: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+
+    if (storedToken) {
+      console.log(storedToken);
+      setToken(storedToken);
+    }
+  }, []);
 
   const { isLoggedIn, email, name } = useAuthContext();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      const res = await fetch(`${host}/user/auth/logout`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (res.status > 400) {
+        throw new Error(res.statusText);
+      }
+      console.log(`logging out`);
+      router.push("/");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="sticky top-0 z-[10]">
       <div className="sticky top-0 inset-x-0 h-fit z-[10] py-4 bg-[#0B0E0C] text-background backdrop-blur-lg  ">
@@ -82,17 +118,22 @@ const Navbar: FC = () => {
                   <DropdownMenuSeparator className="bg-slate-200 px-4" />
 
                   <DropdownMenuItem className="cursor-pointer">
-                    Sign out
+                    <Button variant={"ghost"} onClick={handleLogout}>
+                      Sign out
+                    </Button>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
               <>
-                <Link className="" href="/login">
+                <Link className={cn(buttonVariants())} href="/login">
                   เข้าสู่ระบบ
                 </Link>
                 <Link
-                  className={cn("bg-secondary-button text-[#222]")}
+                  className={cn(
+                    buttonVariants(),
+                    "bg-secondary-button text-[#222]"
+                  )}
                   href="/register"
                 >
                   ลงทะเบียน

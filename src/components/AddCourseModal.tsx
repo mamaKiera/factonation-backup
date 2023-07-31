@@ -6,6 +6,7 @@ import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useCourses } from "@/hooks/useCourses";
 import { CourseDto, EnrollmentDto } from "@/types/dto";
+import { host } from "@/types";
 
 export default function AddCourseModal({
   open,
@@ -40,7 +41,7 @@ export default function AddCourseModal({
       for (let i = 0; i < selectedCourses.length; i++) {
         const courseId = selectedCourses[i];
         console.log(courseId);
-        await fetch(`http://localhost:8000/user/student/enroll`, {
+        await fetch(`${host}/user/student/enroll`, {
           method: "POST",
           headers: {
             // Authorization: `bearer ${accessToken}`,

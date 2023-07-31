@@ -1,13 +1,13 @@
 import { FC } from "react";
 
 import { IBM_Plex_Sans_Thai } from "next/font/google";
-import Herosection from "@/components/homePage/Herosection";
-import Problemsection from "@/components/homePage/Problemsection";
-import Benefitsection from "@/components/homePage/Benefitsection";
-import Reviewsection from "@/components/homePage/Reviewsection";
-import Pricesection from "@/components/homePage/Pricesection";
-import Questionsection from "@/components/homePage/Questionsection";
-import Lastsection from "@/components/homePage/Lastsection";
+import Herosection from "@/components/homePage/HeroSection";
+import Problemsection from "@/components/homePage/ProblemSection";
+import Benefitsection from "@/components/homePage/BenefitSection";
+import Reviewsection from "@/components/homePage/ReviewSection";
+import Pricesection from "@/components/homePage/PriceSection";
+import Questionsection from "@/components/homePage/QuestionSection";
+import Lastsection from "@/components/homePage/LastSection";
 import Footer from "@/components/homePage/Foooter";
 import { cn } from "@/lib/utils";
 

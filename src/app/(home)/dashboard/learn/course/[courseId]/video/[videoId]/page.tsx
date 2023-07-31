@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "@/components/ui/Checkbox";
 import { Checkbox as RadixCheckBox } from "@radix-ui/react-checkbox";
 import { useToast } from "@/components/ui/use-toast";
 import { getLessonByCourseIdFormetted } from "@/lib/getLessons";
 import { LessonDto } from "@/types/dto";
 import { FC, useEffect, useState } from "react";
 import ReactPlayer from "react-player";
+import { host } from "@/types";
 
 interface pageProps {
   params: {
@@ -17,15 +18,19 @@ interface pageProps {
 
 async function toggleLesson(id: string) {
   const studentId = localStorage.getItem("id");
-  const res = await fetch(`http://localhost:8000/lesson/toggle`, {
-    method: "POST",
-    body: JSON.stringify({ lessonId: id, studentId }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const status = await res.json();
-  console.log(status);
+  try {
+    const res = await fetch(`http://${host}/lesson/toggle`, {
+      method: "POST",
+      body: JSON.stringify({ lessonId: id, studentId }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const status = await res.json();
+    console.log(status);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 const page: FC<pageProps> = ({ params: { videoId, courseId } }) => {

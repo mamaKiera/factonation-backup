@@ -11,13 +11,11 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alertDialog";
+} from "@/components/ui/AlertDialog";
 import { useRouter } from "next/navigation";
 import { UserDto } from "@/types/dto";
 import useUserList from "@/hooks/useUsers";
-import { FC } from "react";
-
-interface pageProps {}
+import { host } from "@/types";
 
 const Page = () => {
   const { users }: { users: UserDto[] | null } = useUserList();
@@ -27,11 +25,8 @@ const Page = () => {
     //const accessToken = localStorage.getItem('token')
 
     try {
-      const response = await fetch(`http://localhost:8000/user/student/${id}`, {
+      const response = await fetch(`${host}/user/student/${id}`, {
         method: "DELETE",
-        // headers: {
-        //   Authorization: `bearer ${accessToken}`,
-        // },
       });
 
       if (response.ok) {
@@ -89,9 +84,7 @@ const Page = () => {
                     <tr key={user.email}>
                       <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                         <div className="flex items-center">
-                          <div className="h-11 w-11 flex-shrink-0">
-                            {/* <image className="h-11 w-11 rounded-full" src={} alt="" /> */}
-                          </div>
+                          <div className="h-11 w-11 flex-shrink-0"></div>
                           <div className="ml-4">
                             <div className="font-medium text-gray-900">
                               {user.name}

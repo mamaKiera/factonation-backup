@@ -5,15 +5,17 @@ import { CourseDto } from "@/types/dto";
 import { getCourses } from "@/lib/getCourse";
 
 import useSWR from "swr";
+import { host } from "@/types";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export function useCourses(): { courses: { status: string, data: CourseDto[] }, isLoading: boolean, isError: boolean } {
-  const { data, error, isLoading } = useSWR(
-    "http://localhost:8000/course",
-    fetcher
-  );
-  console.log(data)
+export function useCourses(): {
+  courses: { status: string; data: CourseDto[] };
+  isLoading: boolean;
+  isError: boolean;
+} {
+  const { data, error, isLoading } = useSWR(`${host}/course`, fetcher);
+  console.log(data);
   return {
     courses: data,
     isLoading,

@@ -1,8 +1,8 @@
 "use client";
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Progress } from "@/components/ui/progress";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
+import { Progress } from "@/components/ui/Progress";
 import { useAuthContext } from "@/contexts/authContext";
 import { useCourseStatus } from "@/hooks/useCourseStatus";
 import { useCourses } from "@/hooks/useCourses";
@@ -27,16 +27,21 @@ const page: FC<pageProps> = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("id");
     const fetchCourse = async () => {
       console.log(token);
-      const res = await fetch(`http://localhost:8000/course/student/enrolled`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const courses = await res.json();
-      console.log(courses);
-      setCourses(courses.data);
+      try {
+        const res = await fetch(`${host}/course/student/enrolled`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const courses = await res.json();
+        console.log(courses);
+        setCourses(courses.data);
+      } catch (err) {
+        console.error(err);
+      }
     };
     fetchCourse();
   }, []);

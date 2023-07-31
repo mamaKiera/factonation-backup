@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { FormEvent, SetStateAction, useState } from "react";
-import { Label } from "./ui/label";
+import { Label } from "./ui/Label";
 import {
   Dialog,
   DialogContent,
@@ -10,11 +10,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
-import { Button } from "./ui/button";
+} from "./ui/Dialog";
+import { Button } from "./ui/MainButton";
 import SelectInstructor from "./SelectInstructor";
 import { LessonDto } from "@/types/dto";
 import AddLessonForm from "./AddLessonForm";
+import { host } from "@/types";
 
 export default function AddCourseForm() {
   const [file, setFile] = useState<Blob>();
@@ -41,18 +42,9 @@ export default function AddCourseForm() {
       formData.append("instructor", instructor);
       // formData.append("lessons", lessons);
 
-      await axios.post("http://localhost:8000/course", formData, {
+      await axios.post(`${host}/course`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-
-      console.log(formData);
-      // await fetch("http://localhost:8000/course", {
-      //   method: "POST",
-      //   body: JSON.stringify({ formData, caption }),
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // });
     } catch (error) {
       console.error("Error submitting form:", error);
     }
