@@ -57,7 +57,7 @@ const Page: FC<pageProps> = () => {
     //const accessToken = localStorage.getItem('token')
 
     try {
-      const response = await fetch(`${host}/user/enrollment`, {
+      const response = await fetch(`${host}/user/student/enroll`, {
         method: "DELETE",
         headers: {
           // Authorization: `bearer ${accessToken}`,
