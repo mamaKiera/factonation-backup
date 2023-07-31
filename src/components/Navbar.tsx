@@ -34,6 +34,7 @@ const Navbar: FC = () => {
     const storedToken = localStorage.getItem("token");
 
     if (storedToken) {
+      console.log(storedToken);
       setToken(storedToken);
     }
   }, []);
@@ -47,6 +48,7 @@ const Navbar: FC = () => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+        mode: "no-cors",
       });
 
       if (res.status > 400) {
