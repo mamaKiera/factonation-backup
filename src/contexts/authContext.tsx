@@ -23,16 +23,16 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [id, setId] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(!!token);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
 
     if (storedToken) {
       setToken(storedToken);
+      setIsLoggedIn(true);
     }
-  }, [id]);
-
-  const [isLoggedIn, setIsLoggedIn] = useState(!!token);
+  }, []);
 
   const login = async (email: string, password: string) => {
     try {
