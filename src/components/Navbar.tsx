@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -28,12 +28,25 @@ import { useRouter } from "next/navigation";
 
 const Navbar: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
 
   const { isLoggedIn, email, name } = useAuthContext();
   const router = useRouter();
 
   const handleLogout = async () => {
-    await fetch(`${host}/user/logout`);
+    await fetch(`${host}/user/logout`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     console.log(`logging out`);
     router.push("/");
   };
