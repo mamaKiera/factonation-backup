@@ -24,15 +24,18 @@ import {
 
 import { Button, buttonVariants } from "./ui/MainButton";
 import { host } from "@/types";
+import { useRouter } from "next/navigation";
 
 const Navbar: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   const { isLoggedIn, email, name } = useAuthContext();
+  const router = useRouter();
 
   const handleLogout = async () => {
     await fetch(`${host}/user/logout`);
     console.log(`logging out`);
+    router.push("/");
   };
   return (
     <div className="sticky top-0 z-[10]">
