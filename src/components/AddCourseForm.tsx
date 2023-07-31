@@ -15,6 +15,7 @@ import { Button } from "./ui/MainButton";
 import SelectInstructor from "./SelectInstructor";
 import { LessonDto } from "@/types/dto";
 import AddLessonForm from "./AddLessonForm";
+import { host } from "@/types";
 
 export default function AddCourseForm() {
   const [file, setFile] = useState<Blob>();
@@ -41,7 +42,7 @@ export default function AddCourseForm() {
       formData.append("instructor", instructor);
       // formData.append("lessons", lessons);
 
-      await axios.post("http://localhost:8000/course", formData, {
+      await axios.post(`${host}/course`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
     } catch (error) {

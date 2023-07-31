@@ -11,6 +11,7 @@ import {
   DialogTrigger,
 } from "./ui/Dialog";
 import axios from "axios";
+import { host } from "@/types";
 
 interface AddLessonFormProps {
   lessons: LessonDto[];
@@ -56,7 +57,7 @@ const AddLessonForm: FC<AddLessonFormProps> = ({
       };
       // formData.append("lessons", lessons);
 
-      await axios.post("http://localhost:8000/lesson", formData, {
+      await axios.post(`${host}/lesson`, formData, {
         headers: { "Content-Type": "application/json" },
       });
 

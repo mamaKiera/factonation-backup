@@ -14,7 +14,7 @@ export function useCourses(): {
   isLoading: boolean;
   isError: boolean;
 } {
-  const { data, error, isLoading } = useSWR(`http://${host}/course`, fetcher);
+  const { data, error, isLoading } = useSWR(`${host}/course`, fetcher);
   console.log(data);
   return {
     courses: data,

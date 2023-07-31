@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
 
   const login = async (email: string, password: string) => {
     try {
-      const res = await axios.post(`http://${host}/user/login`, {
+      const res = await axios.post(`${host}/user/login`, {
         email,
         password,
       });
@@ -45,7 +45,6 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
         throw new Error(res.statusText);
       }
       const data = res.data.data;
-      console.log(data);
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("email", data.email);

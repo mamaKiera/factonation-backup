@@ -10,7 +10,7 @@ const useUserList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`http://${host}/user/`);
+        const res = await fetch(`${host}/user/`);
         const responseBody = await res.json();
         setUsers(responseBody.data);
         setError(false);

@@ -15,6 +15,7 @@ import {
 import { useRouter } from "next/navigation";
 import { UserDto } from "@/types/dto";
 import useUserList from "@/hooks/useUsers";
+import { host } from "@/types";
 
 const Page = () => {
   const { users }: { users: UserDto[] | null } = useUserList();
@@ -24,7 +25,7 @@ const Page = () => {
     //const accessToken = localStorage.getItem('token')
 
     try {
-      const response = await fetch(`http://localhost:8000/user/student/${id}`, {
+      const response = await fetch(`${host}/user/student/${id}`, {
         method: "DELETE",
       });
 

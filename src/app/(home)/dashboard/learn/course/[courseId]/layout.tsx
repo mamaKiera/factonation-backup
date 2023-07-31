@@ -5,6 +5,7 @@ import { Progress } from "@/components/ui/Progress";
 import { Toaster } from "@/components/ui/Toaster";
 import { getCourse } from "@/lib/getCourse";
 import { getLessonByCourseIdFormetted } from "@/lib/getLessons";
+import { host } from "@/types";
 import { CourseWithLessonDto, LessonDto } from "@/types/dto";
 import { Trophy } from "lucide-react";
 import { FC, useEffect, useState } from "react";
@@ -48,7 +49,7 @@ export const page: FC<layoutProps> = ({ children, params }) => {
   useEffect(() => {
     const getLesson = async () => {
       try {
-        const res = await fetch("http://localhost:8000/lesson/status/course", {
+        const res = await fetch(`${host}/lesson/status/course`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

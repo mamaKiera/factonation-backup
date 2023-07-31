@@ -1,1 +1,1 @@
-export const host = "factonation.cleverse.academy";
+export const host = "https://api.factonation.cleverse.academy";

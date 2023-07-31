@@ -31,7 +31,7 @@ const page: FC<pageProps> = () => {
     const fetchCourse = async () => {
       console.log(token);
       try {
-        const res = await fetch(`http://${host}/course/student/enrolled`, {
+        const res = await fetch(`${host}/course/student/enrolled`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

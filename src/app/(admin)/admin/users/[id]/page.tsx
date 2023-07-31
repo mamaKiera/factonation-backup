@@ -78,7 +78,7 @@ const Page: FC<pageProps> = () => {
     //const accessToken = localStorage.getItem('token')
 
     try {
-      const response = await fetch(`http://${host}/user/${user?.id}`, {
+      const response = await fetch(`${host}/user/${user?.id}`, {
         method: "PATCH",
         headers: {
           // Authorization: `bearer ${accessToken}`,

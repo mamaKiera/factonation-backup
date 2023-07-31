@@ -62,7 +62,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       };
 
       try {
-        const response = await fetch(`http://${host}/user/register`, {
+        const response = await fetch(`${host}/user/register`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

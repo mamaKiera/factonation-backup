@@ -1,3 +1,4 @@
+import { host } from "@/types";
 import useSWR from "swr";
 
 const fetcher = (url: string, studentId: string, courseId: string) =>
@@ -7,7 +8,7 @@ const fetcher = (url: string, studentId: string, courseId: string) =>
 
 export function useCourseStatus(studentId: string, courseId: string) {
   const { data, error, isLoading } = useSWR(
-    ["http://localhost:8000/lesson/status/course", studentId, courseId],
+    [`${host}/lesson/status/course`, studentId, courseId],
     fetcher
   );
 
