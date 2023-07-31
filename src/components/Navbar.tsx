@@ -50,7 +50,6 @@ const Navbar: FC = () => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        mode: "no-cors",
       });
 
       if (res.status > 400) {
