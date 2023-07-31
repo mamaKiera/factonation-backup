@@ -26,6 +26,7 @@ const Navbar: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   const { isLoggedIn, email, name } = useAuthContext();
+  console.log(isLoggedIn, email, name);
   return (
     <div className="sticky top-0 z-[10]">
       <div className="sticky top-0 inset-x-0 h-fit z-[10] py-4 bg-[#0B0E0C] text-background backdrop-blur-lg  ">

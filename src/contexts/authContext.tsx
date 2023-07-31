@@ -1,5 +1,6 @@
 "use client";
 
+import { host } from "@/types";
 import axios from "axios";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
@@ -29,24 +30,27 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
     if (storedToken) {
       setToken(storedToken);
     }
-  }, []);
+  }, [id]);
 
   const [isLoggedIn, setIsLoggedIn] = useState(!!token);
 
   const login = async (email: string, password: string) => {
     try {
-      const res = await axios.post(`http://localhost:8000/user/login`, {
+      const res = await axios.post(`http://${host}/user/login`, {
         email,
         password,
       });
+
       if (res.status === 401) {
         throw new Error(res.statusText);
       }
-      const data = res.data;
+      const data = res.data.data;
+      console.log(data);
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("email", data.email);
       localStorage.setItem("name", data.name);
+      localStorage.setItem("id", data.id);
       setIsLoggedIn(true);
       setEmail(data.email);
       setId(data.id);
