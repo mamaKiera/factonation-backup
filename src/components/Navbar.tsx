@@ -44,7 +44,7 @@ const Navbar: FC = () => {
 
   const handleLogout = async () => {
     try {
-      const res = await fetch(`${host}/user/logout`, {
+      const res = await fetch(`${host}/user/auth/logout`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
