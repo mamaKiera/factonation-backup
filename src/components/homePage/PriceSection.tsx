@@ -4,10 +4,13 @@ import { CheckSquare } from "lucide-react";
 import { Badge } from "../ui/Badge";
 import { motion } from "framer-motion";
 import { useAuthContext } from "@/contexts/authContext";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Url } from "url";
 import Link from "next/link";
-import { container, item } from "@/types";
+import { buttonVariants } from "../ui/MainButton";
+import { createCheckoutSession } from "@/lib/payment";
+import { useRouter } from "next/navigation";
+import { host } from "@/types";
 
 export interface IPriceDetails {
   module: string;
@@ -17,10 +20,7 @@ export interface IPriceDetails {
   saledPrice?: string;
   actions: string;
   paymaent: Url;
-}
-
-interface ILogin {
-  isLoggedIn: boolean;
+  readmore: string;
 }
 
 const priceDetails = [
@@ -33,7 +33,9 @@ const priceDetails = [
       "กลุ่ม Private ผ่าน Discord สำหรับการพูดคุยและถามตอบระหว่างอาจารย์และนักเรียนที่ เรียนในคอร์สเดียวกัน",
     ],
     actions: "Buy Module 1",
-    payment: "https://buy.stripe.com/28o3e2elY6bs2acdQQ",
+    priceId: "price_1NXe1bBDhhMNODJJCwJJM05k", //to be updated
+    payment: "https://buy.stripe.com/8wMcOCelYczQ5mo148", //to be updated
+    readmore: "/module",
   },
   {
     module: "2",
@@ -44,7 +46,9 @@ const priceDetails = [
       "กลุ่ม Private ผ่าน Discord สำหรับการพูดคุยและถามตอบระหว่างอาจารย์และนักเรียนที่ เรียนในคอร์สเดียวกัน",
     ],
     actions: "Buy Module 2",
+    priceId: "price_1NVqaABDhhMNODJJgx66oCAa",
     payment: "https://buy.stripe.com/4gw5ma4Lo57o6qs4gh",
+    readmore: "/module",
   },
   {
     module: "3",
@@ -55,7 +59,9 @@ const priceDetails = [
       "กลุ่ม Private ผ่าน Discord สำหรับการพูดคุยและถามตอบระหว่างอาจารย์และนักเรียนที่ เรียนในคอร์สเดียวกัน",
     ],
     actions: "Buy Module 3",
+    priceId: "price_1NVqpKBDhhMNODJJpvOTjtNL",
     payment: "https://buy.stripe.com/3csg0O0v80R82ac7su",
+    readmore: "/module",
   },
   {
     module: "1+2+3",
@@ -68,13 +74,43 @@ const priceDetails = [
       "กลุ่ม Private ผ่าน Discord สำหรับการพูดคุยและถามตอบระหว่างอาจารย์และนักเรียนที่เรียนในคอร์สเดียวกัน",
     ],
     actions: "Buy Module 1+2+3",
+    priceId: "price_1NVr90BDhhMNODJJLa5oaaym",
     payment: "https://buy.stripe.com/8wMbKydhU8jA7uwcMP",
+    readmore: "/module",
   },
   ,
 ];
 
 const Pricesection: FC = () => {
-  const { isLoggedIn } = useAuthContext();
+  const { isLoggedIn, id } = useAuthContext();
+  const router = useRouter();
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
+
+  const checkout = async (priceId: string, id: string) => {
+    const session = await createCheckoutSession(priceId, id);
+    const url = session.url;
+    if (!url) throw new Error("url not found");
+    router.push(url);
+  };
+
+  const checkoutProduct = async (priceId: string, id: string) => {
+    const response = await fetch(`${host}/webhook/create`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`,
+      },
+      body: JSON.stringify({ priceId, id }),
+    });
+  };
+
   return (
     <div className="lg:my-28 my-5" id="price-section">
       <div className="flex flex-col gap-3 w-full mx-auto my-14 ">
@@ -92,28 +128,35 @@ const Pricesection: FC = () => {
             hidden: { opacity: 0, x: -150 },
             visible: { opacity: 1, x: 0 },
           }}
-          className="flex lg:gap-4 gap-2 mx-auto  "
+          className="flex lg:gap-4 gap-2 justify-center w-11/12 mx-auto  "
         >
-          <p className="lg:text-3xl font-black text-xl">|</p>
           <p className="lg:text-4xl font-bold text-xl">
             เริ่มเรียนได้เเล้ววันนี้ในราคาสุดคุ้ม
           </p>
         </motion.div>
 
-        <div className="flex items-center justify-center gap-3 ">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: "some" }}
-            variants={container}
-            className="flex lg:flex-row lg:flex-nowrap flex-col flex-wrap gap-3 items-center "
-          >
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: "some" }}
+          transition={{
+            duration: 0.3,
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+          }}
+          variants={{
+            hidden: { opacity: 0, x: 150 },
+            visible: { opacity: 1, x: 0 },
+          }}
+          className="flex items-center justify-center gap-3 "
+        >
+          <div className="flex lg:flex-row lg:flex-nowrap flex-col flex-wrap gap-3 items-center ">
             {priceDetails.map((priceDetail, i) => {
               return (
-                <motion.div
-                  variants={item}
+                <div
                   className={cn(
-                    "border border-stone-200 lg:p-6 rounded-xl lg:w-60 lg:gap-0 w-11/12 flex flex-col justify-between backdrop-blur-3xl lg:h-[510px] h-auto p-3 gap-7  ",
+                    "border border-stone-200 lg:p-6 rounded-xl lg:w-60 lg:gap-0 w-11/12 flex flex-col justify-between backdrop-blur-3xl lg:h-[530px] h-auto sm:p-7 p-3 gap-7  ",
                     {
                       "bg-teal-900 bg-clip-padding backdrop-filter backdrop-blur-3xl bg-opacity-10 border border-gray-100":
                         priceDetail!.saledPrice,
@@ -124,7 +167,7 @@ const Pricesection: FC = () => {
                   <div className="flex lg:flex-col flex-row gap-3">
                     <div className="flex flex-col gap-2">
                       <Badge>Module {priceDetail!.module}</Badge>
-                      <p className="font-semibold lg:text-xl lg:w-52 w-28 text-base">
+                      <p className="font-semibold lg:text-xl lg:w-52 sm:w-60 w-28 text-base">
                         {priceDetail!.courseName}
                       </p>
                       {priceDetail!.saledPrice && (
@@ -149,26 +192,39 @@ const Pricesection: FC = () => {
                       })}
                     </div>
                   </div>
-                  {isLoggedIn ? (
+                  <div className="flex flex-col gap-3">
+                    {isLoggedIn ? (
+                      <button
+                        onClick={() =>
+                          checkoutProduct(priceDetail!.priceId, id)
+                        }
+                        className="flex justify-center items-center bg-stone-900 h-8 rounded-lg text-white lg:text-lg text-sm "
+                      >
+                        {priceDetail!.actions}
+                      </button>
+                    ) : (
+                      <Link
+                        href="/login"
+                        className="flex justify-center items-center bg-stone-900 h-8 rounded-lg text-white lg:text-lg text-sm"
+                      >
+                        {priceDetail!.actions}
+                      </Link>
+                    )}
                     <Link
-                      href={`${priceDetail?.payment}`}
-                      className="flex justify-center items-center bg-stone-900 h-8 rounded-lg text-white "
+                      href={`${priceDetail?.readmore}`}
+                      className={cn(
+                        buttonVariants({ size: "xl", variant: "outline" }),
+                        " flex justify-center items-center  h-8 rounded-lg lg:text-lg text-sm"
+                      )}
                     >
-                      {priceDetail!.actions}
+                      Read More
                     </Link>
-                  ) : (
-                    <Link
-                      href="/login"
-                      className="flex justify-center items-center bg-stone-900 h-8 rounded-lg text-white"
-                    >
-                      {priceDetail!.actions}
-                    </Link>
-                  )}
-                </motion.div>
+                  </div>
+                </div>
               );
             })}
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
