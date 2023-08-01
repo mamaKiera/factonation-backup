@@ -101,15 +101,15 @@ const Pricesection: FC = () => {
     router.push(url);
   };
 
-  const checkoutProduct = async (priceId: string, id: string) => {
-    const response = await fetch(`${host}/webhook/create`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`,
-      },
-      body: JSON.stringify({ priceId, id }),
-    });
-  };
+  // const checkoutProduct = async (priceId: string, id: string) => {
+  //   const response = await fetch(`${host}/webhook/create`, {
+  //     method: "POST",
+  //     headers: {
+  //       Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`,
+  //     },
+  //     body: JSON.stringify({ priceId, id }),
+  //   });
+  // };
 
   return (
     <div className="lg:my-28 my-5" id="price-section">
@@ -195,9 +195,7 @@ const Pricesection: FC = () => {
                   <div className="flex flex-col gap-3">
                     {isLoggedIn ? (
                       <button
-                        onClick={() =>
-                          checkoutProduct(priceDetail!.priceId, id)
-                        }
+                        onClick={() => checkout(priceDetail!.priceId, id)}
                         className="flex justify-center items-center bg-stone-900 h-8 rounded-lg text-white lg:text-lg text-sm "
                       >
                         {priceDetail!.actions}
