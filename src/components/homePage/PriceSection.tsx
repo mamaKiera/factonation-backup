@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { CheckSquare } from "lucide-react";
-import { Badge } from "../ui/badge";
+import { Badge } from "../ui/Badge";
 import { motion } from "framer-motion";
 import { useAuthContext } from "@/contexts/authContext";
 import { FC } from "react";
