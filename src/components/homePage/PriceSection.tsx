@@ -87,6 +87,7 @@ const Pricesection: FC = () => {
   const checkout = async (priceId: string, id: string) => {
     const session = await createCheckoutSession(priceId, id);
     const url = session.url;
+    if (!url) throw new Error("url not found");
     router.push(url);
   };
 
