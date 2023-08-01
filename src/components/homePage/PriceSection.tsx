@@ -4,12 +4,13 @@ import { CheckSquare } from "lucide-react";
 import { Badge } from "../ui/Badge";
 import { motion } from "framer-motion";
 import { useAuthContext } from "@/contexts/authContext";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Url } from "url";
 import Link from "next/link";
 import { buttonVariants } from "../ui/MainButton";
 import { createCheckoutSession } from "@/lib/payment";
 import { useRouter } from "next/navigation";
+import { host } from "@/types";
 
 export interface IPriceDetails {
   module: string;
@@ -83,12 +84,31 @@ const priceDetails = [
 const Pricesection: FC = () => {
   const { isLoggedIn, id } = useAuthContext();
   const router = useRouter();
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
 
   const checkout = async (priceId: string, id: string) => {
     const session = await createCheckoutSession(priceId, id);
     const url = session.url;
     if (!url) throw new Error("url not found");
     router.push(url);
+  };
+
+  const checkoutProduct = async (priceId: string, id: string) => {
+    const response = await fetch(`${host}/webhook/create`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ priceId, id }),
+    });
   };
 
   return (
@@ -175,7 +195,9 @@ const Pricesection: FC = () => {
                   <div className="flex flex-col gap-3">
                     {isLoggedIn ? (
                       <button
-                        onClick={() => checkout(priceDetail!.priceId, id)}
+                        onClick={() =>
+                          checkoutProduct(priceDetail!.priceId, id)
+                        }
                         className="flex justify-center items-center bg-stone-900 h-8 rounded-lg text-white lg:text-lg text-sm "
                       >
                         {priceDetail!.actions}
