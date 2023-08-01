@@ -105,7 +105,7 @@ const Pricesection: FC = () => {
     const response = await fetch(`${host}/webhook/create`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`,
       },
       body: JSON.stringify({ priceId, id }),
     });
