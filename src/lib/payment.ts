@@ -5,9 +5,12 @@ dotenv.config();
 // const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
-const stripe = new Stripe(stripeSecretKey!, {
-  apiVersion: "2022-11-15",
-});
+const stripe = new Stripe(
+  "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",
+  {
+    apiVersion: "2022-11-15",
+  }
+);
 
 export const createCheckoutSession = async (priceId: string, id: string) => {
   return await stripe.checkout.sessions.create({
