@@ -87,6 +87,7 @@ const priceDetails = [
 
 const Pricesection: FC = () => {
   const { isLoggedIn, id } = useAuthContext();
+  console.log({ id });
   const router = useRouter();
   const [token, setToken] = useState("");
 
