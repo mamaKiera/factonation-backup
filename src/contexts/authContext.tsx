@@ -2,12 +2,13 @@
 
 import { host } from "@/types";
 import axios from "axios";
+import router from "next/router";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 export interface IAuthContext {
   isLoggedIn: boolean;
   login: (username: string, password: string) => Promise<unknown>;
-  logout: () => void;
+  logout: (token: string) => void;
   id: string;
   name: string;
   email: string;
@@ -59,14 +60,29 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    // setToken("");
-    setName("");
-    setId("");
-    localStorage.removeItem("user");
-    setIsLoggedIn(false);
-    setEmail("");
+  const logout = async (token: string) => {
+    try {
+      const res = await fetch(`${host}/user/auth/logout`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      localStorage.removeItem("token");
+      // setToken("");
+      setName("");
+      setId("");
+      localStorage.removeItem("user");
+      setIsLoggedIn(false);
+      setEmail("");
+
+      if (res.status > 400) {
+        throw new Error(res.statusText);
+      }
+      console.log(`logging out`);
+      router.push("/");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

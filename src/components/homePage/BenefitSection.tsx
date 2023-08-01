@@ -1,4 +1,5 @@
 "use client";
+import { container, item } from "@/types";
 import { motion } from "framer-motion";
 import { Rocket } from "lucide-react";
 import { UploadCloud } from "lucide-react";
@@ -56,23 +57,23 @@ function Benefitsection() {
           stiffness: 260,
           damping: 20,
         }}
-        variants={{
-          hidden: { opacity: 0, x: 150 },
-          visible: { opacity: 1, x: 0 },
-        }}
+        variants={container}
         className="flex flex-wrap justify-center gap-8 text-center"
       >
         {benefits.map((benefit, i) => {
           return (
-            <div
+            <motion.div
+              variants={item}
               className="flex border-2 border-primary-button py-6 px-4 rounded-xl lg:h-80 lg:w-64 h-auto w-56 items-center justify-center"
               key={i}
             >
               <div className="flex flex-col lg:gap-10 gap-6 justify-center items-center">
                 {benefit.icon}
-                <p className="lg:text-xl px-4 font-extralight text-base">{benefit.desc}</p>
+                <p className="lg:text-xl px-4 font-extralight text-base">
+                  {benefit.desc}
+                </p>
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </motion.div>

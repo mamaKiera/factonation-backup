@@ -4,7 +4,8 @@ import kPrann from "../../../public/khun-Pran.webp";
 import kParinya from "../../../public/khun-Parinya.webp";
 import { Star } from "lucide-react";
 import { motion } from "framer-motion";
-import { MessagesSquare } from 'lucide-react';
+import { MessagesSquare } from "lucide-react";
+import { container, item } from "@/types";
 
 const StarRating = ({ numStars }: { numStars: number }) => {
   const stars = [];
@@ -58,9 +59,6 @@ const reviews: {
     icon: <StarRating numStars={5} />,
     image: kPrann,
   },
-
-
-
 ];
 
 function Reviewsection() {
@@ -68,74 +66,74 @@ function Reviewsection() {
     <div className="bg-[#f8f8f8] py-4">
       <div className="flex flex-col w-4/5 mx-auto lg:my-20 my-10 gap-6 ">
         <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: "some" }}
-        transition={{
-          duration: 0.3,
-          type: "spring",
-          stiffness: 260,
-          damping: 20,
-        }}
-        variants={{
-          hidden: { opacity: 0, x: -150 },
-          visible: { opacity: 1, x: 0 },
-        }} 
-        className="flex lg:gap-4 lg:mx-0 mx-3 gap-2 ">
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: "some" }}
+          transition={{
+            duration: 0.3,
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+          }}
+          variants={{
+            hidden: { opacity: 0, x: -150 },
+            visible: { opacity: 1, x: 0 },
+          }}
+          className="flex lg:gap-4 lg:mx-0 mx-3 gap-2 "
+        >
           <p className="lg:text-3xl lg:font-black text-xl font-semibold">|</p>
-          <p className="lg:text-4xl lg:font-bold text-xl font-semibold">รีวิวจากผู้เรียน</p>
+          <p className="lg:text-4xl lg:font-bold text-xl font-semibold">
+            รีวิวจากผู้เรียน
+          </p>
         </motion.div>
-
 
         <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: "some" }}
-        transition={{
-          delay: 0.2,
-          duration: 0.3,
-          type: "spring",
-          stiffness: 260,
-          damping: 20,
-        }}
-        variants={{
-          hidden: { opacity: 0, x: 150 },
-          visible: { opacity: 1, x: 0 },
-        }} 
-        className="flex lg:gap-8 gap-3  flex-wrap justify-center">
-        {reviews.map((review, i) => {
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: "some" }}
+          transition={{
+            delay: 0.2,
+            duration: 0.3,
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+          }}
+          variants={container}
+          className="flex lg:gap-8 gap-3  flex-wrap justify-center"
+        >
+          {reviews.map((review, i) => {
             return (
-         
-          <div key={i}  className="flex flex-col lg:p-8 justify-between lg:w-[480px] lg:h-[250px] h-[220px] w-[290px] p-6 rounded-xl bg-stone-800 text-white  ">
-            <div>
-            {/* <MessagesSquare size={20} /> */}
+              <motion.div
+                variants={item}
+                key={i}
+                className="flex flex-col lg:p-8 justify-between lg:w-[480px] lg:h-[250px] h-[220px] w-[290px] p-6 rounded-xl bg-stone-800 text-white  "
+              >
+                <div>
+                  {/* <MessagesSquare size={20} /> */}
 
-            <p className="lg:text-base font-normal text-xs ">
-          {review.desc}
-          </p >
-          </div>
-          <div className="flex gap-8 items-center">
-              <Image
-                  src={review.image}
-                  alt="kPrann image"
-                  style={{ height: 60, width: 65 }}
-                  className="flex items-center rounded-lg"
-                />
-            <div className="flex flex-col gap-1">
-              <div>{review.icon}</div>
-              <p className="lg:text-base font-semibold text-sm">{review.name}</p>
-              <p className="text-xs font-light">{review.posit}</p>
-            </div>
-          </div>
-          </div>
-          );
-        })}
+                  <p className="lg:text-base font-normal text-xs ">
+                    {review.desc}
+                  </p>
+                </div>
+                <div className="flex gap-8 items-center">
+                  <Image
+                    src={review.image}
+                    alt="kPrann image"
+                    style={{ height: 60, width: 65 }}
+                    className="flex items-center rounded-lg"
+                  />
+                  <div className="flex flex-col gap-1">
+                    <div>{review.icon}</div>
+                    <p className="lg:text-base font-semibold text-sm">
+                      {review.name}
+                    </p>
+                    <p className="text-xs font-light">{review.posit}</p>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
-
-
-
-
-
 
         {/* <motion.div
         initial="hidden"

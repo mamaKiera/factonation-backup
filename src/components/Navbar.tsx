@@ -39,14 +39,12 @@ const Navbar: FC = () => {
     }
   }, []);
 
-  const { isLoggedIn, email, name } = useAuthContext();
+  const { isLoggedIn, email, name, logout } = useAuthContext();
   const router = useRouter();
 
   const handleLogout = async () => {
     try {
       const res = await fetch(`${host}/user/auth/logout`, {
-        method: "GET",
-        credentials: "include",
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -7,6 +7,7 @@ import { useAuthContext } from "@/contexts/authContext";
 import { FC } from "react";
 import { Url } from "url";
 import Link from "next/link";
+import { container, item } from "@/types";
 
 export interface IPriceDetails {
   module: string;
@@ -91,7 +92,7 @@ const Pricesection: FC = () => {
             hidden: { opacity: 0, x: -150 },
             visible: { opacity: 1, x: 0 },
           }}
-          className="flex lg:gap-4 gap-2 lg:mx-0 mx-4  "
+          className="flex lg:gap-4 gap-2 mx-auto  "
         >
           <p className="lg:text-3xl font-black text-xl">|</p>
           <p className="lg:text-4xl font-bold text-xl">
@@ -99,26 +100,18 @@ const Pricesection: FC = () => {
           </p>
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: "some" }}
-          transition={{
-            duration: 0.3,
-            type: "spring",
-            stiffness: 260,
-            damping: 20,
-          }}
-          variants={{
-            hidden: { opacity: 0, x: 150 },
-            visible: { opacity: 1, x: 0 },
-          }}
-          className="flex items-center justify-center gap-3 "
-        >
-          <div className="flex lg:flex-row lg:flex-nowrap flex-col flex-wrap gap-3 items-center ">
+        <div className="flex items-center justify-center gap-3 ">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: "some" }}
+            variants={container}
+            className="flex lg:flex-row lg:flex-nowrap flex-col flex-wrap gap-3 items-center "
+          >
             {priceDetails.map((priceDetail, i) => {
               return (
-                <div
+                <motion.div
+                  variants={item}
                   className={cn(
                     "border border-stone-200 lg:p-6 rounded-xl lg:w-60 lg:gap-0 w-11/12 flex flex-col justify-between backdrop-blur-3xl lg:h-[510px] h-auto p-3 gap-7  ",
                     {
@@ -171,11 +164,11 @@ const Pricesection: FC = () => {
                       {priceDetail!.actions}
                     </Link>
                   )}
-                </div>
+                </motion.div>
               );
             })}
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );
