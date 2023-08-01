@@ -79,7 +79,8 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
         throw new Error(res.statusText);
       }
       console.log(`logging out`);
-      router.push("/");
+      //router.push("/");
+      location.reload();
     } catch (err) {
       console.error(err);
     }

@@ -42,23 +42,23 @@ const Navbar: FC = () => {
   const { isLoggedIn, email, name, logout } = useAuthContext();
   const router = useRouter();
 
-  const handleLogout = async () => {
-    try {
-      const res = await fetch(`${host}/user/auth/logout`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+  // const handleLogout = async () => {
+  //   try {
+  //     const res = await fetch(`${host}/user/auth/logout`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
 
-      if (res.status > 400) {
-        throw new Error(res.statusText);
-      }
-      console.log(`logging out`);
-      router.push("/");
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  //     if (res.status > 400) {
+  //       throw new Error(res.statusText);
+  //     }
+  //     console.log(`logging out`);
+  //     router.push("/");
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   return (
     <div className="sticky top-0 z-[10]">
@@ -116,7 +116,7 @@ const Navbar: FC = () => {
                   <DropdownMenuSeparator className="bg-slate-200 px-4" />
 
                   <DropdownMenuItem className="cursor-pointer">
-                    <Button variant={"ghost"} onClick={handleLogout}>
+                    <Button variant={"ghost"} onClick={() => logout(token)}>
                       Sign out
                     </Button>
                   </DropdownMenuItem>
