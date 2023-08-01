@@ -8,7 +8,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 export interface IAuthContext {
   isLoggedIn: boolean;
   login: (username: string, password: string) => Promise<unknown>;
-  logout: () => void;
+  logout: (token: string) => void;
   id: string;
   name: string;
   email: string;
