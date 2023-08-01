@@ -12,11 +12,16 @@ import Footer from "@/components/homePage/Foooter";
 import { cn } from "@/lib/utils";
 
 import Navbar from "@/components/Navbar";
+import dotenv from "dotenv";
+dotenv.config();
+
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 
 interface pageProps {}
 const page: FC<pageProps> = ({}) => {
   //   const { isLoggedIn } = useAuthContext();
   //   console.log(isLoggedIn, "eieifoobar");
+  console.log(stripeSecretKey);
   return (
     <div>
       <Navbar />
