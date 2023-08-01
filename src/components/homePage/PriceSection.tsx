@@ -11,6 +11,10 @@ import { buttonVariants } from "../ui/MainButton";
 import { createCheckoutSession } from "@/lib/payment";
 import { useRouter } from "next/navigation";
 import { host } from "@/types";
+import dotenv from "dotenv";
+dotenv.config();
+
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 
 export interface IPriceDetails {
   module: string;
@@ -96,6 +100,7 @@ const Pricesection: FC = () => {
 
   const checkout = async (priceId: string, id: string) => {
     const session = await createCheckoutSession(priceId, id);
+    console.log(stripeSecretKey);
     const url = session.url;
     if (!url) throw new Error("url not found");
     router.push(url);
